@@ -1,7 +1,7 @@
 {
     "name": "lout",
     "description": "API documentation generator for hapi",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "author": "Wyatt Preul <wpreul@gmail.com>",
     "contributors":[
         "Eran Hammer <eran@hueniverse.com> (http://hueniverse.com)",
@@ -22,7 +22,7 @@
     },
     "devDependencies": {
         "mocha": "1.x.x",
-        "chai": "1.2.x"
+        "chai": "1.x.x"
     },
     "scripts": {
         "test": "make test && make unit"
