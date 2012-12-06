@@ -1,6 +1,6 @@
 {
     "name": "lout",
-    "description": "API documentation generator",
+    "description": "API documentation generator for hapi",
     "version": "0.0.1",
     "author": "Wyatt Preul <wpreul@gmail.com>",
     "contributors":[
@@ -10,7 +10,8 @@
     "repository": "git://github.com/walmartlabs/lout",
     "main": "index",
     "keywords": [
-        "docs"
+        "docs",
+        "hapi"
     ],
     "engines": {
         "node": ">=0.8.0"
@@ -21,8 +22,7 @@
     },
     "devDependencies": {
         "mocha": "1.x.x",
-        "chai": "1.2.x",
-        "sinon": "1.3.4"
+        "chai": "1.2.x"
     },
     "scripts": {
         "test": "make test && make unit"

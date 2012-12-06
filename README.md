@@ -1,4 +1,8 @@
-lout
-====
+# lout
 
-API documentation generator
+API documentation generator for [**hapi**](https://github.com/walmartlabs/hapi)
+
+[![Build Status](https://secure.travis-ci.org/walmartlabs/lout.png)](http://travis-ci.org/walmartlabs/lout)
+
+**lout** is a documentation generator for **hapi** servers, providing a human-readable guide for every endpoint
+using the route configuration. The module allows full customization of the output.
