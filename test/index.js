@@ -249,6 +249,22 @@ describe('Lout', function () {
                 expect(markup).to.equal('<html></html>');
                 done();
             });
+
+            it('processes a validation object that is missing exists valids', function (done) {
+
+                var lout = new Lout({
+                    indexTemplate: indexTemplate,
+                    routeTemplate: routeTemplateWithDenied
+                });
+
+                var markup = lout.generateRoutesMarkup([{
+                    method: 'POST',
+                    config: { validate: { query: { username: { __valids: { exists: null }} } } }
+                }]);
+
+                expect(markup).to.equal('<html></html>');
+                done();
+            });
         });
     });
 });
