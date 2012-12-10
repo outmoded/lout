@@ -22,7 +22,8 @@
     },
     "devDependencies": {
         "mocha": "1.x.x",
-        "chai": "1.x.x"
+        "chai": "1.x.x",
+        "joi": "0.0.x"
     },
     "scripts": {
         "test": "make test && make unit"
