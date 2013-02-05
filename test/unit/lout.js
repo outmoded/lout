@@ -2,7 +2,7 @@
 
 var Chai = require('chai');
 var Joi = require('joi');
-var Lout = process.env.TEST_COV ? require('../lib-cov/lout') : require('../lib/lout');
+var Lout = process.env.TEST_COV ? require('../../lib-cov/lout') : require('../../lib/lout');
 
 
 // Declare internals
