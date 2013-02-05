@@ -63,7 +63,7 @@ describe('Docs Generator', function () {
             register: LoutPlugin.register
         };
 
-        _serverWithoutPost.plugin().register(plugin, { plugin: true }, function () {
+        _serverWithoutPost.plugin().register(plugin, function () {
 
             done();
         });
