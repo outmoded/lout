@@ -1,7 +1,7 @@
 {
     "name": "lout",
     "description": "API documentation generator for hapi",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "author": "Wyatt Preul <wpreul@gmail.com>",
     "contributors":[
         "Eran Hammer <eran@hueniverse.com> (http://hueniverse.com)",
@@ -18,12 +18,14 @@
     },
     "dependencies": {
         "handlebars": "1.0.x",
-        "hoek": "0.0.x"
+        "hoek": "0.x.x",
+        "boom": "0.x.x",
+        "joi": "0.x.x"
     },
     "devDependencies": {
         "mocha": "1.x.x",
         "chai": "1.x.x",
-        "joi": "0.0.x"
+        "hapi": "0.x.x"
     },
     "scripts": {
         "test": "make test && make unit"
@@ -33,5 +35,8 @@
             "type": "BSD",
             "url": "http://github.com/walmartlabs/lout/raw/master/LICENSE"
         }
-    ]
+    ],
+    "hapi": {
+        "plugin": "1.x.x"
+    }
 }
