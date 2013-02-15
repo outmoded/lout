@@ -1,42 +1,42 @@
 {
-    "name": "lout",
-    "description": "API documentation generator for hapi",
-    "version": "0.1.1",
-    "author": "Wyatt Preul <wpreul@gmail.com>",
-    "contributors":[
-        "Eran Hammer <eran@hueniverse.com> (http://hueniverse.com)",
-        "Van Nguyen <the.gol.effect@gmail.com>"
-    ],
-    "repository": "git://github.com/walmartlabs/lout",
-    "main": "index",
-    "keywords": [
-        "docs",
-        "hapi"
-    ],
-    "engines": {
-        "node": ">=0.8.0"
-    },
-    "dependencies": {
-        "handlebars": "1.0.x",
-        "hoek": "0.x.x",
-        "boom": "0.x.x",
-        "joi": "0.x.x"
-    },
-    "devDependencies": {
-        "mocha": "1.x.x",
-        "chai": "1.x.x",
-        "hapi": "0.x.x"
-    },
-    "scripts": {
-        "test": "make test && make unit"
-    },
-    "licenses": [
-        {
-            "type": "BSD",
-            "url": "http://github.com/walmartlabs/lout/raw/master/LICENSE"
-        }
-    ],
-    "hapi": {
-        "plugin": "1.x.x"
+  "name": "lout",
+  "description": "API documentation generator for hapi",
+  "version": "0.1.2",
+  "author": "Wyatt Preul <wpreul@gmail.com>",
+  "contributors":[
+    "Eran Hammer <eran@hueniverse.com> (http://hueniverse.com)",
+    "Van Nguyen <the.gol.effect@gmail.com>"
+  ],
+  "repository": "git://github.com/walmartlabs/lout",
+  "main": "index",
+  "keywords": [
+    "docs",
+    "hapi"
+  ],
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "dependencies": {
+    "handlebars": "1.0.x",
+    "hoek": "0.x.x",
+    "boom": "0.x.x",
+    "joi": "0.x.x"
+  },
+  "peerDependencies": {
+    "compatible": "1.0.0"
+  },
+  "devDependencies": {
+    "mocha": "1.x.x",
+    "chai": "1.x.x",
+    "hapi": "0.x.x"
+  },
+  "scripts": {
+    "test": "make test && make unit"
+  },
+  "licenses": [
+    {
+      "type": "BSD",
+      "url": "http://github.com/walmartlabs/lout/raw/master/LICENSE"
     }
+  ]
 }
