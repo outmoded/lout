@@ -1,7 +1,7 @@
 {
   "name": "lout",
-  "description": "API documentation generator for hapi",
-  "version": "0.1.2",
+  "description": "API documentation generator plugin for hapi",
+  "version": "0.1.3",
   "author": "Wyatt Preul <wpreul@gmail.com>",
   "contributors":[
     "Eran Hammer <eran@hueniverse.com> (http://hueniverse.com)",
@@ -14,24 +14,28 @@
     "hapi"
   ],
   "engines": {
-    "node": ">=0.8.0"
+    "node": "0.8.x"
   },
   "dependencies": {
     "handlebars": "1.0.x",
-    "hoek": "0.x.x",
-    "boom": "0.x.x",
-    "joi": "0.x.x"
+    "hoek": "0.4.x",
+    "boom": "0.3.x",
+    "joi": "0.1.x"
   },
   "peerDependencies": {
-    "compatible": "1.0.0"
+    "hapi": "0.14.x"
   },
   "devDependencies": {
+    "hapi": "0.14.x",
     "mocha": "1.x.x",
     "chai": "1.x.x",
-    "hapi": "0.x.x"
+    "blanket": "1.0.x",
+    "travis-cov": "0.2.x"
   },
   "scripts": {
-    "test": "make test && make unit"
+    "test": "make test && make test-cov",
+    "blanket": { "pattern": "//^((?!\/node_modules\/)(?!\/test\/).)*$/ig", "onlyCwd": true, "data-cover-flags": { "branchTracking": true } },
+    "travis-cov": { "threshold": 100 }
   },
   "licenses": [
     {
