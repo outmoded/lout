@@ -17,10 +17,10 @@ var S = Hapi.types.String;
 
 describe('Docs Generator', function () {
 
-    var _routeTemplate = '{{#each routes}}{{this.method}}|{{/each}}';
-    var _indexTemplate = '{{#each routes}}{{this.path}}|{{/each}}';
-    var _server = null;
-    var _serverWithoutPost = null;
+    var routeTemplate = '{{#each routes}}{{this.method}}|{{/each}}';
+    var indexTemplate = '{{#each routes}}{{this.path}}|{{/each}}';
+    var server = null;
+    var serverWithoutPost = null;
 
     var handler = function (request) {
 
@@ -29,14 +29,14 @@ describe('Docs Generator', function () {
 
     function setupServer(done) {
 
-        _server = new Hapi.Server();
-        _server.route([
+        server = new Hapi.Server();
+        server.route([
             { method: 'GET', path: '/test', config: { handler: handler, validate: { query: { param1: S().required() } } } },
             { method: 'POST', path: '/test', config: { handler: handler, validate: { query: { param2: S().valid('first', 'last') } } } },
             { method: 'GET', path: '/notincluded', config: { handler: handler, plugins: { lout: false } } }
         ]);
 
-        _server.plugin().require('../', { plugin: { routeTemplate: _routeTemplate, indexTemplate: _indexTemplate } }, function () {
+        server.plugin().require('../', { routeTemplate: routeTemplate, indexTemplate: indexTemplate }, function () {
 
             done();
         });
@@ -44,10 +44,10 @@ describe('Docs Generator', function () {
 
     function setupServerWithoutPost(done) {
 
-        _serverWithoutPost = new Hapi.Server();
-        _serverWithoutPost.route({ method: 'GET', path: '/test', config: { handler: handler, validate: { query: { param1: S().required() } } } });
+        serverWithoutPost = new Hapi.Server();
+        serverWithoutPost.route({ method: 'GET', path: '/test', config: { handler: handler, validate: { query: { param1: S().required() } } } });
 
-        _serverWithoutPost.plugin().require('../', function () {
+        serverWithoutPost.plugin().require('../', function () {
 
             done();
         });
@@ -60,7 +60,7 @@ describe('Docs Generator', function () {
             return callback(res.result);
         };
 
-        _server.inject({
+        server.inject({
             method: 'get',
             url: path
         }, next);
@@ -119,7 +119,7 @@ describe('Docs Generator', function () {
 
         it('doesn\'t throw an error when requesting the index when there are no POST routes', function (done) {
 
-            _serverWithoutPost.inject({
+            serverWithoutPost.inject({
                 method: 'get',
                 url: '/docs'
             }, function (res) {
