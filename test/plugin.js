@@ -36,7 +36,7 @@ describe('Docs Generator', function () {
             { method: 'GET', path: '/notincluded', config: { handler: handler, plugins: { lout: false } } }
         ]);
 
-        server.plugin().require('../', { routeTemplate: routeTemplate, indexTemplate: indexTemplate }, function () {
+        server.plugin.require('../', { routeTemplate: routeTemplate, indexTemplate: indexTemplate }, function () {
 
             done();
         });
@@ -47,7 +47,7 @@ describe('Docs Generator', function () {
         serverWithoutPost = new Hapi.Server();
         serverWithoutPost.route({ method: 'GET', path: '/test', config: { handler: handler, validate: { query: { param1: S().required() } } } });
 
-        serverWithoutPost.plugin().require('../', function () {
+        serverWithoutPost.plugin.require('../', function () {
 
             done();
         });
