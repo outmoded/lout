@@ -7,7 +7,7 @@
     "Eran Hammer <eran@hueniverse.com> (http://hueniverse.com)",
     "Van Nguyen <the.gol.effect@gmail.com>"
   ],
-  "repository": "git://github.com/walmartlabs/lout",
+  "repository": "git://github.com/spumko/lout",
   "main": "index",
   "keywords": [
     "docs",
@@ -40,7 +40,7 @@
   "licenses": [
     {
       "type": "BSD",
-      "url": "http://github.com/walmartlabs/lout/raw/master/LICENSE"
+      "url": "http://github.com/spumko/lout/raw/master/LICENSE"
     }
   ]
 }
