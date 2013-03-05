@@ -1,5 +1,5 @@
 <a href="https://github.com/walmartlabs/blammo"><img src="https://raw.github.com/walmartlabs/blammo/master/images/from.png" align="right" /></a>
-![lout Logo](https://raw.github.com/walmartlabs/lout/master/images/lout.png)
+![lout Logo](https://raw.github.com/spumko/lout/master/images/lout.png)
 
 API documentation generator for [**hapi**](https://github.com/walmartlabs/hapi)
 
