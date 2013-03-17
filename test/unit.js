@@ -1,6 +1,6 @@
 // Load modules
 
-var Chai = require('chai');
+var Lab = require('lab');
 var Joi = require('joi');
 var Lout = require('../lib/lout');
 
@@ -12,7 +12,11 @@ var internals = {};
 
 // Test shortcuts
 
-var expect = Chai.expect;
+var expect = Lab.expect;
+var before = Lab.before;
+var after = Lab.after;
+var describe = Lab.experiment;
+var it = Lab.test;
 
 
 describe('Lout', function () {
@@ -260,6 +264,22 @@ describe('Lout', function () {
                 var markup = lout.generateRoutesMarkup([{
                     method: 'POST',
                     config: { validate: { query: { username: { __valids: { exists: null }} } } }
+                }]);
+
+                expect(markup).to.equal('<html></html>');
+                done();
+            });
+
+            it('processes a validation object has no _valids', function (done) {
+
+                var lout = new Lout({
+                    indexTemplate: indexTemplate,
+                    routeTemplate: routeTemplateWithDenied
+                });
+
+                var markup = lout.generateRoutesMarkup([{
+                    method: 'POST',
+                    config: { validate: { query: { username: { __valids: null} } } }
                 }]);
 
                 expect(markup).to.equal('<html></html>');
