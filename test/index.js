@@ -21,9 +21,6 @@ var S = Hapi.types.String;
 
 describe('Lout', function () {
 
-    var routeTemplate = '{{#each routes}}{{this.method}}|{{/each}}';
-    var indexTemplate = '{{#each routes}}{{this.path}}|{{/each}}';
-
     var server = null;
     before(function (done) {
 
@@ -40,7 +37,7 @@ describe('Lout', function () {
             { method: 'GET', path: '/notincluded', config: { handler: handler, plugins: { lout: false } } }
         ]);
 
-        server.plugin.require('../', { routeTemplate: routeTemplate, indexTemplate: indexTemplate }, function () {
+        server.plugin.require('../', function () {
 
             done();
         });
@@ -50,7 +47,7 @@ describe('Lout', function () {
 
         server.inject({ method: 'get', url: '/docs?path=/test' }, function (res) {
 
-            expect(res.result).to.equal('GET|POST|');
+            expect(res.result).to.contain('GET: /test');
             done();
         });
     });
@@ -68,7 +65,7 @@ describe('Lout', function () {
 
         server.inject({ method: 'get', url: '/docs' }, function (res) {
 
-            expect(res.result).to.equal('/test|/test|');
+            expect(res.result).to.contain('?path=/test');
             done();
         });
     });

@@ -1,7 +1,7 @@
 {
   "name": "lout",
   "description": "API documentation generator plugin for hapi",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "author": "Wyatt Preul <wpreul@gmail.com>",
   "contributors":[
     "Eran Hammer <eran@hueniverse.com> (http://hueniverse.com)",
@@ -14,20 +14,20 @@
     "hapi"
   ],
   "engines": {
-    "node": "0.8.x"
+    "node": "0.10.x"
   },
   "dependencies": {
-    "handlebars": "1.0.x",
     "hoek": "0.7.x",
-    "boom": "0.3.x",
-    "joi": "0.2.x"
+    "boom": "0.4.x",
+    "joi": "0.3.x"
   },
   "peerDependencies": {
-    "hapi": "0.16.x"
+    "hapi": "1.0.x"
   },
   "devDependencies": {
-    "hapi": "0.16.x",
-    "lab": "0.0.x",
+    "hapi": "1.0.x",
+    "handlebars": "1.0.x",
+    "lab": "0.1.x",
     "complexity-report": "0.x.x"
   },
   "scripts": {
