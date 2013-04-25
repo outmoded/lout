@@ -37,7 +37,7 @@ describe('Lout', function () {
             { method: 'GET', path: '/notincluded', config: { handler: handler, plugins: { lout: false } } }
         ]);
 
-        server.plugin.require('../', function () {
+        server.pack.require('../', function () {
 
             done();
         });
@@ -45,7 +45,7 @@ describe('Lout', function () {
 
     it('shows template when correct path is provided', function (done) {
 
-        server.inject({ method: 'get', url: '/docs?path=/test' }, function (res) {
+        server.inject('/docs?path=/test', function (res) {
 
             expect(res.result).to.contain('GET: /test');
             done();
@@ -54,7 +54,7 @@ describe('Lout', function () {
 
     it('returns a Not Found response when wrong path is provided', function (done) {
 
-        server.inject({ method: 'get', url: '/docs?path=blah' }, function (res) {
+        server.inject('/docs?path=blah', function (res) {
 
             expect(res.result.error).to.equal('Not Found');
             done();
@@ -63,7 +63,7 @@ describe('Lout', function () {
 
     it('displays the index if no path is provided', function (done) {
 
-        server.inject({ method: 'get', url: '/docs' }, function (res) {
+        server.inject('/docs', function (res) {
 
             expect(res.result).to.contain('?path=/test');
             done();
@@ -72,7 +72,7 @@ describe('Lout', function () {
 
     it('index does\'t have the docs endpoint listed', function (done) {
 
-        server.inject({ method: 'get', url: '/docs' }, function (res) {
+        server.inject('/docs', function (res) {
 
             expect(res.result).to.not.contain('/docs');
             done();
@@ -81,7 +81,7 @@ describe('Lout', function () {
 
     it('index does\'t include routes that are configured with docs disabled', function (done) {
 
-        server.inject({ method: 'get', url: '/docs' }, function (res) {
+        server.inject('/docs', function (res) {
 
             expect(res.result).to.not.contain('/notincluded');
             done();
@@ -95,12 +95,9 @@ describe('Lout', function () {
             var server = new Hapi.Server();
             server.route({ method: 'GET', path: '/test', config: { handler: function (request) { request.reply('ok'); }, validate: { query: { param1: S().required() } } } });
 
-            server.plugin.require('../', function () {
+            server.pack.require('../', function () {
 
-                server.inject({
-                    method: 'get',
-                    url: '/docs'
-                }, function (res) {
+                server.inject('/docs', function (res) {
 
                     expect(res).to.exist;
                     expect(res.result).to.contain('/test');
