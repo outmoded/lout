@@ -33,6 +33,8 @@ describe('Lout', function () {
 
         server.route([
             { method: 'GET', path: '/test', config: { handler: handler, validate: { query: { param1: S().required() } } } },
+            { method: 'GET', path: '/another/test', config: { handler: handler, validate: { query: { param1: S().required() } } } },
+            { method: 'GET', path: '/zanother/test', config: { handler: handler, validate: { query: { param1: S().required() } } } },
             { method: 'POST', path: '/test', config: { handler: handler, validate: { query: { param2: S().valid('first', 'last') } } } },
             { method: 'GET', path: '/notincluded', config: { handler: handler, plugins: { lout: false } } }
         ]);
