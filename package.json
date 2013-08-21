@@ -1,12 +1,7 @@
 {
   "name": "lout",
   "description": "API documentation generator plugin for hapi",
-  "version": "0.4.1",
-  "author": "Wyatt Preul <wpreul@gmail.com>",
-  "contributors":[
-    "Eran Hammer <eran@hueniverse.com> (http://hueniverse.com)",
-    "Van Nguyen <the.gol.effect@gmail.com>"
-  ],
+  "version": "0.4.2",
   "repository": "git://github.com/spumko/lout",
   "main": "index",
   "keywords": [
@@ -24,8 +19,7 @@
   },
   "devDependencies": {
     "hapi": "1.x.x",
-    "lab": "0.1.x",
-    "complexity-report": "0.x.x"
+    "lab": "0.2.x"
   },
   "scripts": {
     "test": "make test-cov"
