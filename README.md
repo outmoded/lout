@@ -11,7 +11,7 @@ using the route configuration. The module allows full customization of the outpu
 **lout** requires that the plugin is granted the _'routes'_ and _'views'_ permissions.
 
 The following options are available when registering the plugin:
-- _'engine'_ - the templating engine to use for processing the templates.  Default is 'handlebars'.
+- _'engines'_ - an object where each key is a file extension (e.g. 'html', 'jade'), mapped to the npm module name (string) used for rendering the templates.  Default is { html: 'handlebars' }.
 - _'endpoint'_ - the path where the route will be registered.  Default is /docs.
 - _'basePath'_ - the absolute path to the templates folder.  Default is the lout templates folder.
 - _'auth'_ - the route configuration for authentication.  Default is to disable auth.
