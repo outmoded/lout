@@ -42,7 +42,10 @@
         {{#if this.notes}}
             <p class="notes">{{this.notes}}</p>
         {{/if}}
-        <dl>
+        {{#if this.auth}}
+            <p class="auth">Strategies: {{this.auth}}</p>
+        {{/if}}
+            <dl>
             {{#if this.queryParams}}
                 <dt><h3>Request Parameters</h3></dt>
             {{else}}
