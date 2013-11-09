@@ -1,0 +1,32 @@
+<li>
+    <h5><em>{{this.name}}</em>
+        {{#if this.required}}
+        <i class="icon-star"></i>
+        {{/if}}
+    </h5>
+    {{#if this.description}}
+    <p>{{this.description}}</p>
+    {{/if}}
+    <dl>
+        <dt><h6>Type</h6></dt>
+        <dd>{{this.type}}</dd>
+        {{#if this.allowedValues}}
+            <dt>Allowed Values</dt>
+            {{#each this.allowedValues}}
+                <dd>{{this}}</dd>
+            {{/each}}
+        {{/if}}
+        {{#if this.disallowedValues}}
+            <dt>Forbidden Values</dt>
+            {{#each this.disallowedValues}}
+                <dd>{{this}}</dd>
+            {{/each}}
+        {{/if}}
+        {{#if this.subType}}
+            <dt>Properties</dt>
+            {{#each this.subType}}
+                <dd>{{> type}}</dd>
+            {{/each}}
+        {{/if}}
+    </dl>
+</li>
