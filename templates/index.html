@@ -24,7 +24,7 @@
         <ul class="unstyled">
         {{#each routes}}
             <li class="route">
-                <h2>{{this.method}}: <a href="{{docsEndpoint}}?path={{this.path}}">{{this.path}}</a></h2>
+                <h2>{{this.method}}: <a href="?path={{this.path}}">{{this.path}}</a></h2>
                 {{#if this.tags}}
                 <p class="tags">{{this.tags}}</p>
                 {{/if}}
