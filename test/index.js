@@ -17,7 +17,7 @@ var after = Lab.after;
 var describe = Lab.experiment;
 var it = Lab.test;
 var S = Hapi.types.String;
-
+var O = Hapi.types.Object;
 
 describe('Lout', function () {
 
@@ -36,7 +36,8 @@ describe('Lout', function () {
             { method: 'GET', path: '/another/test', config: { handler: handler, validate: { query: { param1: S().required() } } } },
             { method: 'GET', path: '/zanother/test', config: { handler: handler, validate: { query: { param1: S().required() } } } },
             { method: 'POST', path: '/test', config: { handler: handler, validate: { query: { param2: S().valid('first', 'last') } } } },
-            { method: 'GET', path: '/notincluded', config: { handler: handler, plugins: { lout: false } } }
+            { method: 'GET', path: '/notincluded', config: { handler: handler, plugins: { lout: false } } },
+            { method: 'GET', path: '/nested', config: { handler: handler, validate: { query: { param1: O({ nestedparam1: S().required() }) } } } }
         ]);
 
         server.pack.require('../', function () {
@@ -50,6 +51,7 @@ describe('Lout', function () {
         server.inject('/docs?path=/test', function (res) {
 
             expect(res.result).to.contain('GET: /test');
+            expect(res.result).to.contain('POST: /test');
             done();
         });
     });
@@ -64,15 +66,20 @@ describe('Lout', function () {
     });
 
     it('displays the index if no path is provided', function (done) {
-
         server.inject('/docs', function (res) {
 
-            expect(res.result).to.contain('?path=/test');
+            server.routingTable().forEach(function (route) {
+                if ((route.settings.plugins && route.settings.plugins.lout === false) || route.path === '/docs') {
+                    expect(res.result).to.not.contain('?path=' + route.path);
+                } else {
+                    expect(res.result).to.contain('?path=' + route.path);
+                }
+            });
             done();
         });
     });
 
-    it('index does\'t have the docs endpoint listed', function (done) {
+    it('index doesn\'t have the docs endpoint listed', function (done) {
 
         server.inject('/docs', function (res) {
 
@@ -81,11 +88,19 @@ describe('Lout', function () {
         });
     });
 
-    it('index does\'t include routes that are configured with docs disabled', function (done) {
+    it('index doesn\'t include routes that are configured with docs disabled', function (done) {
 
         server.inject('/docs', function (res) {
 
             expect(res.result).to.not.contain('/notincluded');
+            done();
+        });
+    });
+
+    it('displays nested rules', function (done) {
+        server.inject('/docs?path=/nested', function (res) {
+            expect(res.result).to.contain('param1');
+            expect(res.result).to.contain('nestedparam1');
             done();
         });
     });
