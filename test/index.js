@@ -2,7 +2,7 @@
 
 var Lab = require('lab');
 var Hapi = require('hapi');
-
+Hapi.joi.version('v2');
 
 // Declare internals
 
@@ -16,8 +16,9 @@ var before = Lab.before;
 var after = Lab.after;
 var describe = Lab.experiment;
 var it = Lab.test;
-var S = Hapi.types.String;
-var O = Hapi.types.Object;
+var S = Hapi.types.string;
+var O = Hapi.types.object;
+var A = Hapi.types.array;
 
 describe('Lout', function () {
 
@@ -37,7 +38,9 @@ describe('Lout', function () {
             { method: 'GET', path: '/zanother/test', config: { handler: handler, validate: { query: { param1: S().required() } } } },
             { method: 'POST', path: '/test', config: { handler: handler, validate: { query: { param2: S().valid('first', 'last') } } } },
             { method: 'GET', path: '/notincluded', config: { handler: handler, plugins: { lout: false } } },
-            { method: 'GET', path: '/nested', config: { handler: handler, validate: { query: { param1: O({ nestedparam1: S().required() }) } } } }
+            { method: 'GET', path: '/nested', config: { handler: handler, validate: { query: { param1: O({ nestedparam1: S().required() }) } } } },
+            { method: 'GET', path: '/rootobject', config: { handler: handler, validate: { query: O({ param1: S().required() }) } } },
+            { method: 'GET', path: '/rootarray', config: { handler: handler, validate: { query: A().includes(S()) } } }
         ]);
 
         server.pack.require('../', function () {
@@ -66,6 +69,7 @@ describe('Lout', function () {
     });
 
     it('displays the index if no path is provided', function (done) {
+
         server.inject('/docs', function (res) {
 
             server.routingTable().forEach(function (route) {
@@ -101,6 +105,7 @@ describe('Lout', function () {
         server.inject('/docs?path=/nested', function (res) {
             expect(res.result).to.contain('param1');
             expect(res.result).to.contain('nestedparam1');
+            expect(res.result).to.contain('icon-star');
             done();
         });
     });

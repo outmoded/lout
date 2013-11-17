@@ -57,9 +57,7 @@
                 <dt><h4>Query Parameters</h4></dt>
                 <dd>
                     <ul class="unstyled">
-                        {{#each this.queryParams}}
-                            {{> type}}
-                        {{/each}}
+                        {{> type this.queryParams}}
                     </ul>
                 </dd>
             {{/if}}
@@ -67,9 +65,7 @@
                 <dt><h4>Payload Parameters</h4></dt>
                 <dd>
                     <ul class="unstyled">
-                        {{#each this.payloadParams}}
-                            {{> type}}
-                        {{/each}}
+                        {{> type this.payloadParams}}
                     </ul>
                 </dd>
             {{/if}}
@@ -77,9 +73,7 @@
             <dt><h3>Response Parameters</h3></dt>
             <dd>
                 <ul class="unstyled">
-                    {{#each this.responseParams}}
-                        {{> type}}
-                    {{/each}}
+                    {{> type this.responseParams}}
                 </ul>
             </dd>
             {{/if}}
