@@ -2,7 +2,6 @@
 
 var Lab = require('lab');
 var Hapi = require('hapi');
-Hapi.joi.version('v2');
 
 // Declare internals
 
@@ -16,14 +15,28 @@ var before = Lab.before;
 var after = Lab.after;
 var describe = Lab.experiment;
 var it = Lab.test;
-var S = Hapi.types.string;
-var O = Hapi.types.object;
-var A = Hapi.types.array;
+
+describe('Lout on joi v1.x', function() {
+
+    it('should fail to be required', function(done) {
+        var server = new Hapi.Server();
+        server.pack.require('../', function(err) {
+            expect(err).to.exist;
+            done();
+        });
+    });
+
+});
 
 describe('Lout', function () {
 
-    var server = null;
+    var S, O, A, server = null;
     before(function (done) {
+
+        Hapi.joi.version('v2');
+        S = Hapi.types.string;
+        O = Hapi.types.object;
+        A = Hapi.types.array;
 
         server = new Hapi.Server();
 
