@@ -51,7 +51,19 @@
             {{else}}
             {{#if this.payloadParams}}
                 <dt><h3>Request Parameters</h3></dt>
+            {{else}}
+            {{#if this.pathParams}}
+                <dt><h3>Path Parameters</h3></dt>
             {{/if}}
+            {{/if}}
+            {{/if}}
+            {{#if this.pathParams}}
+                <dt><h4>Path Parameters</h4></dt>
+                <dd>
+                    <ul class="unstyled">
+                        {{> type this.pathParams}}
+                    </ul>
+                </dd>
             {{/if}}
             {{#if this.queryParams}}
                 <dt><h4>Query Parameters</h4></dt>
