@@ -53,7 +53,8 @@ describe('Lout', function () {
             { method: 'GET', path: '/notincluded', config: { handler: handler, plugins: { lout: false } } },
             { method: 'GET', path: '/nested', config: { handler: handler, validate: { query: { param1: O({ nestedparam1: S().required() }) } } } },
             { method: 'GET', path: '/rootobject', config: { handler: handler, validate: { query: O({ param1: S().required() }) } } },
-            { method: 'GET', path: '/rootarray', config: { handler: handler, validate: { query: A().includes(S()) } } }
+            { method: 'GET', path: '/rootarray', config: { handler: handler, validate: { query: A().includes(S()) } } },
+            { method: 'GET', path: '/path/{pparam}/test', config: { handler: handler, validate: { path: { pparam: S().required() } } } }
         ]);
 
         server.pack.require('../', function () {
@@ -118,6 +119,15 @@ describe('Lout', function () {
         server.inject('/docs?path=/nested', function (res) {
             expect(res.result).to.contain('param1');
             expect(res.result).to.contain('nestedparam1');
+            expect(res.result).to.contain('icon-star');
+            done();
+        });
+    });
+
+    it('displays path parameters', function (done) {
+        server.inject('/docs?path=/path/{pparam}/test', function (res) {
+            expect(res.result).to.contain('Path Parameters');
+            expect(res.result).to.contain('pparam');
             expect(res.result).to.contain('icon-star');
             done();
         });
