@@ -1,3 +1,8 @@
+# Version 1.1.0
+- Show path parameters
+- Upgrade to twitter bootstrap 3.x
+- Fix Handlebars dependency
+
 # Version 1.0.1
 - Because lout can be installed on a hapi 1.x, check for joi version to alert on incompatibility
 
