@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+
+var Hapi = require('hapi');
+
+// Reuse the test default routes, since they are quite complete.
+var server = new Hapi.Server(3000);
+
+server.route(require('../test/routes/default'));
+
+server.pack.require('../', function(err) {
+  server.start();
+});

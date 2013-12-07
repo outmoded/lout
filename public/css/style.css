@@ -1,0 +1,85 @@
+body {
+  padding-top: 60px;
+}
+
+.anchor {
+  /* Offset the anchors for the title to be visible when navigating. */
+  display: block;
+  position: relative;
+  top: -60px;
+  visibility: hidden;
+}
+
+.anchor-link,
+.anchor-link > span {
+  text-decoration: none !important;
+}
+
+.route-index .route {
+  -webkit-transition: all 200ms ease;
+  -o-transition: all 200ms ease;
+  transition: all 200ms ease;
+}
+
+.route-index .route .h2 {
+  margin-top: 3px;
+  margin-bottom: 10px;
+}
+
+.route-index .route:hover {
+  background-color: #EEE;
+  -webkit-box-shadow: 1px 1px 10px #CCC;
+  box-shadow: 1px 1px 10px #CCC;
+}
+
+.route-index .full-width-label {
+  display: inline-block;
+  width: 100%;
+}
+
+.route-details .parameters dd {
+  margin-left: 10px;
+}
+
+.route-details .panel-body {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.route-details .panel-heading {
+  padding-top: 5px;
+  background-size: 50px 50px;
+  background-color: #DDD;
+  background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+                  transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+                  transparent 75%, transparent);
+  background-image: -webkit-linear-gradient(315deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+                  transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+                  transparent 75%, transparent);
+  background-image: -o-linear-gradient(315deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+                  transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+                  transparent 75%, transparent);
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+                  transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+                  transparent 75%, transparent);
+}
+
+.route-details .panel-heading.GET {
+  background-color: #D9E8F4;
+}
+
+.route-details .panel-heading.PUT {
+  background-color: #FCEFDC;
+}
+
+.route-details .panel-heading.POST {
+  background-color: #DEF1DE;
+}
+
+.route-details .panel-heading.DELETE {
+  background-color: #F7DDDC;
+}
+
+.route-details .panel-heading.OPTIONS {
+  background-color: #DEF2F8;
+}

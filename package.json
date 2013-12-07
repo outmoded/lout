@@ -19,7 +19,8 @@
   "devDependencies": {
     "hapi": "2.x.x",
     "handlebars": "1.3.x",
-    "lab": "~1.2.2"
+    "lab": "~1.2.2",
+    "cheerio": "~0.13.1"
   },
   "scripts": {
     "test": "make test-cov"

@@ -3,27 +3,32 @@
 <head>
     <title>Documentation for REST routes</title>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body { padding-top: 60px; }
-    </style>
+    <link href="{{@basePath}}/css/style.css" rel="stylesheet">
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">Route Documentation</a>
         </div>
     </div>
-    <div class="container">
-        <ul class="list-unstyled">
+    <div class="container route-index">
         {{#each routes}}
-            <li class="route">
-                <h2>{{this.method}}: <a href="?path={{this.path}}">{{this.path}}</a></h2>
-                {{#if this.tags}}
-                <p class="tags">{{this.tags}}</p>
-                {{/if}}
-            </li>
+            <div class="row route">
+                <div class="col-md-2 h2">
+                    <span class="{{colorFromMethod this}} full-width-label">
+                        {{this.method}}
+                    </span>
+                </div>
+                <div class="col-md-10 h2">
+                    <a href="?path={{this.path}}#{{this.method}}">{{this.path}}</a>
+                    <div class="pull-right">
+                    {{#each this.tags}}
+                        <div class="badge">{{this}}</div>
+                    {{/each}}
+                    </div>
+                </div>
+            </div>
         {{/each}}
-        </ul>
     </div>
 </body>
 </html>

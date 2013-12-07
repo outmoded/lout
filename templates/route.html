@@ -3,87 +3,94 @@
 <head>
     <title>Documentation for {{path}}</title>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body { padding-top: 60px; }
-        dd { margin-left: 10px; }
-    </style>
+    <link href="{{@basePath}}/css/style.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="navbar-header">
             <a class="navbar-brand" href="?"><i class="glyphicon glyphicon-home glyphicon-white"></i></a>
-        </div>
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                {{#each routes}}
-                <li><a href="#{{this.method}}">{{this.method}}</a></li>
-                {{/each}}
-            </ul>
+            <div class="navbar-text">
+                <ul class="navbar-nav list-inline">
+                    {{#each routes}}
+                    <li>
+                        <a href="#{{this.method}}" class="anchor-link">
+                            <span class="{{colorFromMethod this}}">{{this.method}}</span>
+                        </a>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
         </div>
     </nav>
-    <div class="container">
+    <div class="container route-details">
     {{#each routes}}
-        <div class="route">
-            <a name="{{this.method}}"></a>
-        {{#if this.name}}
-            <h2>{{this.name}}</h2>
-        {{else}}
-            <h2>{{this.method}}: {{this.path}}</h2>
-        {{/if}}
-        {{#if this.description}}
-            <p class="description">{{this.description}}</p>
-        {{/if}}
-        {{#if this.notes}}
-            <p class="notes">{{this.notes}}</p>
-        {{/if}}
-        {{#if this.auth}}
-            <p class="auth">Strategies: {{this.auth}}</p>
-        {{/if}}
-            <dl>
-            {{#if this.queryParams}}
-                <dt><h3>Request Parameters</h3></dt>
-            {{else}}
-            {{#if this.payloadParams}}
-                <dt><h3>Request Parameters</h3></dt>
-            {{else}}
-            {{#if this.pathParams}}
-                <dt><h3>Path Parameters</h3></dt>
-            {{/if}}
-            {{/if}}
-            {{/if}}
-            {{#if this.pathParams}}
-                <dt><h4>Path Parameters</h4></dt>
-                <dd>
-                    <ul class="list-unstyled">
-                        {{> type this.pathParams}}
-                    </ul>
-                </dd>
-            {{/if}}
-            {{#if this.queryParams}}
-                <dt><h4>Query Parameters</h4></dt>
-                <dd>
-                    <ul class="list-unstyled">
-                        {{> type this.queryParams}}
-                    </ul>
-                </dd>
-            {{/if}}
-            {{#if this.payloadParams}}
-                <dt><h4>Payload Parameters</h4></dt>
-                <dd>
-                    <ul class="list-unstyled">
-                        {{> type this.payloadParams}}
-                    </ul>
-                </dd>
-            {{/if}}
-            {{#if this.responseParams}}
-            <dt><h3>Response Parameters</h3></dt>
-            <dd>
-                <ul class="list-unstyled">
-                    {{> type this.responseParams}}
-                </ul>
-            </dd>
-            {{/if}}
-        </dl>
+        <div class="panel panel-default route">
+            <a name="{{this.method}}" class="anchor"></a>
+            <div class="panel-heading h2 {{this.method}}">
+                {{#if this.name}}
+                    {{this.name}}
+                {{else}}
+                    <span class="{{colorFromMethod this}}">{{this.method}}</span> {{this.path}}
+                {{/if}}
+            </div>
+
+            {{#multipleIf this.description this.notes this.auth}}
+                <div class="panel-body">
+                    {{#if this.description}}
+                        <h3>Description</h3>
+                        <p class="description">{{this.description}}</p>
+                    {{/if}}
+                    {{#if this.notes}}
+                        <h3>Notes</h3>
+                        <p class="notes">{{this.notes}}</p>
+                    {{/if}}
+                    {{#if this.auth}}
+                        <h3>Strategies</h3>
+                        <p class="auth">{{this.auth}}</p>
+                    {{/if}}
+                </div>
+            {{/multipleIf}}
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <dl class="parameters">
+                    {{#multipleIf this.queryParams this.payloadParams this.pathParams}}
+                        <dt><h3>Request Parameters</h3></dt>
+                    {{/multipleIf}}
+                    {{#if this.pathParams}}
+                        <dt><h4>Path Parameters</h4></dt>
+                        <dd>
+                            <ul class="list-unstyled">
+                                {{> type this.pathParams}}
+                            </ul>
+                        </dd>
+                    {{/if}}
+                    {{#if this.queryParams}}
+                        <dt><h4>Query Parameters</h4></dt>
+                        <dd>
+                            <ul class="list-unstyled">
+                                {{> type this.queryParams}}
+                            </ul>
+                        </dd>
+                    {{/if}}
+                    {{#if this.payloadParams}}
+                        <dt><h4>Payload Parameters</h4></dt>
+                        <dd>
+                            <ul class="list-unstyled">
+                                {{> type this.payloadParams}}
+                            </ul>
+                        </dd>
+                    {{/if}}
+                    {{#if this.responseParams}}
+                        <dt><h3>Response Parameters</h3></dt>
+                        <dd>
+                            <ul class="list-unstyled">
+                                {{> type this.responseParams}}
+                            </ul>
+                        </dd>
+                    {{/if}}
+                    </dl>
+                </li>
+            </ul>
         </div>
     {{/each}}
     </div>

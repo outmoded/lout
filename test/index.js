@@ -2,6 +2,7 @@
 
 var Lab = require('lab');
 var Hapi = require('hapi');
+var cheerio = require('cheerio');
 
 // Declare internals
 
@@ -18,32 +19,12 @@ var it = Lab.test;
 
 describe('Lout', function () {
 
-    var S, O, A, server = null;
+    var server = null;
     before(function (done) {
-
-        S = Hapi.types.string;
-        O = Hapi.types.object;
-        A = Hapi.types.array;
 
         server = new Hapi.Server();
 
-        var handler = function (request) {
-
-            request.reply('ok');
-        };
-
-        server.route([
-            { method: 'GET', path: '/test', config: { handler: handler, validate: { query: { param1: S().required() } } } },
-            { method: 'GET', path: '/another/test', config: { handler: handler, validate: { query: { param1: S().required() } } } },
-            { method: 'GET', path: '/zanother/test', config: { handler: handler, validate: { query: { param1: S().required() } } } },
-            { method: 'POST', path: '/test', config: { handler: handler, validate: { query: { param2: S().valid('first', 'last') } } } },
-            { method: 'GET', path: '/notincluded', config: { handler: handler, plugins: { lout: false } } },
-            { method: 'GET', path: '/nested', config: { handler: handler, validate: { query: { param1: O({ nestedparam1: S().required() }) } } } },
-            { method: 'GET', path: '/rootobject', config: { handler: handler, validate: { query: O({ param1: S().required() }) } } },
-            { method: 'GET', path: '/rootarray', config: { handler: handler, validate: { query: A().includes(S()) } } },
-            { method: 'GET', path: '/path/{pparam}/test', config: { handler: handler, validate: { path: { pparam: S().required() } } } },
-            { method: 'GET', path: '/emptyobject', config: { handler: handler, validate: { query: { param1: O() } } } }
-        ]);
+        server.route(require('./routes/default'));
 
         server.pack.require('../', function () {
 
@@ -55,8 +36,17 @@ describe('Lout', function () {
 
         server.inject('/docs?path=/test', function (res) {
 
-            expect(res.result).to.contain('GET: /test');
-            expect(res.result).to.contain('POST: /test');
+            var $ = cheerio.load(res.result);
+
+            expect($('.anchor-link').length).to.equal(5);
+            expect($('.anchor').length).to.equal(5);
+
+            var matches = ['GET /test', 'POST /test'];
+            $('.panel-heading h2').each(function() {
+
+                expect(matches.shift()).to.equal(this.text());
+            });
+
             done();
         });
     });
@@ -89,7 +79,7 @@ describe('Lout', function () {
 
         server.inject('/docs', function (res) {
 
-            expect(res.result).to.not.contain('/docs');
+            expect(res.result).to.not.contain('?path=/docs');
             done();
         });
     });
@@ -104,7 +94,9 @@ describe('Lout', function () {
     });
 
     it('displays nested rules', function (done) {
+
         server.inject('/docs?path=/nested', function (res) {
+
             expect(res.result).to.contain('param1');
             expect(res.result).to.contain('nestedparam1');
             expect(res.result).to.contain('icon-star');
@@ -113,7 +105,9 @@ describe('Lout', function () {
     });
 
     it('displays path parameters', function (done) {
+
         server.inject('/docs?path=/path/{pparam}/test', function (res) {
+
             expect(res.result).to.contain('Path Parameters');
             expect(res.result).to.contain('pparam');
             expect(res.result).to.contain('icon-star');
@@ -136,7 +130,8 @@ describe('Lout', function () {
         it('doesn\'t throw an error when requesting the index when there are no POST routes', function (done) {
 
             var server = new Hapi.Server();
-            server.route({ method: 'GET', path: '/test', config: { handler: function (request) { request.reply('ok'); }, validate: { query: { param1: S().required() } } } });
+
+            server.route(require('./routes/withoutpost'));
 
             server.pack.require('../', function () {
 
