@@ -2,31 +2,25 @@
 <html lang="en">
 <head>
     <title>Documentation for {{path}}</title>
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body { padding-top: 60px; }
+        dd { margin-left: 10px; }
     </style>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <a class="brand" href="?"><i class="icon-home icon-white"></i></a>
-                <div class="nav-collapse collapse">
-                    <ul class="nav">
-                        {{#each routes}}
-                        <li><a href="#{{this.method}}">{{this.method}}</a></li>
-                        {{/each}}
-                    </ul>
-                </div>
-            </div>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="?"><i class="glyphicon glyphicon-home glyphicon-white"></i></a>
         </div>
-    </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                {{#each routes}}
+                <li><a href="#{{this.method}}">{{this.method}}</a></li>
+                {{/each}}
+            </ul>
+        </div>
+    </nav>
     <div class="container">
     {{#each routes}}
         <div class="route">
@@ -60,7 +54,7 @@
             {{#if this.pathParams}}
                 <dt><h4>Path Parameters</h4></dt>
                 <dd>
-                    <ul class="unstyled">
+                    <ul class="list-unstyled">
                         {{> type this.pathParams}}
                     </ul>
                 </dd>
@@ -68,7 +62,7 @@
             {{#if this.queryParams}}
                 <dt><h4>Query Parameters</h4></dt>
                 <dd>
-                    <ul class="unstyled">
+                    <ul class="list-unstyled">
                         {{> type this.queryParams}}
                     </ul>
                 </dd>
@@ -76,7 +70,7 @@
             {{#if this.payloadParams}}
                 <dt><h4>Payload Parameters</h4></dt>
                 <dd>
-                    <ul class="unstyled">
+                    <ul class="list-unstyled">
                         {{> type this.payloadParams}}
                     </ul>
                 </dd>
@@ -84,7 +78,7 @@
             {{#if this.responseParams}}
             <dt><h3>Response Parameters</h3></dt>
             <dd>
-                <ul class="unstyled">
+                <ul class="list-unstyled">
                     {{> type this.responseParams}}
                 </ul>
             </dd>

@@ -1,7 +1,7 @@
 <li>
     <h5><em>{{this.name}}</em>
         {{#if this.required}}
-        <i class="icon-star" title="This is a required field."></i>
+        <i class="glyphicon glyphicon-star" title="This is a required field."></i>
         {{/if}}
     </h5>
     {{#if this.description}}
@@ -25,7 +25,11 @@
         {{#if this.children}}
             <dt>Properties</dt>
             {{#each this.children}}
-                <dd>{{> type}}</dd>
+                <dd>
+                    <ul class="list-unstyled">
+                    {{> type}}
+                    </ul>
+                </dd>
             {{/each}}
         {{/if}}
     </dl>
