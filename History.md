@@ -1,3 +1,6 @@
+# Version 1.1.1
+- Fixes a crash on empty objects
+
 # Version 1.1.0
 - Show path parameters
 - Upgrade to twitter bootstrap 3.x

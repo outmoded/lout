@@ -54,7 +54,8 @@ describe('Lout', function () {
             { method: 'GET', path: '/nested', config: { handler: handler, validate: { query: { param1: O({ nestedparam1: S().required() }) } } } },
             { method: 'GET', path: '/rootobject', config: { handler: handler, validate: { query: O({ param1: S().required() }) } } },
             { method: 'GET', path: '/rootarray', config: { handler: handler, validate: { query: A().includes(S()) } } },
-            { method: 'GET', path: '/path/{pparam}/test', config: { handler: handler, validate: { path: { pparam: S().required() } } } }
+            { method: 'GET', path: '/path/{pparam}/test', config: { handler: handler, validate: { path: { pparam: S().required() } } } },
+            { method: 'GET', path: '/emptyobject', config: { handler: handler, validate: { query: { param1: O() } } } }
         ]);
 
         server.pack.require('../', function () {
@@ -129,6 +130,16 @@ describe('Lout', function () {
             expect(res.result).to.contain('Path Parameters');
             expect(res.result).to.contain('pparam');
             expect(res.result).to.contain('icon-star');
+            done();
+        });
+    });
+
+    it('should not show properties on empty objects', function (done) {
+
+        server.inject('/docs?path=/emptyobject', function (res) {
+
+            expect(res.result).to.contain('param1');
+            expect(res.result.match(/Properties/g)).to.have.length(1);
             done();
         });
     });
