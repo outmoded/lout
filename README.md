@@ -4,6 +4,9 @@
 API documentation generator for [**hapi**](https://github.com/spumko/hapi)
 
 [![Build Status](https://secure.travis-ci.org/spumko/lout.png)](http://travis-ci.org/spumko/lout)
+[![Dependencies Status](https://david-dm.org/spumko/lout.png)](https://david-dm.org/spumko/lout)
+[![DevDependencies Status](https://david-dm.org/spumko/lout/dev-status.png)](https://david-dm.org/spumko/lout#info=devDependencies)
+
 
 **lout** is a documentation generator for **hapi** servers, providing a human-readable guide for every endpoint
 using the route configuration. The module allows full customization of the output.
