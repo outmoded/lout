@@ -19,7 +19,7 @@
   "devDependencies": {
     "hapi": ">= 1.16.x",
     "handlebars": "1.1.x",
-    "lab": "0.2.x"
+    "lab": "~1.2.2"
   },
   "scripts": {
     "test": "make test-cov"
