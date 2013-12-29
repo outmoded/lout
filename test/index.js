@@ -16,24 +16,11 @@ var after = Lab.after;
 var describe = Lab.experiment;
 var it = Lab.test;
 
-describe('Lout on joi v1.x', function() {
-
-    it('should fail to be required', function(done) {
-        var server = new Hapi.Server();
-        server.pack.require('../', function(err) {
-            expect(err).to.exist;
-            done();
-        });
-    });
-
-});
-
 describe('Lout', function () {
 
     var S, O, A, server = null;
     before(function (done) {
 
-        Hapi.joi.version('v2');
         S = Hapi.types.string;
         O = Hapi.types.object;
         A = Hapi.types.array;
@@ -87,7 +74,7 @@ describe('Lout', function () {
 
         server.inject('/docs', function (res) {
 
-            server.routingTable().forEach(function (route) {
+            server.table().forEach(function (route) {
                 if ((route.settings.plugins && route.settings.plugins.lout === false) || route.path === '/docs') {
                     expect(res.result).to.not.contain('?path=' + route.path);
                 } else {
