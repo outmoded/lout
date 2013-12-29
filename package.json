@@ -14,11 +14,11 @@
   "dependencies": {},
   "peerDependencies": {
     "hapi": ">= 1.16.x",
-    "handlebars": "1.1.x"
+    "handlebars": "1.2.x"
   },
   "devDependencies": {
     "hapi": "spumko/hapi#master",
-    "handlebars": "1.1.x",
+    "handlebars": "1.2.x",
     "lab": "~1.2.2"
   },
   "scripts": {
