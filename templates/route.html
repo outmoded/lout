@@ -50,11 +50,12 @@
                     {{/if}}
                 </div>
             {{/multipleIf}}
+
             <ul class="list-group">
                 <li class="list-group-item">
                     <dl class="parameters">
                     {{#multipleIf this.queryParams this.payloadParams this.pathParams}}
-                        <dt><h3>Request Parameters</h3></dt>
+                        <h3>Request Parameters</h3>
                     {{/multipleIf}}
                     {{#if this.pathParams}}
                         <dt><h4>Path Parameters</h4></dt>

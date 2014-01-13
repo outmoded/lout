@@ -51,6 +51,18 @@ describe('Lout', function () {
         });
     });
 
+    it('shows array objects', function (done) {
+
+        server.inject('/docs?path=/rootarray', function (res) {
+
+            var $ = cheerio.load(res.result);
+
+            expect($('dt h6').length).to.equal(5);
+
+            done();
+        });
+    });
+
     it('returns a Not Found response when wrong path is provided', function (done) {
 
         server.inject('/docs?path=blah', function (res) {

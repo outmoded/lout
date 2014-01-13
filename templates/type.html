@@ -24,13 +24,35 @@
         {{/if}}
         {{#if this.children}}
             <dt>Properties</dt>
-            {{#each this.children}}
-                <dd>
-                    <ul class="list-unstyled">
+            <dd>
+                <ul class="list-unstyled">
+                {{#each this.children}}
                     {{> type}}
+                {{/each}}
+                </ul>
+            </dd>
+        {{/if}}
+        {{#if this.rules}}
+            {{#if this.rules.includes}}
+                <dt>Includes</dt>
+                <dd>
+                    <ul class="disc-bullets reduced-margin-list">
+                    {{#each this.rules.includes}}
+                        {{> type}}
+                    {{/each}}
                     </ul>
                 </dd>
-            {{/each}}
+            {{/if}}
+            {{#if this.rules.excludes}}
+                <dt>Excludes</dt>
+                <dd>
+                    <ul class="disc-bullets reduced-margin-list">
+                    {{#each this.rules.excludes}}
+                        {{> type}}
+                    {{/each}}
+                    </ul>
+                </dd>
+            {{/if}}
         {{/if}}
     </dl>
 </li>

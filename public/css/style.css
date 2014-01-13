@@ -83,3 +83,11 @@ body {
 .route-details .panel-heading.OPTIONS {
   background-color: #DEF2F8;
 }
+
+.route-details ul.disc-bullets > li {
+  list-style-type: disc;
+}
+
+.route-details ul.reduced-margin-list {
+  margin-left: -20px;
+}
