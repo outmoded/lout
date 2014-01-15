@@ -41,11 +41,17 @@ describe('Lout', function () {
             expect($('.anchor-link').length).to.equal(5);
             expect($('.anchor').length).to.equal(5);
 
-            var matches = ['GET /test', 'POST /test'];
-            $('.panel-heading h2').each(function() {
+            var matches = ['GET /test', 'POST /test', 'DELETE /test', 'PUT /test', 'HEAD /test'];
+            var methodHeadings = $('.panel-heading .method-title');
 
-                expect(matches.shift()).to.equal(this.text());
+            expect(methodHeadings.length).to.equal(5);
+
+            methodHeadings.each(function() {
+
+                expect(this.text()).to.contain(matches.shift());
             });
+
+            expect($('.badge').length).to.equal(2);
 
             done();
         });

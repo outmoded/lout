@@ -27,11 +27,18 @@
         <div class="panel panel-default route">
             <a name="{{this.method}}" class="anchor"></a>
             <div class="panel-heading h2 {{this.method}}">
-                {{#if this.name}}
-                    {{this.name}}
-                {{else}}
-                    <span class="{{colorFromMethod this}}">{{this.method}}</span> {{this.path}}
-                {{/if}}
+                <span class="method-title">
+                    {{#if this.name}}
+                        <span>{{this.name}}</span>
+                    {{else}}
+                        <span class="{{colorFromMethod this}}">{{this.method}}</span> <span>{{this.path}}</span>
+                    {{/if}}
+                </span>
+                <span class="pull-right">
+                    {{#each this.tags}}
+                        <div class="badge">{{this}}</div>
+                    {{/each}}
+                </span>
             </div>
 
             {{#multipleIf this.description this.notes this.auth}}
