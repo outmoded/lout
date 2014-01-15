@@ -41,7 +41,7 @@ describe('Lout', function () {
             expect($('.anchor-link').length).to.equal(5);
             expect($('.anchor').length).to.equal(5);
 
-            var matches = ['GET /test', 'POST /test', 'DELETE /test', 'PUT /test', 'HEAD /test'];
+            var matches = ['GET /test', 'HEAD /test', 'POST /test', 'PUT /test', 'DELETE /test'];
             var methodHeadings = $('.panel-heading .method-title');
 
             expect(methodHeadings.length).to.equal(5);
