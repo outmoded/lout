@@ -1,3 +1,7 @@
+# Version 2.0.1
+- Fix #41: css route didn't handle authentication properly
+- Fix #43: '/' as endpoint didn't work
+
 # Version 2.0.0
 - Support for Hapi 2.x.x
 - Beginning of a makeover to have a cleaner default look
