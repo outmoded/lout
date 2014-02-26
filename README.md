@@ -20,3 +20,18 @@ The following options are available when registering the plugin:
 - _'auth'_ - the route configuration for authentication.  Default is to disable auth.
 - _'indexTemplate'_ the name of the template file to contain docs main page.  Default is 'index'.
 - _'routeTemplate'_ the name of the route template file.  Default is 'route'.
+
+##Usage
+
+```javascript
+var Hapi = require('hapi');
+var server = new Hapi.Server(80);
+
+server.pack.route([{
+    your routes...
+}]);
+
+server.pack.require('lout', function() {
+    server.start();
+});
+```
