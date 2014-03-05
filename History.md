@@ -1,3 +1,7 @@
+# Version 2.1.0
+- Fix #47: setting custom basePath makes lout not finding its helpers folder
+- Fix #48: add simple way to provide custom CSS
+
 # Version 2.0.1
 - Fix #41: css route didn't handle authentication properly
 - Fix #43: '/' as endpoint didn't work

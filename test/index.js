@@ -3,6 +3,7 @@
 var Lab = require('lab');
 var Hapi = require('hapi');
 var cheerio = require('cheerio');
+var Path = require('path');
 
 // Declare internals
 
@@ -160,6 +161,58 @@ describe('Lout', function () {
                     done();
                 });
             });
+        });
+    });
+});
+
+describe('Customized Lout', function () {
+
+    it('should fail with a basePath without helpers', function(done) {
+
+        var server = new Hapi.Server();
+
+        expect(function() {
+
+            server.pack.require({
+                '../': {
+                    basePath: Path.join(__dirname, './custom-test-files')
+                }
+            }, function () {});
+        }).to.throw(Error, 'ENOENT');
+        done();
+    });
+
+    it('should succeed with a correct configuration', function(done) {
+
+        var server = new Hapi.Server();
+
+        server.pack.require({
+            '../': {
+                basePath: Path.join(__dirname, './custom-test-files'),
+                helpersPath: null,
+                cssPath: null
+            }
+        }, function () {
+
+            done();
+        });
+    });
+
+    it('should serve a custom css', function(done) {
+        var server = new Hapi.Server();
+
+        server.pack.require({
+            '../': {
+                cssPath: Path.join(__dirname, './custom-test-files/css')
+            }
+        }, function () {
+
+            server.inject('/docs/css/style.css', function (res) {
+
+                expect(res).to.exist;
+                expect(res.result).to.contain('.cssTest');
+                done();
+            })
         });
     });
 });
