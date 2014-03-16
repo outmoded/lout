@@ -1,3 +1,6 @@
+# Version 2.1.1
+- Mark as compatible with Hapi 3.x
+
 # Version 2.1.0
 - Fix #47: setting custom basePath makes lout not finding its helpers folder
 - Fix #48: add simple way to provide custom CSS
