@@ -97,6 +97,20 @@ describe('Lout', function () {
         });
     });
 
+    it('shows alternatives', function (done) {
+
+        server.inject('/docs?path=/alternatives', function (res) {
+
+            expect(res.result).to.contain('Alternatives');
+            expect(res.result).to.contain('number');
+            expect(res.result).to.contain('string');
+            expect(res.result).to.contain('first');
+            expect(res.result).to.contain('last');
+
+            done();
+        });
+    });
+
     it('returns a Not Found response when wrong path is provided', function (done) {
 
         server.inject('/docs?path=blah', function (res) {

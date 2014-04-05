@@ -32,6 +32,16 @@
                 </ul>
             </dd>
         {{/if}}
+        {{#if this.alternatives}}
+            <dt>Alternatives</dt>
+            <dd>
+                <ul class="disc-bullets reduced-margin-list">
+                    {{#each this.alternatives}}
+                        {{> type}}
+                    {{/each}}
+                </ul>
+            </dd>
+        {{/if}}
         {{#if this.rules}}
             {{#if this.rules.includes}}
                 <dt>Includes</dt>
