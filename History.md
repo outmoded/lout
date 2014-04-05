@@ -1,3 +1,7 @@
+# Version 2.2.0
+- Upgrade test suite to Lab 3.x and reach 100% coverage
+- Add support for Joi.alternatives()
+
 # Version 2.1.1
 - Mark as compatible with Hapi 3.x
 
