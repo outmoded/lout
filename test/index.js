@@ -18,6 +18,33 @@ var after = Lab.after;
 var describe = Lab.experiment;
 var it = Lab.test;
 
+describe('Registration', function() {
+
+    it('should register', function(done) {
+
+        var server = new Hapi.Server();
+
+        server.pack.require('../', function () {
+
+            var routes = server.table();
+            expect(routes.length).to.equal(2);
+            done();
+        });
+    });
+
+    it('should register with options', function(done) {
+
+        var server = new Hapi.Server();
+
+        server.pack.require('../', { helpersPath: null, cssPath: null, endpoint: '/' }, function () {
+
+            var routes = server.table();
+            expect(routes.length).to.equal(1);
+            done();
+        });
+    });
+});
+
 describe('Lout', function () {
 
     var server = null;
@@ -144,6 +171,40 @@ describe('Lout', function () {
         });
     });
 
+    it('should display authentication information', function (done) {
+
+        var server = new Hapi.Server();
+
+        server.auth.scheme('testScheme', function() {
+
+            return {
+                authenticate: function() {},
+                payload: function() {},
+                response: function() {}
+            };
+        });
+        server.auth.strategy('testStrategy', 'testScheme');
+
+        server.route(require('./routes/withauth'));
+        server.pack.require('../', function() {
+            server.inject('/docs?path=/withauth', function (res) {
+
+                expect(res).to.exist;
+                expect(res.result).to.contain('Strategies');
+                done();
+            });
+        });
+    });
+
+    it('should show routes without any validation', function (done) {
+
+        server.inject('/docs?path=/novalidation', function (res) {
+
+            expect(res.result).to.not.contain('Request Parameters');
+            done();
+        });
+    });
+
     describe('Index', function () {
 
         it('doesn\'t throw an error when requesting the index when there are no POST routes', function (done) {
@@ -212,7 +273,7 @@ describe('Customized Lout', function () {
                 expect(res).to.exist;
                 expect(res.result).to.contain('.cssTest');
                 done();
-            })
+            });
         });
     });
 });

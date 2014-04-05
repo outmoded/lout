@@ -13,14 +13,14 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "hapi": "2.x.x || 3.x.x",
+    "hapi": "2.x || 3.x",
     "handlebars": "1.3.x"
   },
   "devDependencies": {
-    "hapi": "2.x.x || 3.x.x",
+    "hapi": "2.x || 3.x",
     "handlebars": "1.3.x",
-    "lab": "~1.7.0",
-    "cheerio": "~0.13.1"
+    "lab": "^3.0.0",
+    "cheerio": "^0.14.0"
   },
   "scripts": {
     "test": "make test-cov"
