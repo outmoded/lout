@@ -1,6 +1,6 @@
-var Hapi = require('hapi');
+var Joi = require('joi');
 
-var t = Hapi.types;
+var t = Joi;
 
 var handler = function (request) {
 
