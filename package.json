@@ -11,16 +11,18 @@
   "engines": {
     "node": "0.10.x"
   },
-  "dependencies": {
-    "hoek": "^1.5.x",
-    "handlebars": "1.3.x"
-  },
+  "dependencies": {},
   "peerDependencies": {
-    "hapi": ">= 2.x.x"
+    "hapi": ">= 2.x.x",
+    "joi": ">= 2.x.x",
+    "hoek": ">= 1.5.x",
+    "handlebars": ">= 1.3.x"
   },
   "devDependencies": {
-    "joi": "^2.8.0",
-    "hapi": "^2.0.0",
+    "hapi": "^4.0.0",
+    "joi": "^3.0.0",
+    "hoek": "^2.0.0",
+    "handlebars": "^1.3.0",
     "lab": "^3.0.0",
     "cheerio": "^0.14.0"
   },
