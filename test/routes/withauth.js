@@ -1,4 +1,3 @@
-var Hapi = require('hapi');
 
 var handler = function (request) {
 
