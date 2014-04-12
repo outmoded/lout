@@ -76,7 +76,7 @@ describe('Lout', function () {
 
             methodHeadings.each(function() {
 
-                expect(this.text()).to.contain(matches.shift());
+                expect($(this).text()).to.contain(matches.shift());
             });
 
             expect($('.badge').length).to.equal(2);
