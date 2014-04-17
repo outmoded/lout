@@ -1,3 +1,6 @@
+# Version 3.1.0
+- Fix and support more array constraints
+
 # Version 3.0.0
 - Only support hapi 4.x and up
 
