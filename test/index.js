@@ -219,6 +219,17 @@ describe('Lout', function () {
         });
     });
 
+    it('doesn\'t throw an error when a param is an array with a length limit', function (done) {
+
+        server.inject('/docs?path=/maxarray', function (res) {
+            
+            expect(res).to.exist;
+            expect(res.statusCode).to.equal(200)
+
+            done();
+        });
+    });
+
     describe('Index', function () {
 
         it('doesn\'t throw an error when requesting the index when there are no POST routes', function (done) {
