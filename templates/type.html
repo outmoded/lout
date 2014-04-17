@@ -42,27 +42,19 @@
                 </ul>
             </dd>
         {{/if}}
-        {{#if this.rules}}
-            {{#if this.rules.includes}}
-                <dt>Includes</dt>
-                <dd>
+        {{#each this.rules}}
+            <dt>{{@key}}</dt>
+            <dd>
+                {{#if this.length}}
                     <ul class="disc-bullets reduced-margin-list">
-                    {{#each this.rules.includes}}
+                    {{#each this}}
                         {{> type}}
                     {{/each}}
                     </ul>
-                </dd>
-            {{/if}}
-            {{#if this.rules.excludes}}
-                <dt>Excludes</dt>
-                <dd>
-                    <ul class="disc-bullets reduced-margin-list">
-                    {{#each this.rules.excludes}}
-                        {{> type}}
-                    {{/each}}
-                    </ul>
-                </dd>
-            {{/if}}
-        {{/if}}
+                {{else}}
+                    {{this}}
+                {{/if}}
+            </dd>
+        {{/each}}
     </dl>
 </li>
