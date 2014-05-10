@@ -219,6 +219,15 @@ describe('Lout', function () {
         });
     });
 
+    it('should not error 500 on invalid joi object', function (done) {
+
+        server.inject('/docs?path=/invalidjoi', function (res) {
+
+            expect(res.result).to.contain('Invalid Joi Declaration');
+            done();
+        });
+    });
+
     describe('Index', function () {
 
         it('doesn\'t throw an error when requesting the index when there are no POST routes', function (done) {

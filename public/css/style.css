@@ -91,3 +91,7 @@ body {
 .route-details ul.reduced-margin-list {
   margin-left: -20px;
 }
+
+.route-error {
+  color: #FF0000;
+}

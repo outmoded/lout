@@ -42,6 +42,10 @@
                 </ul>
             </dd>
         {{/if}}
+        {{#if this.error}}
+            <dt>Message</dt>
+            <dd class="route-error">{{this.error}}</dd>
+        {{/if}}
         {{#each this.rules}}
             <dt>{{@key}}</dt>
             <dd>
