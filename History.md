@@ -1,3 +1,6 @@
+# Version 3.1.1
+- Fix #60: correctly describe POJOs in arrays
+
 # Version 3.1.0
 - Fix and support more array constraints
 
