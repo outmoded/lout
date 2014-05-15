@@ -7,19 +7,19 @@
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="?"><i class="glyphicon glyphicon-home glyphicon-white"></i></a>
-            <div class="navbar-text">
-                <ul class="navbar-nav list-inline">
-                    {{#each routes}}
-                    <li>
-                        <a href="#{{this.method}}" class="anchor-link">
-                            <span class="{{colorFromMethod this}}">{{this.method}}</span>
-                        </a>
-                    </li>
-                    {{/each}}
-                </ul>
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="?"><i class="glyphicon glyphicon-home glyphicon-white"></i></a>
             </div>
+            <ul class="nav navbar-nav">
+                {{#each routes}}
+                <li>
+                    <a href="#{{this.method}}" class="anchor-link">
+                        <span class="{{colorFromMethod this}}">{{this.method}}</span>
+                    </a>
+                </li>
+                {{/each}}
+            </ul>
         </div>
     </nav>
     <div class="container route-details">
