@@ -1,3 +1,7 @@
+# Version 3.1.2
+- Fix #62: fix unnecessary containers around the navbar list
+- Fix #63: make css path relative
+
 # Version 3.1.1
 - Fix #60: correctly describe POJOs in arrays
 
