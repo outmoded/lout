@@ -219,6 +219,15 @@ describe('Lout', function () {
         });
     });
 
+    it('should handle invalid array of rules', function (done) {
+
+        server.inject('/docs?path=/withinvalidrulesarray', function (res) {
+
+            expect(res.result).to.not.contain('Request Parameters');
+            done();
+        });
+    });
+
     describe('Index', function () {
 
         it('doesn\'t throw an error when requesting the index when there are no POST routes', function (done) {
