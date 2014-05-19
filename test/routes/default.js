@@ -19,7 +19,7 @@ module.exports = [
     { method: 'GET', path: '/nested', config: { handler: handler, validate: { query: { param1: t.object({ nestedparam1: t.string().required() }) } } } },
     { method: 'GET', path: '/rootobject', config: { handler: handler, validate: { query: t.object({ param1: t.string().required() }) } } },
     { method: 'GET', path: '/rootarray', config: { handler: handler, validate: { query: t.array().includes(t.string(), t.object({ param1: t.number() })).excludes(t.number()).min(2).max(5).length(3) } } },
-    { method: 'GET', path: '/path/{pparam}/test', config: { handler: handler, validate: { path: { pparam: t.string().required() } } } },
+    { method: 'GET', path: '/path/{pparam}/test', config: { handler: handler, validate: { params: { pparam: t.string().required() } } } },
     { method: 'GET', path: '/emptyobject', config: { handler: handler, validate: { query: { param1: t.object() } } } },
     { method: 'GET', path: '/alternatives', config: { handler: handler, validate: { query: { param1: t.alternatives(t.number().required(), t.string().valid('first', 'last')) }}}},
     { method: 'GET', path: '/novalidation', config: { handler: handler } },

@@ -12,20 +12,20 @@
     "node": "0.10.x"
   },
   "dependencies": {
-    "handlebars": "^1.3.0"
+    "handlebars": "^1.3.0",
+    "hoek": "^2.0.0"
   },
   "peerDependencies": {
-    "hapi": ">= 4.x.x",
-    "joi": ">= 3.1.x",
-    "hoek": ">= 2.x.x"
+    "hapi": ">= 5.x.x",
+    "joi": ">= 4.2.1"
   },
   "devDependencies": {
-    "hapi": "^4.0.0",
-    "joi": "^3.1.0",
+    "hapi": ">= 5.0.0",
+    "joi": ">= 4.2.1",
     "hoek": "^2.0.0",
     "handlebars": "^1.3.0",
     "lab": "^3.0.0",
-    "cheerio": "^0.15.0"
+    "cheerio": "^0.16.0"
   },
   "scripts": {
     "test": "make test-cov"
