@@ -221,9 +221,9 @@ describe('Lout', function () {
 
     it('should handle invalid array of rules', function (done) {
 
-        server.inject('/docs?path=/withinvalidrulesarray', function (res) {
+        server.inject('/docs?path=/withnestedrulesarray', function (res) {
 
-            expect(res.result).to.not.contain('Request Parameters');
+            expect(res.result).to.contain('Request Parameters');
             done();
         });
     });
