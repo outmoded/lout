@@ -29,7 +29,7 @@ The following options are available when registering the plugin:
 var Hapi = require('hapi');
 var server = new Hapi.Server(80);
 
-server.pack.route([{
+server.route([{
     your routes...
 }]);
 
