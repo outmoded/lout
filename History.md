@@ -1,3 +1,7 @@
+# Version 3.1.3
+- Fix #64: a regression was introduced in 3.1.1 on arrays' rules
+- Fix example in the readme
+
 # Version 3.1.2
 - Fix #62: fix unnecessary containers around the navbar list
 - Fix #63: make css path relative
