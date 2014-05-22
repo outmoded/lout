@@ -17,11 +17,11 @@
   },
   "peerDependencies": {
     "hapi": ">= 5.x.x",
-    "joi": ">= 4.2.1"
+    "joi": ">= 4.3.0"
   },
   "devDependencies": {
     "hapi": ">= 5.0.0",
-    "joi": ">= 4.2.1",
+    "joi": ">= 4.3.0",
     "hoek": "^2.0.0",
     "handlebars": "^1.3.0",
     "lab": "^3.0.0",

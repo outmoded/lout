@@ -1,6 +1,4 @@
-var Joi = require('joi');
-
-var t = Joi;
+var t = require('joi');
 
 var handler = function (request) {
 
@@ -25,5 +23,5 @@ module.exports = [
     { method: 'GET', path: '/novalidation', config: { handler: handler } },
     { method: 'GET', path: '/withresponse', config: { handler: handler, response: { schema: { param1: t.string() } } } },
     { method: 'GET', path: '/withpojoinarray', config: { handler: handler, validate: { query: { param1: t.array().includes( { param2: t.string() } ) } } } },
-    { method: 'POST', path: '/withnestedrulesarray', config: { handler: handler, validate: { payload: { param1: Joi.array().includes( Joi.object( { param2: Joi.array().includes( Joi.object( { param3 : Joi.string() } ) ).optional() } ) ) } } } }
+    { method: 'POST', path: '/withnestedrulesarray', config: { handler: handler, validate: { payload: { param1: t.array().includes( t.object( { param2: t.array().includes( t.object( { param3 : t.string() } ) ).optional() } ) ) } } } }
 ];

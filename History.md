@@ -1,3 +1,6 @@
+# Version 4.1.0
+- Support Joi 4.3
+
 # Version 4.0.0
 - Fix #67: support Hapi 5.x
 
