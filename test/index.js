@@ -245,6 +245,26 @@ describe('Lout', function () {
         });
     });
 
+    it('should show example', function (done) {
+
+        server.inject('/docs?path=/withexample', function (res) {
+
+            var $ = cheerio.load(res.result);
+            expect($('.example').length).to.equal(1);
+            done();
+        });
+    });
+
+    it('should support multiple nested examples', function (done) {
+
+        server.inject('/docs?path=/withnestedexamples', function (res) {
+
+            var $ = cheerio.load(res.result);
+            expect($('.example').length).to.equal(3);
+            done();
+        });
+    });
+
     describe('Index', function () {
 
         it('doesn\'t throw an error when requesting the index when there are no POST routes', function (done) {

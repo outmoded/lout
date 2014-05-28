@@ -220,4 +220,36 @@ module.exports = [{
     },
     notes: '<span class="htmlroutenote">HTML route note</span>'
   }
+}, {
+  method: 'GET',
+  path: '/withexample',
+  config: {
+    handler: handler,
+    validate: {
+      query: {
+        param1: t.string().regex(/^\w{1,5}$/).example('abcde')
+      }
+    }
+  }
+}, {
+  method: 'GET',
+  path: '/withnestedexamples',
+  config: {
+    handler: handler,
+    validate: {
+      query: {
+        param1: t.object({
+          param2: t.object({
+            param3: t.number().example(5)
+          }).example({
+            param3: 5
+          })
+        }).example({
+          param2: {
+            param3: 5
+          }
+        })
+      }
+    }
+  }
 }];

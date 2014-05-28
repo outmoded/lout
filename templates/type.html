@@ -14,6 +14,12 @@
             <dt>Notes</dt>
             <dd>{{{this.notes}}}</dd>
         {{/if}}
+        {{#if this.examples}}
+            <dt>Examples</dt>
+            {{#each this.examples}}
+                <dd class="example"><pre><code>{{json this}}</code></pre></dd>
+            {{/each}}
+        {{/if}}
         {{#if this.allowedValues}}
             <dt>Allowed Values</dt>
             {{#each this.allowedValues}}
