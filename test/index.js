@@ -234,6 +234,17 @@ describe('Lout', function () {
         });
     });
 
+    it('should show html notes', function (done) {
+
+        server.inject('/docs?path=/withhtmlnote', function (res) {
+
+            var $ = cheerio.load(res.result);
+            expect($('.htmlroutenote').length).to.equal(1);
+            expect($('.htmltypenote').length).to.equal(1);
+            done();
+        });
+    });
+
     describe('Index', function () {
 
         it('doesn\'t throw an error when requesting the index when there are no POST routes', function (done) {

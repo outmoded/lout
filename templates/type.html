@@ -10,6 +10,10 @@
     <dl class="type">
         <dt><h6>Type</h6></dt>
         <dd>{{this.type}}</dd>
+        {{#if this.notes}}
+            <dt>Notes</dt>
+            <dd>{{{this.notes}}}</dd>
+        {{/if}}
         {{#if this.allowedValues}}
             <dt>Allowed Values</dt>
             {{#each this.allowedValues}}
