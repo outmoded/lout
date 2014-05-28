@@ -1,3 +1,8 @@
+# Version 4.2.0
+- Fix #68: Support unescaped notes
+- Fix #40: Support Joi.example()
+- Fix #52: Unescape description
+
 # Version 4.1.0
 - Support Joi 4.3
 
