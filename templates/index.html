@@ -15,21 +15,23 @@
     </div>
     <div class="container route-index">
         {{#each routes}}
-            <div class="row route">
-                <div class="col-md-2 h2">
-                    <span class="{{colorFromMethod this}} full-width-label">
-                        {{this.method}}
-                    </span>
-                </div>
-                <div class="col-md-10 h2">
-                    <a href="?path={{this.path}}#{{this.method}}">{{this.path}}</a>
-                    <div class="pull-right">
-                    {{#each this.tags}}
-                        <div class="badge">{{this}}</div>
-                    {{/each}}
+            <a href="?path={{this.path}}#{{this.method}}">
+                <div class="row route">
+                    <div class="col-md-2 h2">
+                        <span class="{{colorFromMethod this}} full-width-label">
+                            {{this.method}}
+                        </span>
+                    </div>
+                    <div class="col-md-10 h2">
+                        <div class="pull-right">
+                        {{#each this.tags}}
+                            <div class="badge">{{this}}</div>
+                        {{/each}}
+                        </div>
+                        {{this.path}}
                     </div>
                 </div>
-            </div>
+            </a>
         {{/each}}
     </div>
 </body>
