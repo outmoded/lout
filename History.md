@@ -1,3 +1,6 @@
+# Version 4.2.1
+- Make entire row a link instead of route
+
 # Version 4.2.0
 - Fix #68: Support unescaped notes
 - Fix #40: Support Joi.example()
