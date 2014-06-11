@@ -91,7 +91,7 @@ describe('Lout', function () {
 
             var $ = cheerio.load(res.result);
 
-            expect($('dt h6').length).to.equal(7);
+            expect($('dt h6').length).to.equal(6);
 
             done();
         });
@@ -210,9 +210,23 @@ describe('Lout', function () {
         });
     });
 
-    it('should show routes without any validation', function (done) {
+    it('should show GET routes without any validation and no payload parameters', function (done) {
 
-        server.inject('/docs?path=/novalidation', function (res) {
+        server.inject('/docs?path=/novalidation_get', function (res) {
+
+            expect(res.result).to.contain('Request Parameters');
+            expect(res.result).to.contain('Query Parameters');
+
+            var $ = cheerio.load(res.result);
+            expect($('.type dd').text()).to.equal('anyany'); // any should appear 3 times
+
+            done();
+        });
+    });
+
+    it('should show other routes without any validation', function (done) {
+
+        server.inject('/docs?path=/novalidation_post', function (res) {
 
             expect(res.result).to.contain('Request Parameters');
             expect(res.result).to.contain('Query Parameters');
