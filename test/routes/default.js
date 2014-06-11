@@ -165,7 +165,13 @@ module.exports = [{
   }
 }, {
   method: 'GET',
-  path: '/novalidation',
+  path: '/novalidation_get',
+  config: {
+    handler: handler
+  }
+}, {
+  method: 'POST',
+  path: '/novalidation_post',
   config: {
     handler: handler
   }
