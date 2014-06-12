@@ -67,33 +67,49 @@
                     {{#if this.pathParams}}
                         <dt><h4>Path Parameters</h4></dt>
                         <dd>
-                            <ul class="list-unstyled">
-                                {{> type this.pathParams}}
-                            </ul>
+                            {{#if this.pathParams.isDenied}}
+                                <h5>Denied</h5>
+                            {{else}}
+                                <ul class="list-unstyled">
+                                    {{> type this.pathParams}}
+                                </ul>
+                            {{/if}}
                         </dd>
                     {{/if}}
                     {{#if this.queryParams}}
                         <dt><h4>Query Parameters</h4></dt>
                         <dd>
-                            <ul class="list-unstyled">
-                                {{> type this.queryParams}}
-                            </ul>
+                            {{#if this.queryParams.isDenied}}
+                                <h5>Denied</h5>
+                            {{else}}
+                                <ul class="list-unstyled">
+                                    {{> type this.queryParams}}
+                                </ul>
+                            {{/if}}
                         </dd>
                     {{/if}}
                     {{#if this.payloadParams}}
                         <dt><h4>Payload Parameters</h4></dt>
                         <dd>
-                            <ul class="list-unstyled">
-                                {{> type this.payloadParams}}
-                            </ul>
+                            {{#if this.payloadParams.isDenied}}
+                                <h5>Denied</h5>
+                            {{else}}
+                                <ul class="list-unstyled">
+                                    {{> type this.payloadParams}}
+                                </ul>
+                            {{/if}}
                         </dd>
                     {{/if}}
                     {{#if this.responseParams}}
                         <dt><h3>Response Parameters</h3></dt>
                         <dd>
-                            <ul class="list-unstyled">
-                                {{> type this.responseParams}}
-                            </ul>
+                            {{#if this.responseParams.isDenied}}
+                                <h5>Denied</h5>
+                            {{else}}
+                                <ul class="list-unstyled">
+                                    {{> type this.responseParams}}
+                                </ul>
+                            {{/if}}
                         </dd>
                     {{/if}}
                     </dl>

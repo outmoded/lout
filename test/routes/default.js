@@ -232,6 +232,24 @@ module.exports = [{
     }
   }
 }, {
+  method: 'POST',
+  path: '/denybody',
+  config: {
+    handler: handler,
+    validate: {
+      payload: false
+    }
+  }
+}, {
+  method: 'POST',
+  path: '/rootemptyobject',
+  config: {
+    handler: handler,
+    validate: {
+      payload: t.object()
+    }
+  }
+}, {
   method: 'GET',
   path: '/withnestedexamples',
   config: {

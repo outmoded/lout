@@ -259,6 +259,24 @@ describe('Lout', function () {
         });
     });
 
+    it('should support "false" as validation rule', function (done) {
+
+        server.inject('/docs?path=/denybody', function (res) {
+
+            expect(res.result).to.contain('Denied');
+            done();
+        });
+    });
+
+    it('should not detect "false" on an empty object', function (done) {
+
+        server.inject('/docs?path=/rootemptyobject', function (res) {
+
+            expect(res.result).to.not.contain('Denied');
+            done();
+        });
+    });
+
     describe('Index', function () {
 
         it('doesn\'t throw an error when requesting the index when there are no POST routes', function (done) {
