@@ -91,7 +91,7 @@ describe('Lout', function () {
 
             var $ = cheerio.load(res.result);
 
-            expect($('dt h6').length).to.equal(7);
+            expect($('dt h6').length).to.equal(5);
 
             done();
         });
@@ -214,13 +214,7 @@ describe('Lout', function () {
 
         server.inject('/docs?path=/novalidation', function (res) {
 
-            expect(res.result).to.contain('Request Parameters');
-            expect(res.result).to.contain('Query Parameters');
-            expect(res.result).to.contain('Payload Parameters');
-
-            var $ = cheerio.load(res.result);
-            expect($('.type dd').text()).to.equal('anyanyany'); // any should appear 3 times
-
+            expect(res.result).to.not.contain('Parameters');
             done();
         });
     });
