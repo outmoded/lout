@@ -7,6 +7,6 @@ var server = new Hapi.Server(3000);
 
 server.route(require('../test/routes/default'));
 
-server.pack.require('../', function(err) {
+server.pack.register(require('../'), function(err) {
   server.start();
 });
