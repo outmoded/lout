@@ -1,3 +1,8 @@
+# Version 5.0.0
+- Fix #71: Hide parameters that accept anything
+- Fix #69: Now working with Hapi >= 6.x
+- Show "false" validation rule as denied
+
 # Version 4.2.1
 - Make entire row a link instead of route
 
