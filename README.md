@@ -47,7 +47,7 @@ Hapi 6.x has deprecated pack.require() use pack.register() instead
 var Hapi = require('hapi');
 var server = new Hapi.Server(80);
 
-sever.pack.register({ plugin: require('lout'); }, function() {
+sever.pack.register({ plugin: require('lout') }, function() {
     server.start();
 });
 ```
