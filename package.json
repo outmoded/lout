@@ -23,7 +23,7 @@
     "hapi": ">= 6.x.x",
     "joi": ">= 4.6.0",
     "lab": "^3.0.0",
-    "cheerio": "^0.16.0"
+    "cheerio": "^0.17.0"
   },
   "scripts": {
     "test": "make test-cov"
