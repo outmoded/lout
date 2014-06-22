@@ -19,6 +19,7 @@ The following options are available when registering the plugin:
 - _'basePath'_ - the absolute path to the templates folder.  Default is the lout templates folder.
 - _'cssPath'_ - the absolute path to the css folder.  Default is the lout css folder. It must contain a style.css.
 - _'helpersPath'_ - the absolute path to the helpers folder.  Default is the lout helpers folder. This might need to be null if you change the basePath.
+- _'partialsPath'_ - the absolute path to the partials folder.  Default is the lout templates folder. This might need to be null if you change the basePath.
 - _'auth'_ - the route configuration for authentication.  Default is to disable auth.
 - _'indexTemplate'_ - the name of the template file to contain docs main page.  Default is 'index'.
 - _'routeTemplate'_ - the name of the route template file.  Default is 'route'.
