@@ -1,3 +1,7 @@
+# Version 5.0.1
+- Fix #75: make correct use of basePath option
+- Allow for partials setting override
+
 # Version 5.0.0
 - Fix #71: Hide parameters that accept anything
 - Fix #69: Now working with Hapi >= 6.x
