@@ -52,3 +52,24 @@ server.pack.register({ plugin: require('lout') }, function() {
     server.start();
 });
 ```
+
+### Ignoring a route in documentation
+
+If you want a route not to appear in lout's documentation, you have to set lout settings for this specific route to false.
+
+Here is an example snippet of a route configuration :
+
+```js
+{
+  method: 'GET',
+  path: '/myroute',
+  config: {
+    handler: [...],
+    [...]
+    plugins: {
+      lout: false
+    }
+  }
+}
+
+```
