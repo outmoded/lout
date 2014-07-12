@@ -2,7 +2,7 @@
     {{#if this.condition}}
         <div class="conditional">
             <span class="condition">
-                <span class="condition-text">If <span class="condition-key">{{this.condition.key}}</span> matches the following model</span>
+                <span class="condition-text">If <span class="condition-key">{{this.condition.key}}</span> matches the following model :</span>
                 <ul class="list-unstyled condition-model">{{> type this.condition.value}}</ul>
             </span>
             <span class="consequence">
@@ -120,7 +120,16 @@
                         {{/each}}
                         </ul>
                     {{else}}
-                        {{this}}
+                        {{#if this.key}}
+                            <span class="assertion">
+                                <span class="assertion-text">
+                                    Asserts that <span class="assertion-key">{{this.key}}</span> matches the following model :
+                                </span>
+                                <ul class="list-unstyled assertion-model">{{> type this.value}}</ul>
+                            </span>
+                        {{else}}
+                            {{this}}
+                        {{/if}}
                     {{/if}}
                 </dd>
             {{/each}}

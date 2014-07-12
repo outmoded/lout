@@ -100,3 +100,8 @@ body {
   font-style: italic;
   font-weight: bold;
 }
+
+.assertion .assertion-key {
+  font-style: italic;
+  font-weight: bold;
+}

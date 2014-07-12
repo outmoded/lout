@@ -399,4 +399,16 @@ module.exports = [{
             }
         }
     }
+}, {
+    method: 'GET',
+    path: '/withassert',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param1: t.object().assert('d.e', t.ref('a.c'), 'equal to a.c'),
+                param2: t.object().assert('$x', t.ref('b.e'), 'equal to b.e')
+            }
+        }
+    }
 }];

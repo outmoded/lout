@@ -419,6 +419,21 @@ describe('Lout', function () {
         });
     });
 
+    it('should support assertions', function (done) {
+
+        server.inject('/docs?path=/withassert', function (res) {
+
+            var $ = cheerio.load(res.result);
+            expect($('.assertion-text').text())
+                .to.contain('Asserts that d.e matches the following model')
+                .to.contain('Asserts that $x matches the following model');
+            expect($('dd.ref-target').text())
+                .to.contain('a.c')
+                .to.contain('b.e');
+            done();
+        });
+    });
+
     describe('Index', function () {
 
         it('doesn\'t throw an error when requesting the index when there are no POST routes', function (done) {
