@@ -387,4 +387,16 @@ module.exports = [{
             }
         }
     }
+}, {
+    method: 'GET',
+    path: '/withreferences',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param1: t.ref('a.b'),
+                param2: t.ref('$x')
+            }
+        }
+    }
 }];

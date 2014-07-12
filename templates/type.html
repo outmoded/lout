@@ -26,6 +26,10 @@
         <dl class="type">
             <dt><h6>Type</h6></dt>
             <dd>{{this.type}}</dd>
+            {{#if this.target}}
+                <dt class="ref-target">Target</dt>
+                <dd class="ref-target">{{this.target}}</dd>
+            {{/if}}
             {{#if this.unit}}
                 <dt>Unit</dt>
                 <dd>{{this.unit}}</dd>

@@ -407,6 +407,18 @@ describe('Lout', function () {
         });
     });
 
+    it('should support references', function (done) {
+
+        server.inject('/docs?path=/withreferences', function (res) {
+
+            var $ = cheerio.load(res.result);
+            expect($('dd.ref-target').text())
+                .to.contain('a.b')
+                .to.contain('$x');
+            done();
+        });
+    });
+
     describe('Index', function () {
 
         it('doesn\'t throw an error when requesting the index when there are no POST routes', function (done) {
