@@ -363,6 +363,16 @@ describe('Lout', function () {
         });
     });
 
+    it('should show case insensitive string', function (done) {
+
+        server.inject('/docs?path=/test', function (res) {
+
+            var $ = cheerio.load(res.result);
+            expect($('dd.case-insensitive').length).to.equal(1);
+            done();
+        });
+    });
+
     describe('Index', function () {
 
         it('doesn\'t throw an error when requesting the index when there are no POST routes', function (done) {

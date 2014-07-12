@@ -12,7 +12,7 @@ module.exports = [{
     handler: handler,
     validate: {
       query: {
-        param1: t.string().required()
+        param1: t.string().insensitive().required()
       }
     },
     tags: ['admin', 'api'],

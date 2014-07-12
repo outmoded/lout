@@ -1,6 +1,6 @@
 <li>
     <h5><em>{{this.name}}</em>
-        {{#if this.required}}
+        {{#if this.flags.required}}
         <i class="glyphicon glyphicon-star" title="This is a required field."></i>
         {{/if}}
     </h5>
@@ -14,13 +14,13 @@
             <dt>Unit</dt>
             <dd>{{this.unit}}</dd>
         {{/if}}
-        {{#if this.encoding}}
+        {{#if this.flags.encoding}}
             <dt class="encoding">Encoding</dt>
-            <dd class="encoding">{{this.encoding}}</dd>
+            <dd class="encoding">{{this.flags.encoding}}</dd>
         {{/if}}
-        {{#if this.default}}
+        {{#if this.flags.default}}
             <dt class="default-value">Default value</dt>
-            <dd class="default-value"><pre><code>{{json this.default}}</code></pre></dd>
+            <dd class="default-value"><pre><code>{{json this.flags.default}}</code></pre></dd>
         {{/if}}
         {{#if this.notes}}
             <dt>Notes</dt>
@@ -62,9 +62,13 @@
                 </ul>
             </dd>
         {{/if}}
-        {{#if this.allowUnknown}}
+        {{#if this.flags.allowUnknown}}
             <dt class="allow-unknown">Allow unknown keys</dt>
-            <dd class="allow-unknown">{{this.allowUnknown}}</dd>
+            <dd class="allow-unknown">{{this.flags.allowUnknown}}</dd>
+        {{/if}}
+        {{#if this.flags.insensitive}}
+            <dt class="case-insensitive">Case insensitive matching</dt>
+            <dd class="case-insensitive">true</dd>
         {{/if}}
         {{#if this.children}}
             <dt>Properties</dt>
