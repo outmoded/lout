@@ -373,6 +373,21 @@ describe('Lout', function () {
         });
     });
 
+    it('should support string specifics', function (done) {
+
+        server.inject('/docs?path=/withstringspecifics', function (res) {
+
+            var $ = cheerio.load(res.result);
+            var ddRules = 'dd.rules-';
+            var rulesSelector = ddRules + [ 'Alphanum', 'Regex', 'Token', 'Email', 'Guid', 'IsoDate', 'Hostname',
+                'Lowercase', 'Uppercase', 'Trim'].join(',' + ddRules);
+
+            expect($('dd.rules-Regex').text()).to.contain('/\\d{3}.*/');
+            expect($(rulesSelector).length).to.equal(10);
+            done();
+        });
+    });
+
     describe('Index', function () {
 
         it('doesn\'t throw an error when requesting the index when there are no POST routes', function (done) {

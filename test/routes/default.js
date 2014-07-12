@@ -353,4 +353,25 @@ module.exports = [{
             }
         }
     }
+}, {
+    method: 'GET',
+    path: '/withstringspecifics',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param1: t.string()
+                            .alphanum()
+                            .regex(/\d{3}.*/)
+                            .token()
+                            .email()
+                            .guid()
+                            .isoDate()
+                            .hostname()
+                            .lowercase()
+                            .uppercase()
+                            .trim()
+            }
+        }
+    }
 }];
