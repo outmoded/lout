@@ -325,4 +325,20 @@ module.exports = [{
             }
         }
     }
+}, {
+    method: 'GET',
+    path: '/withpeersconditions',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param1: t.object()
+                            .and('a', 'b', 'c')
+                            .or('a', 'b', 'c')
+                            .xor('a', 'b', 'c')
+                            .with('a', ['b', 'c'])
+                            .without('a', ['b', 'c'])
+            }
+        }
+    }
 }];

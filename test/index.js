@@ -340,6 +340,19 @@ describe('Lout', function () {
         });
     });
 
+    it('should show peer dependencies', function (done) {
+
+        server.inject('/docs?path=/withpeersconditions', function (res) {
+
+            expect(res.result).to.contain('Requires a and b and c.');
+            expect(res.result).to.contain('Requires a or b or c.');
+            expect(res.result).to.contain('Requires a xor b xor c.');
+            expect(res.result).to.contain('Requires b, c to be present when a is.');
+            expect(res.result).to.contain('Requires b, c to not be present when a is.');
+            done();
+        });
+    });
+
     describe('Index', function () {
 
         it('doesn\'t throw an error when requesting the index when there are no POST routes', function (done) {

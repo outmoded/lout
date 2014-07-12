@@ -52,6 +52,16 @@
                 <dd>{{this}}</dd>
             {{/each}}
         {{/if}}
+        {{#if this.peers}}
+            <dt>Peers conditions</dt>
+            <dd>
+                <ul class="disc-bullets reduced-margin-list">
+                    {{#each this.peers}}
+                        <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+            </dd>
+        {{/if}}
         {{#if this.children}}
             <dt>Properties</dt>
             <dd>
