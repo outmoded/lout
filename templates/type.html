@@ -14,6 +14,10 @@
             <dt>Unit</dt>
             <dd>{{this.unit}}</dd>
         {{/if}}
+        {{#if this.encoding}}
+            <dt>Encoding</dt>
+            <dd>{{this.encoding}}</dd>
+        {{/if}}
         {{#if this.default}}
             <dt>Default value</dt>
             <dd><pre><code>{{json this.default}}</code></pre></dd>

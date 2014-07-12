@@ -307,6 +307,16 @@ describe('Lout', function () {
         });
     });
 
+    it('should show binary types encoding', function (done) {
+
+        server.inject('/docs?path=/withbinaryencoding', function (res) {
+
+            expect(res.result).to.contain('Encoding');
+            expect(res.result).to.contain('base64');
+            done();
+        });
+    });
+
     describe('Index', function () {
 
         it('doesn\'t throw an error when requesting the index when there are no POST routes', function (done) {

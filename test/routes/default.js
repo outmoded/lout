@@ -303,4 +303,15 @@ module.exports = [{
             }
         }
     }
+}, {
+    method: 'GET',
+    path: '/withbinaryencoding',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param1: t.binary().encoding('base64')
+            }
+        }
+    }
 }];
