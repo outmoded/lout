@@ -341,4 +341,16 @@ module.exports = [{
             }
         }
     }
+}, {
+    method: 'GET',
+    path: '/withallowunknown',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param1: t.object().unknown(),
+                param2: t.object().unknown(false)
+            }
+        }
+    }
 }];

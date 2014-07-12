@@ -62,6 +62,10 @@
                 </ul>
             </dd>
         {{/if}}
+        {{#if this.allowUnknown}}
+            <dt class="allow-unknown">Allow unknown keys</dt>
+            <dd class="allow-unknown">{{this.allowUnknown}}</dd>
+        {{/if}}
         {{#if this.children}}
             <dt>Properties</dt>
             <dd>

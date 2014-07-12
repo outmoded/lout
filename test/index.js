@@ -353,6 +353,16 @@ describe('Lout', function () {
         });
     });
 
+    it('should show peer dependencies', function (done) {
+
+        server.inject('/docs?path=/withallowunknown', function (res) {
+
+            var $ = cheerio.load(res.result);
+            expect($('dd.allow-unknown').text()).to.equal('truefalse');
+            done();
+        });
+    });
+
     describe('Index', function () {
 
         it('doesn\'t throw an error when requesting the index when there are no POST routes', function (done) {
