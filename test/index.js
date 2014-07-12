@@ -287,6 +287,16 @@ describe('Lout', function () {
         });
     });
 
+    it('should show units', function (done) {
+
+        server.inject('/docs?path=/withunit', function (res) {
+
+            expect(res.result).to.contain('Unit');
+            expect(res.result).to.contain('ms');
+            done();
+        });
+    });
+
     describe('Index', function () {
 
         it('doesn\'t throw an error when requesting the index when there are no POST routes', function (done) {

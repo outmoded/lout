@@ -281,4 +281,15 @@ module.exports = [{
             }
         }
     }
+}, {
+    method: 'GET',
+    path: '/withunit',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param1: t.number().unit('ms')
+            }
+        }
+    }
 }];
