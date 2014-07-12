@@ -301,8 +301,9 @@ describe('Lout', function () {
 
         server.inject('/docs?path=/withdefaultvalue', function (res) {
 
-            expect(res.result).to.contain('Default value');
-            expect(res.result).to.contain(42);
+            var $ = cheerio.load(res.result);
+            expect($('dt.default-value').text()).to.equal('Default value');
+            expect($('dd.default-value').text()).to.equal('42');
             done();
         });
     });
@@ -311,14 +312,30 @@ describe('Lout', function () {
 
         server.inject('/docs?path=/withbinaryencoding', function (res) {
 
-            expect(res.result).to.contain('Encoding');
-            expect(res.result).to.contain('base64');
-            expect(res.result).to.contain('Min');
-            expect(res.result).to.contain(42);
-            expect(res.result).to.contain('Max');
-            expect(res.result).to.contain(128);
-            expect(res.result).to.contain('Length');
-            expect(res.result).to.contain(64);
+            var $ = cheerio.load(res.result);
+            expect($('dt.encoding').text()).to.equal('Encoding');
+            expect($('dd.encoding').text()).to.equal('base64');
+            expect($('dt.rules-Min').text()).to.equal('Min');
+            expect($('dd.rules-Min').text()).to.contain('42');
+            expect($('dt.rules-Max').text()).to.equal('Max');
+            expect($('dd.rules-Max').text()).to.contain('128');
+            expect($('dt.rules-Length').text()).to.equal('Length');
+            expect($('dd.rules-Length').text()).to.contain('64');
+            done();
+        });
+    });
+
+    it('should show dates with min and max', function (done) {
+
+        server.inject('/docs?path=/withdate', function (res) {
+
+            // The tests results will depend on the timezone it is executed on, so I'll only test for the presence
+            // of something.
+            var $ = cheerio.load(res.result);
+            expect($('dt.rules-Min').text()).to.equal('Min');
+            expect($('dd.rules-Min').text().replace(/\n|\s+/g, '')).to.have.length.above(0);
+            expect($('dt.rules-Max').text()).to.equal('Max');
+            expect($('dd.rules-Max').text().replace(/\n|\s+/g, '')).to.have.length.above(0);
             done();
         });
     });

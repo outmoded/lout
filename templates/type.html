@@ -15,12 +15,12 @@
             <dd>{{this.unit}}</dd>
         {{/if}}
         {{#if this.encoding}}
-            <dt>Encoding</dt>
-            <dd>{{this.encoding}}</dd>
+            <dt class="encoding">Encoding</dt>
+            <dd class="encoding">{{this.encoding}}</dd>
         {{/if}}
         {{#if this.default}}
-            <dt>Default value</dt>
-            <dd><pre><code>{{json this.default}}</code></pre></dd>
+            <dt class="default-value">Default value</dt>
+            <dd class="default-value"><pre><code>{{json this.default}}</code></pre></dd>
         {{/if}}
         {{#if this.notes}}
             <dt>Notes</dt>
@@ -73,8 +73,8 @@
             </dd>
         {{/if}}
         {{#each this.rules}}
-            <dt>{{@key}}</dt>
-            <dd>
+            <dt class="rules-{{@key}}">{{@key}}</dt>
+            <dd class="rules-{{@key}}">
                 {{#if this.length}}
                     <ul class="disc-bullets reduced-margin-list">
                     {{#each this}}

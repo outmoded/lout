@@ -314,4 +314,15 @@ module.exports = [{
             }
         }
     }
+}, {
+    method: 'GET',
+    path: '/withdate',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param1: t.date().min('1-1-1974').max('12-31-2020')
+            }
+        }
+    }
 }];
