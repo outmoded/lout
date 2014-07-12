@@ -310,7 +310,7 @@ module.exports = [{
         handler: handler,
         validate: {
             query: {
-                param1: t.binary().encoding('base64')
+                param1: t.binary().min(42).max(128).length(64).encoding('base64')
             }
         }
     }

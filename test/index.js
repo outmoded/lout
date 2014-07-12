@@ -313,6 +313,12 @@ describe('Lout', function () {
 
             expect(res.result).to.contain('Encoding');
             expect(res.result).to.contain('base64');
+            expect(res.result).to.contain('Min');
+            expect(res.result).to.contain(42);
+            expect(res.result).to.contain('Max');
+            expect(res.result).to.contain(128);
+            expect(res.result).to.contain('Length');
+            expect(res.result).to.contain(64);
             done();
         });
     });
