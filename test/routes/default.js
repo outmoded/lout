@@ -292,4 +292,15 @@ module.exports = [{
             }
         }
     }
+}, {
+    method: 'GET',
+    path: '/withdefaultvalue',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param1: t.number().default(42)
+            }
+        }
+    }
 }];

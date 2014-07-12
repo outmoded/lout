@@ -297,6 +297,16 @@ describe('Lout', function () {
         });
     });
 
+    it('should show default values', function (done) {
+
+        server.inject('/docs?path=/withdefaultvalue', function (res) {
+
+            expect(res.result).to.contain('Default value');
+            expect(res.result).to.contain(42);
+            done();
+        });
+    });
+
     describe('Index', function () {
 
         it('doesn\'t throw an error when requesting the index when there are no POST routes', function (done) {
