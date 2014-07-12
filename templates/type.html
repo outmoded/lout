@@ -53,11 +53,11 @@
             {{/each}}
         {{/if}}
         {{#if this.peers}}
-            <dt>Peers conditions</dt>
-            <dd>
+            <dt class="peers-conditions">Peers conditions</dt>
+            <dd class="peers-conditions">
                 <ul class="disc-bullets reduced-margin-list">
                     {{#each this.peers}}
-                        <li>{{this}}</li>
+                        <li class="peer-condition">{{this}}</li>
                     {{/each}}
                 </ul>
             </dd>
