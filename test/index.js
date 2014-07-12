@@ -277,6 +277,16 @@ describe('Lout', function () {
         });
     });
 
+    it('should show meta informations', function (done) {
+
+        server.inject('/docs?path=/withmeta', function (res) {
+
+            var $ = cheerio.load(res.result);
+            expect($('.meta pre code').length).to.equal(1);
+            done();
+        });
+    });
+
     describe('Index', function () {
 
         it('doesn\'t throw an error when requesting the index when there are no POST routes', function (done) {

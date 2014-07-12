@@ -270,4 +270,15 @@ module.exports = [{
       }
     }
   }
+}, {
+    method: 'GET',
+    path: '/withmeta',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param1: t.string().meta({ index: true, unique: true })
+            }
+        }
+    }
 }];
