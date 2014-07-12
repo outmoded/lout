@@ -388,6 +388,25 @@ describe('Lout', function () {
         });
     });
 
+    it('should support conditional alternatives', function (done) {
+
+        server.inject('/docs?path=/withconditionalalternatives', function (res) {
+
+            var $ = cheerio.load(res.result);
+            expect($('.condition-text').text())
+                .to.contain('If b matches the following model')
+                .to.contain('If a matches the following model');
+            expect($('.condition-model').length).to.equal(2);
+            expect($('.consequence-model').length).to.equal(4);
+            expect($('.type > dd').text())
+                .to.contain('string')
+                .to.contain('number')
+                .to.contain('boolean')
+                .to.contain('date');
+            done();
+        });
+    });
+
     describe('Index', function () {
 
         it('doesn\'t throw an error when requesting the index when there are no POST routes', function (done) {

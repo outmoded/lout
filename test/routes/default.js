@@ -159,7 +159,7 @@ module.exports = [{
     handler: handler,
     validate: {
       query: {
-        param1: t.alternatives(t.number().required(), t.string().valid('first', 'last'))
+        param1: t.alternatives().try(t.number().required(), t.string().valid('first', 'last'))
       }
     }
   }
@@ -371,6 +371,19 @@ module.exports = [{
                             .lowercase()
                             .uppercase()
                             .trim()
+            }
+        }
+    }
+}, {
+    method: 'GET',
+    path: '/withconditionalalternatives',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param1: t.alternatives()
+                    .when('b', { is: 5, then: t.string(), otherwise: t.number() })
+                    .when('a', { is: true, then: t.date(), otherwise: t.any() })
             }
         }
     }

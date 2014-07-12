@@ -91,3 +91,12 @@ body {
 .route-details ul.reduced-margin-list {
   margin-left: -20px;
 }
+
+.conditional .consequence-text {
+  font-weight: bold;
+}
+
+.conditional .condition-key {
+  font-style: italic;
+  font-weight: bold;
+}
