@@ -52,8 +52,27 @@
                         <p class="notes">{{{this.notes}}}</p>
                     {{/if}}
                     {{#if this.auth}}
-                        <h3>Strategies</h3>
-                        <p class="auth">{{this.auth}}</p>
+                        <h3>Authentication</h3>
+                        <p class="auth">
+                            <h4 class="auth-strategies">Strategies</h4>
+                            <p class="auth-strategies">{{this.auth.strategies}}</p>
+                            <h4 class="auth-mode">Mode</h4>
+                            <p class="auth-mode">{{this.auth.mode}}</p>
+                            <h4 class="auth-payload">Payload</h4>
+                            <p class="auth-payload">{{this.auth.payload}}</p>
+                            {{#if this.auth.scope}}
+                                <h4 class="auth-scope">Scope</h4>
+                                <p class="auth-scope">{{this.auth.scope}}</p>
+                            {{/if}}
+                            {{#if this.auth.entity}}
+                                <h4 class="auth-entity">Entity</h4>
+                                <p class="auth-entity">{{this.auth.entity}}</p>
+                            {{/if}}
+                            {{#if this.auth.tos}}
+                                <h4 class="auth-tos">Terms of service</h4>
+                                <p class="auth-tos">{{this.auth.tos}}</p>
+                            {{/if}}
+                        </p>
                     {{/if}}
                 </div>
             {{/multipleIf}}

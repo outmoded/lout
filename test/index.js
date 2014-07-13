@@ -185,31 +185,6 @@ describe('Lout', function () {
         });
     });
 
-    it('should display authentication information', function (done) {
-
-        var server = new Hapi.Server();
-
-        server.auth.scheme('testScheme', function() {
-
-            return {
-                authenticate: function() {},
-                payload: function() {},
-                response: function() {}
-            };
-        });
-        server.auth.strategy('testStrategy', 'testScheme');
-
-        server.route(require('./routes/withauth'));
-        server.pack.register(require('../'), function() {
-            server.inject('/docs?path=/withauth', function (res) {
-
-                expect(res).to.exist;
-                expect(res.result).to.contain('Strategies');
-                done();
-            });
-        });
-    });
-
     it('should show routes without any validation', function (done) {
 
         server.inject('/docs?path=/novalidation', function (res) {
@@ -431,6 +406,57 @@ describe('Lout', function () {
                 .to.contain('a.c')
                 .to.contain('b.e');
             done();
+        });
+    });
+
+    describe('Authentication', function() {
+
+        var server;
+
+        before(function (done) {
+
+            server = new Hapi.Server();
+
+            server.auth.scheme('testScheme', function() {
+
+                return {
+                    authenticate: function() {},
+                    payload: function() {},
+                    response: function() {}
+                };
+            });
+            server.auth.strategy('testStrategy', 'testScheme');
+
+            server.route(require('./routes/withauth'));
+            server.pack.register(require('../'), function () {
+
+                done();
+            });
+        });
+
+        it('should display authentication information', function (done) {
+
+            server.inject('/docs?path=/withauth', function (res) {
+
+                expect(res).to.exist;
+                expect(res.result).to.contain('Strategies');
+                done();
+            });
+        });
+
+        it('should display authentication information with an object', function (done) {
+
+            server.inject('/docs?path=/withauthasobject', function (res) {
+
+                var $ = cheerio.load(res.result);
+                expect($('p.auth-strategies').text()).to.equal('testStrategy');
+                expect($('p.auth-mode').text()).to.equal('try');
+                expect($('p.auth-payload').text()).to.equal('optional');
+                expect($('p.auth-scope').text()).to.equal('test');
+                expect($('p.auth-entity').text()).to.equal('user');
+                expect($('p.auth-tos').text()).to.equal('1.0.0');
+                done();
+            });
         });
     });
 
