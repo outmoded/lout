@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Documentation for {{path}}</title>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
     <link href=".{{@cssBaseUrl}}/style.css" rel="stylesheet">
 </head>
+
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -23,131 +25,130 @@
         </div>
     </nav>
     <div class="container route-details">
-    {{#each routes}}
+        {{#each routes}}
         <div class="panel panel-default route">
             <a name="{{this.method}}" class="anchor"></a>
             <div class="panel-heading h2 {{this.method}}">
                 <span class="method-title">
                     {{#if this.name}}
-                        <span>{{this.name}}</span>
+                    <span>{{this.name}}</span>
                     {{else}}
-                        <span class="{{colorFromMethod this}}">{{this.method}}</span> <span>{{this.path}}</span>
+                    <span class="{{colorFromMethod this}}">{{this.method}}</span>
+                    <span>{{this.path}}</span>
                     {{/if}}
                 </span>
                 <span class="pull-right">
                     {{#each this.tags}}
-                        <div class="badge">{{this}}</div>
+                    <div class="badge">{{this}}</div>
                     {{/each}}
                 </span>
             </div>
 
             {{#multipleIf this.description this.notes this.auth this.vhost this.cors this.jsonp}}
-                <div class="panel-body">
-                    {{#if this.description}}
-                        <h3>Description</h3>
-                        <p class="description">{{{this.description}}}</p>
+            <div class="panel-body">
+                {{#if this.description}}
+                <h3>Description</h3>
+                <p class="description">{{{this.description}}}</p>
+                {{/if}} {{#if this.notes}}
+                <h3>Notes</h3>
+                <p class="notes">{{{this.notes}}}</p>
+                {{/if}} {{#if this.auth}}
+                <h3>Authentication</h3>
+                <p class="auth">
+                    <h4 class="auth-strategies">Strategies</h4>
+                    <p class="auth-strategies">{{this.auth.strategies}}</p>
+                    <h4 class="auth-mode">Mode</h4>
+                    <p class="auth-mode">{{this.auth.mode}}</p>
+                    <h4 class="auth-payload">Payload</h4>
+                    <p class="auth-payload">{{this.auth.payload}}</p>
+                    {{#if this.auth.scope}}
+                    <h4 class="auth-scope">Scope</h4>
+                    <p class="auth-scope">{{this.auth.scope}}</p>
+                    {{/if}} {{#if this.auth.entity}}
+                    <h4 class="auth-entity">Entity</h4>
+                    <p class="auth-entity">{{this.auth.entity}}</p>
+                    {{/if}} {{#if this.auth.tos}}
+                    <h4 class="auth-tos">Terms of service</h4>
+                    <p class="auth-tos">{{this.auth.tos}}</p>
                     {{/if}}
-                    {{#if this.notes}}
-                        <h3>Notes</h3>
-                        <p class="notes">{{{this.notes}}}</p>
-                    {{/if}}
-                    {{#if this.auth}}
-                        <h3>Authentication</h3>
-                        <p class="auth">
-                            <h4 class="auth-strategies">Strategies</h4>
-                            <p class="auth-strategies">{{this.auth.strategies}}</p>
-                            <h4 class="auth-mode">Mode</h4>
-                            <p class="auth-mode">{{this.auth.mode}}</p>
-                            <h4 class="auth-payload">Payload</h4>
-                            <p class="auth-payload">{{this.auth.payload}}</p>
-                            {{#if this.auth.scope}}
-                                <h4 class="auth-scope">Scope</h4>
-                                <p class="auth-scope">{{this.auth.scope}}</p>
-                            {{/if}}
-                            {{#if this.auth.entity}}
-                                <h4 class="auth-entity">Entity</h4>
-                                <p class="auth-entity">{{this.auth.entity}}</p>
-                            {{/if}}
-                            {{#if this.auth.tos}}
-                                <h4 class="auth-tos">Terms of service</h4>
-                                <p class="auth-tos">{{this.auth.tos}}</p>
-                            {{/if}}
-                        </p>
-                    {{/if}}
-                    {{#if this.vhost}}
-                        <h3 class="vhost">Virtual host</h3>
-                        <p class="vhost">{{this.vhost}}</p>
-                    {{/if}}
-                    {{#if this.cors}}
-                        <h3 class="cors">CORS</h3>
-                        <p class="cors">{{this.cors}}</p>
-                    {{/if}}
-                    {{#if this.jsonp}}
-                        <h3 class="jsonp">JSONP</h3>
-                        <p class="jsonp">{{this.jsonp}}</p>
-                    {{/if}}
-                </div>
+                </p>
+                {{/if}} {{#if this.vhost}}
+                <h3 class="vhost">Virtual host</h3>
+                <p class="vhost">{{this.vhost}}</p>
+                {{/if}} {{#if this.cors}}
+                <h3 class="cors">CORS</h3>
+                <p class="cors">{{this.cors}}</p>
+                {{/if}} {{#if this.jsonp}}
+                <h3 class="jsonp">JSONP</h3>
+                <p class="jsonp">{{this.jsonp}}</p>
+                {{/if}}
+            </div>
             {{/multipleIf}}
 
             <ul class="list-group">
                 <li class="list-group-item">
                     <dl class="parameters">
-                    {{#multipleIf this.queryParams this.payloadParams this.pathParams}}
+                        {{#multipleIf this.queryParams this.payloadParams this.pathParams}}
                         <h3>Request Parameters</h3>
-                    {{/multipleIf}}
-                    {{#if this.pathParams}}
-                        <dt><h4>Path Parameters</h4></dt>
+                        {{/multipleIf}} {{#if this.pathParams}}
+                        <dt>
+                            <h4>Path Parameters</h4>
+                        </dt>
                         <dd>
                             {{#if this.pathParams.isDenied}}
-                                <h5>Denied</h5>
+                            <h5>Denied</h5>
                             {{else}}
-                                <ul class="list-unstyled">
-                                    {{> type this.pathParams}}
-                                </ul>
+                            <ul class="list-unstyled">
+                                {{> type this.pathParams}}
+                            </ul>
                             {{/if}}
                         </dd>
-                    {{/if}}
-                    {{#if this.queryParams}}
-                        <dt><h4>Query Parameters</h4></dt>
+                        {{/if}} {{#if this.queryParams}}
+                        <dt>
+                            <h4>Query Parameters</h4>
+                        </dt>
                         <dd>
                             {{#if this.queryParams.isDenied}}
-                                <h5>Denied</h5>
+                            <h5>Denied</h5>
                             {{else}}
-                                <ul class="list-unstyled">
-                                    {{> type this.queryParams}}
-                                </ul>
+                            <ul class="list-unstyled">
+                                {{> type this.queryParams}}
+                            </ul>
                             {{/if}}
                         </dd>
-                    {{/if}}
-                    {{#if this.payloadParams}}
-                        <dt><h4>Payload Parameters</h4></dt>
+                        {{/if}} {{#if this.payloadParams}}
+                        <dt>
+                            <h4>Payload Parameters</h4>
+                        </dt>
                         <dd>
                             {{#if this.payloadParams.isDenied}}
-                                <h5>Denied</h5>
+                            <h5>Denied</h5>
                             {{else}}
-                                <ul class="list-unstyled">
-                                    {{> type this.payloadParams}}
-                                </ul>
+                            <ul class="list-unstyled">
+                                {{> type this.payloadParams}}
+                            </ul>
                             {{/if}}
                         </dd>
-                    {{/if}}
-                    {{#if this.responseParams}}
-                        <dt><h3>Response Parameters</h3></dt>
+                        {{/if}} {{#if this.responseParams}}
+                        <dt>
+                            <h3>Response Parameters</h3>
+                        </dt>
                         <dd>
                             {{#if this.responseParams.isDenied}}
-                                <h5>Denied</h5>
+                            <h5>Denied</h5>
                             {{else}}
-                                <ul class="list-unstyled">
-                                    {{> type this.responseParams}}
-                                </ul>
+                            <ul class="list-unstyled">
+                                {{> type this.responseParams}}
+                            </ul>
                             {{/if}}
                         </dd>
-                    {{/if}}
+                        {{/if}}
                     </dl>
                 </li>
             </ul>
         </div>
-    {{/each}}
+        {{/each}}
     </div>
 </body>
+
 </html>

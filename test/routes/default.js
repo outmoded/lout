@@ -2,274 +2,274 @@ var t = require('joi');
 
 var handler = function(request) {
 
-  request.reply('ok');
+    request.reply('ok');
 };
 
 module.exports = [{
-  method: 'GET',
-  path: '/test',
-  config: {
-    handler: handler,
-    validate: {
-      query: {
-        param1: t.string().insensitive().required()
-      }
-    },
-    tags: ['admin', 'api'],
-    description: 'Test GET',
-    notes: 'test note'
-  }
-}, {
-  method: 'GET',
-  path: '/another/test',
-  config: {
-    handler: handler,
-    validate: {
-      query: {
-        param1: t.string().required()
-      }
+    method: 'GET',
+    path: '/test',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param1: t.string().insensitive().required()
+            }
+        },
+        tags: ['admin', 'api'],
+        description: 'Test GET',
+        notes: 'test note'
     }
-  }
 }, {
-  method: 'GET',
-  path: '/zanother/test',
-  config: {
-    handler: handler,
-    validate: {
-      query: {
-        param1: t.string().required()
-      }
+    method: 'GET',
+    path: '/another/test',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param1: t.string().required()
+            }
+        }
     }
-  }
 }, {
-  method: 'POST',
-  path: '/test',
-  config: {
-    handler: handler,
-    validate: {
-      query: {
-        param2: t.string().valid('first', 'last')
-      }
+    method: 'GET',
+    path: '/zanother/test',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param1: t.string().required()
+            }
+        }
     }
-  }
 }, {
-  method: 'DELETE',
-  path: '/test',
-  config: {
-    handler: handler,
-    validate: {
-      query: {
-        param2: t.string().valid('first', 'last')
-      }
+    method: 'POST',
+    path: '/test',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param2: t.string().valid('first', 'last')
+            }
+        }
     }
-  }
 }, {
-  method: 'PUT',
-  path: '/test',
-  config: {
-    handler: handler,
-    validate: {
-      query: {
-        param2: t.string().valid('first', 'last')
-      }
+    method: 'DELETE',
+    path: '/test',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param2: t.string().valid('first', 'last')
+            }
+        }
     }
-  }
 }, {
-  method: 'HEAD',
-  path: '/test',
-  config: {
-    handler: handler,
-    validate: {
-      query: {
-        param2: t.string().valid('first', 'last'),
-        param3: t.number().valid(42)
-      }
+    method: 'PUT',
+    path: '/test',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param2: t.string().valid('first', 'last')
+            }
+        }
     }
-  }
 }, {
-  method: 'GET',
-  path: '/notincluded',
-  config: {
-    handler: handler,
-    plugins: {
-      lout: false
+    method: 'HEAD',
+    path: '/test',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param2: t.string().valid('first', 'last'),
+                param3: t.number().valid(42)
+            }
+        }
     }
-  }
 }, {
-  method: 'GET',
-  path: '/nested',
-  config: {
-    handler: handler,
-    validate: {
-      query: {
-        param1: t.object({
-          nestedparam1: t.string().required()
-        })
-      }
+    method: 'GET',
+    path: '/notincluded',
+    config: {
+        handler: handler,
+        plugins: {
+            lout: false
+        }
     }
-  }
 }, {
-  method: 'GET',
-  path: '/rootobject',
-  config: {
-    handler: handler,
-    validate: {
-      query: t.object({
-        param1: t.string().required()
-      })
+    method: 'GET',
+    path: '/nested',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param1: t.object({
+                    nestedparam1: t.string().required()
+                })
+            }
+        }
     }
-  }
 }, {
-  method: 'GET',
-  path: '/rootarray',
-  config: {
-    handler: handler,
-    validate: {
-      query: t.array().includes(t.string(), t.object({
-        param1: t.number()
-      })).excludes(t.number()).min(2).max(5).length(3)
+    method: 'GET',
+    path: '/rootobject',
+    config: {
+        handler: handler,
+        validate: {
+            query: t.object({
+                param1: t.string().required()
+            })
+        }
     }
-  }
 }, {
-  method: 'GET',
-  path: '/path/{pparam}/test',
-  config: {
-    handler: handler,
-    validate: {
-      params: {
-        pparam: t.string().required()
-      }
+    method: 'GET',
+    path: '/rootarray',
+    config: {
+        handler: handler,
+        validate: {
+            query: t.array().includes(t.string(), t.object({
+                param1: t.number()
+            })).excludes(t.number()).min(2).max(5).length(3)
+        }
     }
-  }
 }, {
-  method: 'GET',
-  path: '/emptyobject',
-  config: {
-    handler: handler,
-    validate: {
-      query: {
-        param1: t.object()
-      }
+    method: 'GET',
+    path: '/path/{pparam}/test',
+    config: {
+        handler: handler,
+        validate: {
+            params: {
+                pparam: t.string().required()
+            }
+        }
     }
-  }
 }, {
-  method: 'GET',
-  path: '/alternatives',
-  config: {
-    handler: handler,
-    validate: {
-      query: {
-        param1: t.alternatives().try(t.number().required(), t.string().valid('first', 'last'))
-      }
+    method: 'GET',
+    path: '/emptyobject',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param1: t.object()
+            }
+        }
     }
-  }
 }, {
-  method: 'GET',
-  path: '/novalidation',
-  config: {
-    handler: handler
-  }
-}, {
-  method: 'GET',
-  path: '/withresponse',
-  config: {
-    handler: handler,
-    response: {
-      schema: {
-        param1: t.string()
-      }
+    method: 'GET',
+    path: '/alternatives',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param1: t.alternatives().try(t.number().required(), t.string().valid('first', 'last'))
+            }
+        }
     }
-  }
 }, {
-  method: 'GET',
-  path: '/withpojoinarray',
-  config: {
-    handler: handler,
-    validate: {
-      query: {
-        param1: t.array().includes({
-          param2: t.string()
-        })
-      }
+    method: 'GET',
+    path: '/novalidation',
+    config: {
+        handler: handler
     }
-  }
 }, {
-  method: 'POST',
-  path: '/withnestedrulesarray',
-  config: {
-    handler: handler,
-    validate: {
-      payload: {
-        param1: t.array().includes(t.object({
-          param2: t.array().includes(t.object({
-            param3: t.string()
-          })).optional()
-        }))
-      }
+    method: 'GET',
+    path: '/withresponse',
+    config: {
+        handler: handler,
+        response: {
+            schema: {
+                param1: t.string()
+            }
+        }
     }
-  }
 }, {
-  method: 'GET',
-  path: '/withhtmlnote',
-  config: {
-    handler: handler,
-    validate: {
-      query: {
-        param1: t.string().notes('<span class="htmltypenote">HTML type note</span>')
-      }
-    },
-    notes: '<span class="htmlroutenote">HTML route note</span>'
-  }
-}, {
-  method: 'GET',
-  path: '/withexample',
-  config: {
-    handler: handler,
-    validate: {
-      query: {
-        param1: t.string().regex(/^\w{1,5}$/).example('abcde')
-      }
+    method: 'GET',
+    path: '/withpojoinarray',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param1: t.array().includes({
+                    param2: t.string()
+                })
+            }
+        }
     }
-  }
 }, {
-  method: 'POST',
-  path: '/denybody',
-  config: {
-    handler: handler,
-    validate: {
-      payload: false
+    method: 'POST',
+    path: '/withnestedrulesarray',
+    config: {
+        handler: handler,
+        validate: {
+            payload: {
+                param1: t.array().includes(t.object({
+                    param2: t.array().includes(t.object({
+                        param3: t.string()
+                    })).optional()
+                }))
+            }
+        }
     }
-  }
 }, {
-  method: 'POST',
-  path: '/rootemptyobject',
-  config: {
-    handler: handler,
-    validate: {
-      payload: t.object()
+    method: 'GET',
+    path: '/withhtmlnote',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param1: t.string().notes('<span class="htmltypenote">HTML type note</span>')
+            }
+        },
+        notes: '<span class="htmlroutenote">HTML route note</span>'
     }
-  }
 }, {
-  method: 'GET',
-  path: '/withnestedexamples',
-  config: {
-    handler: handler,
-    validate: {
-      query: {
-        param1: t.object({
-          param2: t.object({
-            param3: t.number().example(5)
-          }).example({
-            param3: 5
-          })
-        }).example({
-          param2: {
-            param3: 5
-          }
-        })
-      }
+    method: 'GET',
+    path: '/withexample',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param1: t.string().regex(/^\w{1,5}$/).example('abcde')
+            }
+        }
     }
-  }
+}, {
+    method: 'POST',
+    path: '/denybody',
+    config: {
+        handler: handler,
+        validate: {
+            payload: false
+        }
+    }
+}, {
+    method: 'POST',
+    path: '/rootemptyobject',
+    config: {
+        handler: handler,
+        validate: {
+            payload: t.object()
+        }
+    }
+}, {
+    method: 'GET',
+    path: '/withnestedexamples',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param1: t.object({
+                    param2: t.object({
+                        param3: t.number().example(5)
+                    }).example({
+                        param3: 5
+                    })
+                }).example({
+                    param2: {
+                        param3: 5
+                    }
+                })
+            }
+        }
+    }
 }, {
     method: 'GET',
     path: '/withmeta',
@@ -277,7 +277,10 @@ module.exports = [{
         handler: handler,
         validate: {
             query: {
-                param1: t.string().meta({ index: true, unique: true })
+                param1: t.string().meta({
+                    index: true,
+                    unique: true
+                })
             }
         }
     }
@@ -333,11 +336,11 @@ module.exports = [{
         validate: {
             query: {
                 param1: t.object()
-                            .and('a', 'b', 'c')
-                            .or('a', 'b', 'c')
-                            .xor('a', 'b', 'c')
-                            .with('a', ['b', 'c'])
-                            .without('a', ['b', 'c'])
+                    .and('a', 'b', 'c')
+                    .or('a', 'b', 'c')
+                    .xor('a', 'b', 'c')
+                    .with('a', ['b', 'c'])
+                    .without('a', ['b', 'c'])
             }
         }
     }
@@ -361,16 +364,16 @@ module.exports = [{
         validate: {
             query: {
                 param1: t.string()
-                            .alphanum()
-                            .regex(/\d{3}.*/)
-                            .token()
-                            .email()
-                            .guid()
-                            .isoDate()
-                            .hostname()
-                            .lowercase()
-                            .uppercase()
-                            .trim()
+                    .alphanum()
+                    .regex(/\d{3}.*/)
+                    .token()
+                    .email()
+                    .guid()
+                    .isoDate()
+                    .hostname()
+                    .lowercase()
+                    .uppercase()
+                    .trim()
             }
         }
     }
@@ -382,8 +385,16 @@ module.exports = [{
         validate: {
             query: {
                 param1: t.alternatives()
-                    .when('b', { is: 5, then: t.string(), otherwise: t.number() })
-                    .when('a', { is: true, then: t.date(), otherwise: t.any() })
+                    .when('b', {
+                        is: 5,
+                        then: t.string(),
+                        otherwise: t.number()
+                    })
+                    .when('a', {
+                        is: true,
+                        then: t.date(),
+                        otherwise: t.any()
+                    })
             }
         }
     }
@@ -412,7 +423,7 @@ module.exports = [{
         }
     }
 }, {
-    method:'GET',
+    method: 'GET',
     path: '/withproperties',
     vhost: 'john.doe',
     config: {

@@ -1,138 +1,122 @@
 <li>
     {{#if this.condition}}
-        <div class="conditional">
-            <span class="condition">
-                <span class="condition-text">If <span class="condition-key">{{this.condition.key}}</span> matches the following model :</span>
-                <ul class="list-unstyled condition-model">{{> type this.condition.value}}</ul>
+    <div class="conditional">
+        <span class="condition">
+            <span class="condition-text">
+                <span>If</span>
+                <span class="condition-key">{{this.condition.key}}</span>
+                <span>matches the following model :</span>
             </span>
-            <span class="consequence">
-                <span class="consequence-text">Then :</span>
-                <ul class="list-unstyled consequence-model">{{> type this.then}}</ul>
-            </span>
-            <span class="consequence">
-                <span class="consequence-text">Otherwise :</span>
-                <ul class="list-unstyled consequence-model">{{> type this.otherwise}}</ul>
-            </span>
-        </div>
+            <ul class="list-unstyled condition-model">{{> type this.condition.value}}</ul>
+        </span>
+        <span class="consequence">
+            <span class="consequence-text">Then :</span>
+            <ul class="list-unstyled consequence-model">{{> type this.then}}</ul>
+        </span>
+        <span class="consequence">
+            <span class="consequence-text">Otherwise :</span>
+            <ul class="list-unstyled consequence-model">{{> type this.otherwise}}</ul>
+        </span>
+    </div>
     {{else}}
-        <h5><em>{{this.name}}</em>
-            {{#if this.flags.required}}
-            <i class="glyphicon glyphicon-star" title="This is a required field."></i>
-            {{/if}}
-        </h5>
-        {{#if this.description}}
-        <p>{{this.description}}</p>
+    <h5>
+        <em>{{this.name}}</em>
+        {{#if this.flags.required}}
+        <i class="glyphicon glyphicon-star" title="This is a required field."></i>
         {{/if}}
-        <dl class="type">
-            <dt><h6>Type</h6></dt>
-            <dd>{{this.type}}</dd>
-            {{#if this.target}}
-                <dt class="ref-target">Target</dt>
-                <dd class="ref-target">{{this.target}}</dd>
-            {{/if}}
-            {{#if this.unit}}
-                <dt>Unit</dt>
-                <dd>{{this.unit}}</dd>
-            {{/if}}
-            {{#if this.flags.encoding}}
-                <dt class="encoding">Encoding</dt>
-                <dd class="encoding">{{this.flags.encoding}}</dd>
-            {{/if}}
-            {{#if this.flags.default}}
-                <dt class="default-value">Default value</dt>
-                <dd class="default-value"><pre><code>{{json this.flags.default}}</code></pre></dd>
-            {{/if}}
-            {{#if this.notes}}
-                <dt>Notes</dt>
-                <dd>{{{this.notes}}}</dd>
-            {{/if}}
-            {{#if this.meta}}
-                <dt>Meta</dt>
-                <dd>
-                    <p class="meta">
-                        <pre><code>{{json this.meta}}</code></pre>
-                    </p>
-                </dd>
-            {{/if}}
-            {{#if this.examples}}
-                <dt>Examples</dt>
-                {{#each this.examples}}
-                    <dd class="example"><pre><code>{{json this}}</code></pre></dd>
+    </h5>
+    {{#if this.description}}
+    <p>{{this.description}}</p>
+    {{/if}}
+    <dl class="type">
+        <dt>
+            <h6>Type</h6>
+        </dt>
+        <dd>{{this.type}}</dd>
+        {{#if this.target}}
+        <dt class="ref-target">Target</dt>
+        <dd class="ref-target">{{this.target}}</dd>
+        {{/if}} {{#if this.unit}}
+        <dt>Unit</dt>
+        <dd>{{this.unit}}</dd>
+        {{/if}} {{#if this.flags.encoding}}
+        <dt class="encoding">Encoding</dt>
+        <dd class="encoding">{{this.flags.encoding}}</dd>
+        {{/if}} {{#if this.flags.default}}
+        <dt class="default-value">Default value</dt>
+        <dd class="default-value"><pre><code>{{json this.flags.default}}</code></pre>
+        </dd>
+        {{/if}} {{#if this.notes}}
+        <dt>Notes</dt>
+        <dd>{{{this.notes}}}</dd>
+        {{/if}} {{#if this.meta}}
+        <dt>Meta</dt>
+        <dd>
+            <p class="meta">
+                <pre><code>{{json this.meta}}</code></pre>
+            </p>
+        </dd>
+        {{/if}} {{#if this.examples}}
+        <dt>Examples</dt>
+        {{#each this.examples}}
+        <dd class="example"><pre><code>{{json this}}</code></pre>
+        </dd>
+        {{/each}} {{/if}} {{#if this.allowedValues}}
+        <dt>Allowed Values</dt>
+        {{#each this.allowedValues}}
+        <dd>{{this}}</dd>
+        {{/each}} {{/if}} {{#if this.disallowedValues}}
+        <dt>Forbidden Values</dt>
+        {{#each this.disallowedValues}}
+        <dd>{{this}}</dd>
+        {{/each}} {{/if}} {{#if this.peers}}
+        <dt class="peers-conditions">Peers conditions</dt>
+        <dd class="peers-conditions">
+            <ul class="disc-bullets reduced-margin-list">
+                {{#each this.peers}}
+                <li class="peer-condition">{{this}}</li>
                 {{/each}}
-            {{/if}}
-            {{#if this.allowedValues}}
-                <dt>Allowed Values</dt>
-                {{#each this.allowedValues}}
-                    <dd>{{this}}</dd>
-                {{/each}}
-            {{/if}}
-            {{#if this.disallowedValues}}
-                <dt>Forbidden Values</dt>
-                {{#each this.disallowedValues}}
-                    <dd>{{this}}</dd>
-                {{/each}}
-            {{/if}}
-            {{#if this.peers}}
-                <dt class="peers-conditions">Peers conditions</dt>
-                <dd class="peers-conditions">
-                    <ul class="disc-bullets reduced-margin-list">
-                        {{#each this.peers}}
-                            <li class="peer-condition">{{this}}</li>
-                        {{/each}}
-                    </ul>
-                </dd>
-            {{/if}}
-            {{#if this.flags.allowUnknown}}
-                <dt class="allow-unknown">Allow unknown keys</dt>
-                <dd class="allow-unknown">{{this.flags.allowUnknown}}</dd>
-            {{/if}}
-            {{#if this.flags.insensitive}}
-                <dt class="case-insensitive">Case insensitive matching</dt>
-                <dd class="case-insensitive">true</dd>
-            {{/if}}
-            {{#if this.children}}
-                <dt>Properties</dt>
-                <dd>
-                    <ul class="list-unstyled">
-                    {{#each this.children}}
-                        {{> type}}
-                    {{/each}}
-                    </ul>
-                </dd>
-            {{/if}}
-            {{#if this.alternatives}}
-                <dt>Alternatives</dt>
-                <dd>
-                    <ul class="disc-bullets reduced-margin-list">
-                        {{#each this.alternatives}}
-                            {{> type}}
-                        {{/each}}
-                    </ul>
-                </dd>
-            {{/if}}
-            {{#each this.rules}}
-                <dt class="rules-{{@key}}">{{@key}}</dt>
-                <dd class="rules-{{@key}}">
-                    {{#if this.length}}
-                        <ul class="disc-bullets reduced-margin-list">
-                        {{#each this}}
-                            {{> type}}
-                        {{/each}}
-                        </ul>
-                    {{else}}
-                        {{#if this.key}}
-                            <span class="assertion">
-                                <span class="assertion-text">
-                                    Asserts that <span class="assertion-key">{{this.key}}</span> matches the following model :
-                                </span>
-                                <ul class="list-unstyled assertion-model">{{> type this.value}}</ul>
-                            </span>
-                        {{else}}
-                            {{this}}
-                        {{/if}}
-                    {{/if}}
-                </dd>
-            {{/each}}
-        </dl>
+            </ul>
+        </dd>
+        {{/if}} {{#if this.flags.allowUnknown}}
+        <dt class="allow-unknown">Allow unknown keys</dt>
+        <dd class="allow-unknown">{{this.flags.allowUnknown}}</dd>
+        {{/if}} {{#if this.flags.insensitive}}
+        <dt class="case-insensitive">Case insensitive matching</dt>
+        <dd class="case-insensitive">true</dd>
+        {{/if}} {{#if this.children}}
+        <dt>Properties</dt>
+        <dd>
+            <ul class="list-unstyled">
+                {{#each this.children}} {{> type}} {{/each}}
+            </ul>
+        </dd>
+        {{/if}} {{#if this.alternatives}}
+        <dt>Alternatives</dt>
+        <dd>
+            <ul class="disc-bullets reduced-margin-list">
+                {{#each this.alternatives}} {{> type}} {{/each}}
+            </ul>
+        </dd>
+        {{/if}} {{#each this.rules}}
+        <dt class="rules-{{@key}}">{{@key}}</dt>
+        <dd class="rules-{{@key}}">
+            {{#if this.length}}
+            <ul class="disc-bullets reduced-margin-list">
+                {{#each this}} {{> type}} {{/each}}
+            </ul>
+            {{else}} {{#if this.key}}
+            <span class="assertion">
+                <span class="assertion-text">
+                    <span>Asserts that</span>
+                    <span class="assertion-key">{{this.key}}</span>
+                    <span>matches the following model :</span>
+                </span>
+                <ul class="list-unstyled assertion-model">{{> type this.value}}</ul>
+            </span>
+            {{else}} {{this}} {{/if}} {{/if}}
+        </dd>
+        {{/each}}
+    </dl>
     {{/if}}
 </li>
