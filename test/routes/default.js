@@ -411,4 +411,13 @@ module.exports = [{
             }
         }
     }
+}, {
+    method:'GET',
+    path: '/withproperties',
+    vhost: 'john.doe',
+    config: {
+        handler: handler,
+        cors: false,
+        jsonp: 'callback'
+    }
 }];

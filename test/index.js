@@ -409,6 +409,18 @@ describe('Lout', function () {
         });
     });
 
+    it('should show properties of the route', function (done) {
+
+        server.inject('/docs?path=/withproperties', function (res) {
+
+            var $ = cheerio.load(res.result);
+            expect($('p.vhost').text()).to.equal('john.doe');
+            expect($('p.cors').text()).to.equal('false');
+            expect($('p.jsonp').text()).to.equal('callback');
+            done();
+        });
+    });
+
     describe('Authentication', function() {
 
         var server;

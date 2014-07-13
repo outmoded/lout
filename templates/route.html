@@ -41,7 +41,7 @@
                 </span>
             </div>
 
-            {{#multipleIf this.description this.notes this.auth}}
+            {{#multipleIf this.description this.notes this.auth this.vhost this.cors this.jsonp}}
                 <div class="panel-body">
                     {{#if this.description}}
                         <h3>Description</h3>
@@ -73,6 +73,18 @@
                                 <p class="auth-tos">{{this.auth.tos}}</p>
                             {{/if}}
                         </p>
+                    {{/if}}
+                    {{#if this.vhost}}
+                        <h3 class="vhost">Virtual host</h3>
+                        <p class="vhost">{{this.vhost}}</p>
+                    {{/if}}
+                    {{#if this.cors}}
+                        <h3 class="cors">CORS</h3>
+                        <p class="cors">{{this.cors}}</p>
+                    {{/if}}
+                    {{#if this.jsonp}}
+                        <h3 class="jsonp">JSONP</h3>
+                        <p class="jsonp">{{this.jsonp}}</p>
                     {{/if}}
                 </div>
             {{/multipleIf}}
