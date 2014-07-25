@@ -7,22 +7,13 @@ API documentation generator for [**hapi**](https://github.com/spumko/hapi)
 [![Dependencies Status](https://david-dm.org/spumko/lout.png)](https://david-dm.org/spumko/lout)
 [![DevDependencies Status](https://david-dm.org/spumko/lout/dev-status.png)](https://david-dm.org/spumko/lout#info=devDependencies)
 
-
+##Description
 **lout** is a documentation generator for **hapi** servers, providing a human-readable guide for every endpoint
 using the route configuration. The module allows full customization of the output.
 
-**lout** requires that the plugin is granted the _'routes'_ and _'views'_ permissions.
-
-The following options are available when registering the plugin:
-- _'engines'_ - an object where each key is a file extension (e.g. 'html', 'jade'), mapped to the npm module name (string) used for rendering the templates.  Default is { html: 'handlebars' }.
-- _'endpoint'_ - the path where the route will be registered.  Default is /docs.
-- _'basePath'_ - the absolute path to the templates folder.  Default is the lout templates folder.
-- _'cssPath'_ - the absolute path to the css folder.  Default is the lout css folder. It must contain a style.css.
-- _'helpersPath'_ - the absolute path to the helpers folder.  Default is the lout helpers folder. This might need to be null if you change the basePath.
-- _'partialsPath'_ - the absolute path to the partials folder.  Default is the lout templates folder. This might need to be null if you change the basePath.
-- _'auth'_ - the route configuration for authentication.  Default is to disable auth.
-- _'indexTemplate'_ - the name of the template file to contain docs main page.  Default is 'index'.
-- _'routeTemplate'_ - the name of the route template file.  Default is 'route'.
+##Live demo
+You can find a [live demo](http://lout.herokuapp.com/) of lout using the unit tests routes.
+The routes are of course fake but you can get a grasp of what lout looks like given various inputs.
 
 ##Usage
 
@@ -52,6 +43,18 @@ server.pack.register({ plugin: require('lout') }, function() {
     server.start();
 });
 ```
+
+##Parameters
+The following options are available when registering the plugin:
+- _'engines'_ - an object where each key is a file extension (e.g. 'html', 'jade'), mapped to the npm module name (string) used for rendering the templates.  Default is { html: 'handlebars' }.
+- _'endpoint'_ - the path where the route will be registered.  Default is /docs.
+- _'basePath'_ - the absolute path to the templates folder.  Default is the lout templates folder.
+- _'cssPath'_ - the absolute path to the css folder.  Default is the lout css folder. It must contain a style.css.
+- _'helpersPath'_ - the absolute path to the helpers folder.  Default is the lout helpers folder. This might need to be null if you change the basePath.
+- _'partialsPath'_ - the absolute path to the partials folder.  Default is the lout templates folder. This might need to be null if you change the basePath.
+- _'auth'_ - the route configuration for authentication.  Default is to disable auth.
+- _'indexTemplate'_ - the name of the template file to contain docs main page.  Default is 'index'.
+- _'routeTemplate'_ - the name of the route template file.  Default is 'route'.
 
 ### Ignoring a route in documentation
 
