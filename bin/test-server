@@ -2,8 +2,8 @@
 
 var Hapi = require('hapi');
 
-// Reuse the test default routes, since they are quite complete.
-var server = new Hapi.Server(3000);
+var port = Number(process.env.PORT || 3000);
+var server = new Hapi.Server(port);
 
 server.auth.scheme('testScheme', function() {
 
@@ -15,9 +15,20 @@ server.auth.scheme('testScheme', function() {
 });
 server.auth.strategy('testStrategy', 'testScheme');
 
+server.route({
+  method: 'GET',
+  path: '/',
+  handler: function(request, reply) {
+    reply.redirect('http://' + request.info.host + '/docs');
+  }
+});
+
+// Reuse the test default routes, since they are quite complete.
 server.route(require('../test/routes/default'));
 server.route(require('../test/routes/withauth'));
 
 server.pack.register(require('../'), function(err) {
-  server.start();
+  server.start(function() {
+    console.log('Listening on', server.info.uri);
+  });
 });

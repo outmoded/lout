@@ -9,7 +9,7 @@
     "hapi"
   ],
   "engines": {
-    "node": ">=0.10.22"
+    "node": ">=0.10.29"
   },
   "dependencies": {
     "handlebars": "^1.3.0",
