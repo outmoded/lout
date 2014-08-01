@@ -2,7 +2,7 @@
   "name": "lout",
   "description": "API documentation generator plugin for hapi",
   "version": "5.0.1",
-  "repository": "git://github.com/spumko/lout",
+  "repository": "git://github.com/hapijs/lout",
   "main": "index",
   "keywords": [
     "docs",
@@ -31,7 +31,7 @@
   "licenses": [
     {
       "type": "BSD",
-      "url": "http://github.com/spumko/lout/raw/master/LICENSE"
+      "url": "http://github.com/hapijs/lout/raw/master/LICENSE"
     }
   ]
 }

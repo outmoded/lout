@@ -1,11 +1,11 @@
-<a href="https://github.com/spumko"><img src="https://raw.github.com/spumko/spumko/master/images/from.png" align="right" /></a>
-![lout Logo](https://raw.github.com/spumko/lout/master/images/lout.png)
+<a href="https://github.com/hapijs"><img src="https://raw.github.com/hapijs/spumko/master/images/from.png" align="right" /></a>
+![lout Logo](https://raw.github.com/hapijs/lout/master/images/lout.png)
 
-API documentation generator for [**hapi**](https://github.com/spumko/hapi)
+API documentation generator for [**hapi**](https://github.com/hapijs/hapi)
 
-[![Build Status](https://secure.travis-ci.org/spumko/lout.png)](http://travis-ci.org/spumko/lout)
-[![Dependencies Status](https://david-dm.org/spumko/lout.png)](https://david-dm.org/spumko/lout)
-[![DevDependencies Status](https://david-dm.org/spumko/lout/dev-status.png)](https://david-dm.org/spumko/lout#info=devDependencies)
+[![Build Status](https://secure.travis-ci.org/hapijs/lout.png)](http://travis-ci.org/hapijs/lout)
+[![Dependencies Status](https://david-dm.org/hapijs/lout.png)](https://david-dm.org/hapijs/lout)
+[![DevDependencies Status](https://david-dm.org/hapijs/lout/dev-status.png)](https://david-dm.org/hapijs/lout#info=devDependencies)
 
 Lead Maintainer: [Nicolas Morel](https://github.com/Marsup)
 
