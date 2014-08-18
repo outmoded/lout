@@ -1,4 +1,3 @@
-<a href="https://github.com/hapijs"><img src="https://raw.github.com/hapijs/spumko/master/images/from.png" align="right" /></a>
 ![lout Logo](https://raw.github.com/hapijs/lout/master/images/lout.png)
 
 API documentation generator for [**hapi**](https://github.com/hapijs/hapi)
