@@ -1,3 +1,8 @@
+# Version 5.0.2
+- Fix #57: Support most of Joi 4.x features
+- Fix #45: Show authentication configuration
+- Show additional routes parameters (vhost, cors, jsonp)
+
 # Version 5.0.1
 - Fix #75: make correct use of basePath option
 - Allow for partials setting override
