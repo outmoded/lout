@@ -346,6 +346,20 @@ module.exports = [{
     }
 }, {
     method: 'GET',
+    path: '/withpattern',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param1: t.object({
+                    a: t.string()
+                }).pattern(/\w\d/, t.boolean())
+
+            }
+        }
+    }
+}, {
+    method: 'GET',
     path: '/withallowunknown',
     config: {
         handler: handler,

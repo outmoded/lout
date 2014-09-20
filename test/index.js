@@ -336,6 +336,17 @@ describe('Lout', function() {
         });
     });
 
+    it('should show pattern on objects', function(done) {
+
+        server.inject('/docs?path=/withpattern', function(res) {
+
+            expect(res.result).to.contain('Patterns');
+            expect(res.result).to.contain('/\\w\\d/');
+            expect(res.result).to.contain('boolean');
+            done();
+        });
+    });
+
     it('should show peer dependencies', function(done) {
 
         server.inject('/docs?path=/withallowunknown', function(res) {

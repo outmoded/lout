@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "hapi": ">= 6.x.x",
-    "joi": ">= 4.6.0",
+    "joi": ">= 4.7.0",
     "lab": "^4.0.0",
     "cheerio": "^0.17.0"
   },

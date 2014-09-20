@@ -1,6 +1,7 @@
 {
   "html": {
-    "indent_size": 4
+    "indent_size": 4,
+    "indent_handlebars": true
   },
   "css": {
     "indent_size": 4
