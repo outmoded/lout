@@ -1,3 +1,6 @@
+# Version 5.1.0
+- Fix #81 Add support for object.pattern
+
 # Version 5.0.2
 - Fix #57: Support most of Joi 4.x features
 - Fix #45: Show authentication configuration
