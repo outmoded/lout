@@ -39,7 +39,7 @@ describe('Registration', function() {
         server.pack.register({
             plugin: require('../'),
             options: {
-                helpersPath: null,
+                helpersPath: '.',
                 cssPath: null,
                 endpoint: '/'
             }
@@ -537,7 +537,7 @@ describe('Customized Lout', function() {
             plugin: require('../'),
             options: {
                 basePath: Path.join(__dirname, './custom-test-files'),
-                helpersPath: null,
+                helpersPath: '.',
                 cssPath: null
             }
         }, function() {
