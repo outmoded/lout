@@ -1,3 +1,6 @@
+# Version 5.1.1
+- Upgrade Handlebars version
+
 # Version 5.1.0
 - Fix #81 Add support for object.pattern
 

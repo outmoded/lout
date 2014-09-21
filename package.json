@@ -12,7 +12,7 @@
     "node": ">=0.10.30"
   },
   "dependencies": {
-    "handlebars": "^1.3.0",
+    "handlebars": "^2.0.0",
     "hoek": "^2.2.0"
   },
   "peerDependencies": {
