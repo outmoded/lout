@@ -19,7 +19,6 @@ module.exports = [{
             mode: 'try',
             strategy: 'testStrategy',
             payload: 'optional',
-            tos: '1.0.0',
             scope: ['test'],
             entity: 'user'
         }

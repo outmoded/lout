@@ -485,7 +485,6 @@ describe('Lout', function() {
                 expect($('p.auth-payload').text()).to.equal('optional');
                 expect($('p.auth-scope').text()).to.equal('test');
                 expect($('p.auth-entity').text()).to.equal('user');
-                expect($('p.auth-tos').text()).to.equal('1.0.0');
                 done();
             });
         });
