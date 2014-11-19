@@ -132,7 +132,10 @@ describe('Lout', function() {
         server.inject('/docs', function(res) {
 
             server.table().forEach(function(route) {
-                if ((route.settings.plugins && route.settings.plugins.lout === false) || route.path === '/docs') {
+                if ((route.settings.plugins && route.settings.plugins.lout === false) ||
+                    route.path === '/docs' ||
+                    route.method === 'options') {
+
                     expect(res.result).to.not.contain('?path=' + route.path);
                 } else {
                     expect(res.result).to.contain('?path=' + route.path);
@@ -582,6 +585,29 @@ describe('Customized Lout', function() {
 
                 expect(res).to.exist;
                 expect(res.result).to.contain('.cssTest');
+                done();
+            });
+        });
+    });
+
+    it('ignores methods', function(done) {
+
+        var server = new Hapi.Server();
+
+        server.route(require('./routes/default'));
+
+        server.pack.register({
+            plugin: require('../'),
+            options: {
+                filterRoutes: function (route) {
+
+                    return route.method !== 'delete' && route.path !== '/test';
+                }
+            }
+        }, function() {
+            server.inject('/docs', function(res) {
+
+                expect(res.result).to.not.contain('?path=/test').and.to.not.contain('#DELETE');
                 done();
             });
         });

@@ -56,10 +56,11 @@ The following options are available when registering the plugin:
 - _'auth'_ - the route configuration for authentication.  Default is to disable auth.
 - _'indexTemplate'_ - the name of the template file to contain docs main page.  Default is 'index'.
 - _'routeTemplate'_ - the name of the route template file.  Default is 'route'.
+- _'filterRoutes'_ - a function that receives a route object containing `method` and `path` and returns a boolean value to exclude routes.
 
 ### Ignoring a route in documentation
 
-If you want a route not to appear in lout's documentation, you have to set lout settings for this specific route to false.
+If you want a specific route not to appear in lout's documentation, you have to set lout settings for this specific route to false.
 
 Here is an example snippet of a route configuration :
 
@@ -76,4 +77,18 @@ Here is an example snippet of a route configuration :
   }
 }
 
+```
+
+If you want to exclude multiple routes using conditions, you can use `filterRoutes` when registering lout :
+```js
+server.pack.register({
+  plugin: require('lout'),
+  options: {
+    filterRoutes: function (route) {
+      return route.method !== '*' && !/^\/private\//.test(route.path);
+    }
+  }
+}, function() {
+    server.start();
+});
 ```

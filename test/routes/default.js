@@ -445,4 +445,8 @@ module.exports = [{
         cors: false,
         jsonp: 'callback'
     }
+}, {
+    method: 'OPTIONS',
+    path: '/optionstest',
+    handler: handler
 }];
