@@ -26,7 +26,7 @@ server.route([{
     your routes...
 }]);
 
-server.pack.require('lout', function() {
+server.pack.register(require('lout'), function() {
     server.start();
 });
 
