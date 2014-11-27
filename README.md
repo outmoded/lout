@@ -8,15 +8,26 @@ API documentation generator for [**hapi**](https://github.com/hapijs/hapi)
 
 Lead Maintainer: [Nicolas Morel](https://github.com/Marsup)
 
-##Description
+## Description
 **lout** is a documentation generator for **hapi** servers, providing a human-readable guide for every endpoint
 using the route configuration. The module allows full customization of the output.
 
-##Live demo
+## Live demo
 You can find a [live demo](http://lout.herokuapp.com/) of lout using the unit tests routes.
 The routes are of course fake but you can get a grasp of what lout looks like given various inputs.
 
-##Usage
+## Usage
+
+```javascript
+var Hapi = require('hapi');
+var server = new Hapi.Server(80);
+
+server.pack.register({ plugin: require('lout') }, function() {
+    server.start();
+});
+```
+
+## Usage before Hapi 7.x
 
 ```javascript
 var Hapi = require('hapi');
@@ -32,20 +43,7 @@ server.pack.require('lout', function() {
 
 ```
 
-### Usage in Hapi 6.x
-
-Hapi 6.x has deprecated pack.require() use pack.register() instead
-
-```javascript
-var Hapi = require('hapi');
-var server = new Hapi.Server(80);
-
-server.pack.register({ plugin: require('lout') }, function() {
-    server.start();
-});
-```
-
-##Parameters
+## Parameters
 The following options are available when registering the plugin:
 - _'engines'_ - an object where each key is a file extension (e.g. 'html', 'jade'), mapped to the npm module name (string) used for rendering the templates.  Default is { html: 'handlebars' }.
 - _'endpoint'_ - the path where the route will be registered.  Default is /docs.
