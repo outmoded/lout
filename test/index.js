@@ -16,7 +16,7 @@ var lab = exports.lab = Lab.script();
 var before = lab.before;
 var describe = lab.experiment;
 var it = lab.test;
-var expect = Lab.expect;
+var expect = require('code').expect;
 
 describe('Registration', function() {
 
@@ -318,9 +318,9 @@ describe('Lout', function() {
             // of something.
             var $ = cheerio.load(res.result);
             expect($('dt.rules-Min').text()).to.equal('Min');
-            expect($('dd.rules-Min').text().replace(/\n|\s+/g, '')).to.have.length.above(0);
+            expect($('dd.rules-Min').text().replace(/\n|\s+/g, '')).to.not.be.empty();
             expect($('dt.rules-Max').text()).to.equal('Max');
-            expect($('dd.rules-Max').text().replace(/\n|\s+/g, '')).to.have.length.above(0);
+            expect($('dd.rules-Max').text().replace(/\n|\s+/g, '')).to.not.be.empty();
             done();
         });
     });
@@ -472,7 +472,7 @@ describe('Lout', function() {
 
             server.inject('/docs?path=/withauth', function(res) {
 
-                expect(res).to.exist;
+                expect(res).to.exist();
                 expect(res.result).to.contain('Strategies');
                 done();
             });
@@ -505,7 +505,7 @@ describe('Lout', function() {
 
                 server.inject('/docs', function(res) {
 
-                    expect(res).to.exist;
+                    expect(res).to.exist();
                     expect(res.result).to.contain('/test');
                     done();
                 });
@@ -583,7 +583,7 @@ describe('Customized Lout', function() {
 
             server.inject('/docs/css/style.css', function(res) {
 
-                expect(res).to.exist;
+                expect(res).to.exist();
                 expect(res.result).to.contain('.cssTest');
                 done();
             });
@@ -607,7 +607,8 @@ describe('Customized Lout', function() {
         }, function() {
             server.inject('/docs', function(res) {
 
-                expect(res.result).to.not.contain('?path=/test').and.to.not.contain('#DELETE');
+                expect(res.result).to.not.contain('?path=/test');
+                expect(res.result).to.not.contain('#DELETE');
                 done();
             });
         });

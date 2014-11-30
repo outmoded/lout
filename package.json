@@ -12,18 +12,19 @@
     "node": ">=0.10.30"
   },
   "dependencies": {
-    "handlebars": "^2.0.0",
-    "hoek": "^2.2.0"
+    "handlebars": "2.x.x",
+    "hoek": "2.x.x"
   },
   "peerDependencies": {
     "hapi": "6.x.x - 7.x.x",
-    "joi": ">= 4.6.0"
+    "joi": ">= 5.x.x"
   },
   "devDependencies": {
     "hapi": "6.x.x - 7.x.x",
-    "joi": ">= 4.7.0",
-    "lab": "^4.0.0",
-    "cheerio": "^0.17.0"
+    "joi": ">= 5.x.x",
+    "lab": "5.x.x",
+    "cheerio": "0.x.x",
+    "code": "1.x.x"
   },
   "scripts": {
     "test": "make test-cov"
