@@ -3,7 +3,8 @@
 var Hapi = require('hapi');
 
 var port = Number(process.env.PORT || 3000);
-var server = new Hapi.Server(port);
+var server = new Hapi.Server();
+server.connection({ port: port });
 
 server.auth.scheme('testScheme', function() {
 
@@ -27,7 +28,7 @@ server.route({
 server.route(require('../test/routes/default'));
 server.route(require('../test/routes/withauth'));
 
-server.pack.register(require('../'), function(err) {
+server.register(require('../'), function(err) {
   server.start(function() {
     console.log('Listening on', server.info.uri);
   });

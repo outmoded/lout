@@ -15,25 +15,30 @@
             </div>
         </div>
     </div>
-    <div class="container route-index">
-        {{#each routes}}
-        <a href="?path={{this.path}}#{{this.method}}">
-            <div class="row route">
-                <div class="col-md-2 h2">
-                    <span class="{{colorFromMethod this}} full-width-label">
-                        {{this.method}}
-                    </span>
-                </div>
-                <div class="col-md-10 h2">
-                    <div class="pull-right">
-                        {{#each this.tags}}
-                        <div class="badge">{{this}}</div>
-                        {{/each}}
+    <div class="container">
+        {{#each this}}
+        <pre class="h3 server-uri-block"><span class="text-muted server-uri-prefix">Routes for </span><span class="server-uri">{{@key}}</span></pre>
+        <div class="route-index">
+            {{#each this.routes}}
+            <a href="?server={{@../key}}&path={{this.path}}#{{this.method}}">
+                <div class="row route">
+                    <div class="col-md-2 h2">
+                        <span class="{{colorFromMethod this}} full-width-label">
+                            {{this.method}}
+                        </span>
                     </div>
-                    {{this.path}}
+                    <div class="col-md-10 h2">
+                        <div class="pull-right">
+                            {{#each this.tags}}
+                            <div class="badge">{{this}}</div>
+                            {{/each}}
+                        </div>
+                        {{this.path}}
+                    </div>
                 </div>
-            </div>
-        </a>
+            </a>
+            {{/each}}
+        </div>
         {{/each}}
     </div>
 </body>

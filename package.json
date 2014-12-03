@@ -13,14 +13,15 @@
   },
   "dependencies": {
     "handlebars": "2.x.x",
-    "hoek": "2.x.x"
+    "hoek": "2.x.x",
+    "boom": "2.x.x"
   },
   "peerDependencies": {
-    "hapi": "6.x.x - 7.x.x",
+    "hapi": ">= 8 || ^8.0.0-rc",
     "joi": ">= 5.x.x"
   },
   "devDependencies": {
-    "hapi": "6.x.x - 7.x.x",
+    "hapi": ">= 8 || ^8.0.0-rc",
     "joi": ">= 5.x.x",
     "lab": "5.x.x",
     "cheerio": "0.x.x",
