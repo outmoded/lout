@@ -14,7 +14,7 @@
                 <a class="navbar-brand" href="?"><i class="glyphicon glyphicon-home glyphicon-white"></i></a>
             </div>
             <ul class="nav navbar-nav">
-                {{#each routes}}
+                {{#each this}}
                 <li>
                     <a href="#{{this.method}}" class="anchor-link">
                         <span class="{{colorFromMethod this}}">{{this.method}}</span>
@@ -25,7 +25,7 @@
         </div>
     </nav>
     <div class="container route-details">
-        {{#each routes}}
+        {{#each this}}
         <div class="panel panel-default route">
             <a name="{{this.method}}" class="anchor"></a>
             <div class="panel-heading h2 {{this.method}}">

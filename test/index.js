@@ -27,8 +27,8 @@ describe('Registration', function() {
         server.register(require('../'), function() {
 
             var routes = server.table();
-            expect(Object.keys(routes)).to.have.length(1);
-            expect(routes['http://test']).to.have.length(2);
+            expect(routes).to.have.length(1);
+            expect(routes[0].table).to.have.length(2);
             done();
         });
     });
@@ -47,7 +47,7 @@ describe('Registration', function() {
         }, function() {
 
             var routes = server.table();
-            expect(routes['http://test']).to.have.length(1);
+            expect(routes[0].table).to.have.length(1);
             done();
         });
     });
@@ -133,7 +133,7 @@ describe('Lout', function() {
 
         server.inject('/docs', function(res) {
 
-            server.table()['http://test'].forEach(function(route) {
+            server.table()[0].table.forEach(function(route) {
                 if ((route.settings.plugins && route.settings.plugins.lout === false) ||
                     route.path === '/docs' ||
                     route.method === 'options') {
@@ -640,22 +640,21 @@ describe('Multiple connections', function() {
 
         server.inject('/docs', function(res) {
 
-            var table = server.table();
-            var connections = Object.keys(table);
-            expect(connections).to.have.length(2);
-            connections.forEach(function (connection) {
+            var tables = server.table();
+            expect(tables).to.have.length(2);
+            tables.forEach(function (connection) {
 
-                expect(res.result).to.contain(connection);
+                expect(res.result).to.contain(connection.info.uri);
 
-                table[connection].forEach(function(route) {
+                connection.table.forEach(function(route) {
 
                     if ((route.settings.plugins && route.settings.plugins.lout === false) ||
                         route.path === '/docs' ||
                         route.method === 'options') {
 
-                        expect(res.result).to.not.contain('?server=' + connection + '&path=' + route.path);
+                        expect(res.result).to.not.contain('?server=' + connection.info.uri + '&path=' + route.path);
                     } else {
-                        expect(res.result).to.contain('?server=' + connection + '&path=' + route.path);
+                        expect(res.result).to.contain('?server=' + connection.info.uri + '&path=' + route.path);
                     }
                 });
             });
@@ -668,11 +667,21 @@ describe('Multiple connections', function() {
         server.inject('/docs?server=http://test:1', function(res) {
 
             var table = server.table();
-            var connections = Object.keys(table);
-            expect(connections).to.have.length(2);
+            expect(table).to.have.length(2);
+
+            var table1, table2;
+            table.forEach(function (connection) {
+
+                var uri = connection.info.uri;
+                if (uri === 'http://test:1') {
+                    table1 = connection.table;
+                } else if (uri === 'http://test:2') {
+                    table2 = connection.table;
+                }
+            });
 
             expect(res.result).to.contain('http://test:1');
-            table['http://test:1'].forEach(function(route) {
+            table1.forEach(function(route) {
 
                 if ((route.settings.plugins && route.settings.plugins.lout === false) ||
                     route.path === '/docs' ||
@@ -685,7 +694,7 @@ describe('Multiple connections', function() {
             });
 
             expect(res.result).to.not.contain('http://test:2');
-            table['http://test:2'].forEach(function(route) {
+            table2.forEach(function(route) {
 
                 expect(res.result).to.not.contain('?server=http://test:2&path=' + route.path);
             });
