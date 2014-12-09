@@ -2,9 +2,9 @@
 
 API documentation generator for [**hapi**](https://github.com/hapijs/hapi)
 
-[![Build Status](https://secure.travis-ci.org/hapijs/lout.png)](http://travis-ci.org/hapijs/lout)
-[![Dependencies Status](https://david-dm.org/hapijs/lout.png)](https://david-dm.org/hapijs/lout)
-[![DevDependencies Status](https://david-dm.org/hapijs/lout/dev-status.png)](https://david-dm.org/hapijs/lout#info=devDependencies)
+[![Build Status](https://secure.travis-ci.org/hapijs/lout.svg)](http://travis-ci.org/hapijs/lout)
+[![Dependencies Status](https://david-dm.org/hapijs/lout.svg)](https://david-dm.org/hapijs/lout)
+[![DevDependencies Status](https://david-dm.org/hapijs/lout/dev-status.svg)](https://david-dm.org/hapijs/lout#info=devDependencies)
 
 Lead Maintainer: [Nicolas Morel](https://github.com/Marsup)
 
