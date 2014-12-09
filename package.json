@@ -17,11 +17,11 @@
     "boom": "2.x.x"
   },
   "peerDependencies": {
-    "hapi": ">= 8 || ^8.0.0-rc",
+    "hapi": ">= 8",
     "joi": ">= 5.x.x"
   },
   "devDependencies": {
-    "hapi": ">= 8 || ^8.0.0-rc",
+    "hapi": ">= 8",
     "joi": ">= 5.x.x",
     "lab": "5.x.x",
     "cheerio": "0.x.x",
