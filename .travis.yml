@@ -5,10 +5,17 @@ node_js:
   - 0.11
 
 deploy:
-  provider: heroku
-  api_key:
-    secure: 0SO7x4n75eW/7IC3DexD/BNhnOYpbH54uZdouS8iSAWCrtG/P3CgRMYUcr+bApFgBfzBmmQVwCBBSgOWGe9mpnNLfg+ha58QGzFKJ9as+Z529qoFnr/hlUt6QF2578j2O2fG/QADFw2NhAYy6NrGF2Ki/khp5+MZ3IjHl8E86wk=
-  app: lout
-  on:
-    repo: hapijs/lout
-  run: "node bin/test-server"
+  - provider: heroku
+    api_key:
+      secure: 0SO7x4n75eW/7IC3DexD/BNhnOYpbH54uZdouS8iSAWCrtG/P3CgRMYUcr+bApFgBfzBmmQVwCBBSgOWGe9mpnNLfg+ha58QGzFKJ9as+Z529qoFnr/hlUt6QF2578j2O2fG/QADFw2NhAYy6NrGF2Ki/khp5+MZ3IjHl8E86wk=
+    app: lout
+    on:
+      repo: hapijs/lout
+    run: "node bin/test-server"
+  - provider: npm
+    email: marsup@gmail.com
+    api_key:
+      secure: d3nYl1lUckUW/L1OU0dIy44Y8L4OHE9ln95BICAJUqxw3f7YvIhhIxJJN5FCMuqjBPBls93GyboJeXPBQj0G25J2LupHeHG3YauHceNg5Jp8uXbX64uYRS5GlL80J2iibPDRTGIocCqmINKHCHKSO/sVMA/ricTq6teVhDIFEOI=
+    on:
+      tags: true
+      repo: hapijs/lout
