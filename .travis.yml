@@ -17,5 +17,6 @@ deploy:
     api_key:
       secure: d3nYl1lUckUW/L1OU0dIy44Y8L4OHE9ln95BICAJUqxw3f7YvIhhIxJJN5FCMuqjBPBls93GyboJeXPBQj0G25J2LupHeHG3YauHceNg5Jp8uXbX64uYRS5GlL80J2iibPDRTGIocCqmINKHCHKSO/sVMA/ricTq6teVhDIFEOI=
     on:
+      branch: master
       tags: true
       repo: hapijs/lout
