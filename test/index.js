@@ -703,3 +703,56 @@ describe('Multiple connections', function() {
         });
     });
 });
+
+describe('Select connections', function() {
+
+    var server = null;
+    var selected = ['c2'];
+    var unselected = ['c1'];
+
+    before(function (done) {
+
+        server = new Hapi.Server();
+        server.connection({ host: 'test', port: 1, labels: 'c1' });
+        server.connection({ host: 'test', port: 2, labels: 'c2' });
+
+        server.route(require('./routes/default'));
+
+        server.register(require('../'), { select: 'c2' }, function() {
+
+            done();
+        });
+    });
+
+    it('should load all the selected servers routes', function (done) {
+
+        server.select(selected).inject('/docs', function(res) {
+
+            var selectedTables = server.select(selected).table();
+            var unselectedTables = server.select(unselected).table();
+            expect(selectedTables).to.have.length(1);
+            expect(unselectedTables).to.have.length(1);
+            selectedTables.forEach(function (connection) {
+
+                expect(res.result).to.contain(connection.info.uri);
+
+                connection.table.forEach(function(route) {
+
+                    if ((route.settings.plugins && route.settings.plugins.lout === false) ||
+                        route.path === '/docs' ||
+                        route.method === 'options') {
+
+                        expect(res.result).to.not.contain('?server=' + connection.info.uri + '&path=' + route.path);
+                    } else {
+                        expect(res.result).to.contain('?server=' + connection.info.uri + '&path=' + route.path);
+                    }
+                });
+            });
+            unselectedTables.forEach(function (connection) {
+
+                expect(res.result).to.not.contain(connection.info.uri);
+            });
+            done();
+        });
+    });
+});
