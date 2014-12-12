@@ -28,6 +28,7 @@ server.register({ register: require('lout') }, function(err) {
 });
 
 server.start();
+```
 
 ## Usage before Hapi 8.x
 
