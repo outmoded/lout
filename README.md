@@ -20,6 +20,19 @@ The routes are of course fake but you can get a grasp of what lout looks like gi
 
 ```javascript
 var Hapi = require('hapi');
+var server = new Hapi.Sever();
+
+server.connection({ port: 80 });
+
+server.register({ register: require('lout') }, function(err) {
+});
+
+server.start();
+
+## Usage before Hapi 8.x
+
+```javascript
+var Hapi = require('hapi');
 var server = new Hapi.Server(80);
 
 server.pack.register({ plugin: require('lout') }, function() {
