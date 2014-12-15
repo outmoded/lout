@@ -20,7 +20,7 @@ The routes are of course fake but you can get a grasp of what lout looks like gi
 
 ```javascript
 var Hapi = require('hapi');
-var server = new Hapi.Sever();
+var server = new Hapi.Server();
 
 server.connection({ port: 80 });
 
