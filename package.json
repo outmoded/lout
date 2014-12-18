@@ -28,7 +28,8 @@
     "code": "1.x.x"
   },
   "scripts": {
-    "test": "make test-cov"
+    "test": "lab -r console -t 100 -a code",
+    "test-cov-html": "lab -r html -o coverage.html -a code"
   },
   "licenses": [
     {
