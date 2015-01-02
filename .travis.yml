@@ -1,3 +1,9 @@
+# Travis optimizations, see http://docs.travis-ci.com/user/workers/container-based-infrastructure/
+sudo: false
+cache:
+  directories:
+    - node_modules
+
 language: node_js
 
 node_js:
