@@ -7,8 +7,8 @@ cache:
 language: node_js
 
 node_js:
-  - 0.10
-  - 0.11
+  - "0.10"
+  - "0.11"
 
 deploy:
   - provider: heroku
@@ -17,6 +17,7 @@ deploy:
     app: lout
     on:
       repo: hapijs/lout
+      node: "0.10"
     run: "node bin/test-server"
   - provider: npm
     email: marsup@gmail.com
@@ -26,3 +27,4 @@ deploy:
       branch: master
       tags: true
       repo: hapijs/lout
+      node: "0.10"
