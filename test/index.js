@@ -445,6 +445,16 @@ describe('Lout', function() {
         });
     });
 
+    it('should support references in rules', function(done) {
+
+        server.inject('/docs?server=http://test&path=/withrulereference', function(res) {
+
+            var $ = cheerio.load(res.result);
+            expect($('.rules-Min .reference').text()).to.equal('param2');
+            done();
+        });
+    });
+
     describe('Authentication', function() {
 
         var server;

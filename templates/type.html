@@ -144,7 +144,11 @@
                                 </span>
                                 <ul class="list-unstyled assertion-model">{{> type this.value}}</ul>
                             </span>
-                        {{else}}{{this}}{{/if}}
+                        {{else}}
+                            {{#if this.ref}}
+                                <span class="reference">{{this.ref}}</span>
+                            {{else}}{{this}}{{/if}}
+                        {{/if}}
                     {{/if}}
                 </dd>
             {{/each}}

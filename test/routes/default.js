@@ -449,4 +449,16 @@ module.exports = [{
     method: 'OPTIONS',
     path: '/optionstest',
     handler: handler
+}, {
+    method: 'GET',
+    path: '/withrulereference',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param1: t.date().min(t.ref('param2')),
+                param2: t.date()
+            }
+        }
+    }
 }];

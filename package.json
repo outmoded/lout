@@ -18,11 +18,11 @@
   },
   "peerDependencies": {
     "hapi": ">= 8",
-    "joi": ">= 5.x.x"
+    "joi": ">= 5.1.x"
   },
   "devDependencies": {
     "hapi": ">= 8",
-    "joi": ">= 5.x.x",
+    "joi": ">= 5.1.x",
     "lab": "5.x.x",
     "cheerio": "0.x.x",
     "code": "1.x.x"
