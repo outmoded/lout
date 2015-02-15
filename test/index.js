@@ -786,3 +786,70 @@ describe('Select connections', function() {
         });
     });
 });
+
+describe('Multiple paths', function () {
+
+    it('should show separate paths', function (done) {
+
+        var server = new Hapi.Server().connection({ host: 'test' });
+        server.route({
+            method: 'GET',
+            path: '/v1/test',
+            handler: function() {}
+        });
+        server.route({
+            method: 'GET',
+            path: '/v2/test',
+            handler: function() {}
+        });
+        server.route({
+            method: 'GET',
+            path: '/another',
+            handler: function() {}
+        });
+
+        server.register([{
+            register: require('../'),
+            options: {
+                endpoint: '/docs/v1',
+                filterRoutes: function (route) {
+                    return /^\/v1/.test(route.path);
+                }
+            }
+        }, {
+            register: require('../'),
+            options: {
+                endpoint: '/docs/v2',
+                filterRoutes: function (route) {
+                    return /^\/v2/.test(route.path);
+                }
+            }
+        }], function(err) {
+
+            expect(err).to.not.exist();
+
+            var routes = server.table();
+            expect(routes[0].table).to.have.length(7); // 3 routes, 2 docs routes, 2 css routes
+
+            server.inject('/docs/v1', function (res) {
+
+                var $ = cheerio.load(res.result);
+                expect($('.route-index > a').length).to.equal(1);
+                expect($('.route-index > a').attr('href')).to.equal('?server=http://test&path=/v1/test#GET');
+
+                server.inject('/docs/v2', function (res) {
+
+                    var $ = cheerio.load(res.result);
+                    expect($('.route-index > a').length).to.equal(1);
+                    expect($('.route-index > a').attr('href')).to.equal('?server=http://test&path=/v2/test#GET');
+
+                    server.inject('/docs', function (res) {
+
+                        expect(res.statusCode).to.equal(404);
+                        done();
+                    });
+                });
+            });
+        });
+    });
+});
