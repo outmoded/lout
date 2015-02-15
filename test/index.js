@@ -44,10 +44,29 @@ describe('Registration', function() {
                 cssPath: null,
                 endpoint: '/'
             }
-        }, function() {
+        }, function(err) {
+
+            expect(err).to.not.exist();
 
             var routes = server.table();
             expect(routes[0].table).to.have.length(1);
+            done();
+        });
+    });
+
+    it('should fail to register with bad options', function (done) {
+
+        var server = new Hapi.Server().connection({ host: 'test' });
+
+        server.register({
+            register: require('../'),
+            options: {
+                foo: 'bar'
+            }
+        }, function(err) {
+
+            expect(err).to.exist();
+            expect(err.message).to.equal('foo is not allowed');
             done();
         });
     });
@@ -577,8 +596,9 @@ describe('Customized Lout', function() {
         server.register({
             register: require('../'),
             options: options
-        }, function() {
+        }, function(err) {
 
+            expect(err).to.not.exist();
             done();
         });
     });

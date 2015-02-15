@@ -12,9 +12,9 @@
     "node": ">=0.10.30"
   },
   "dependencies": {
-    "handlebars": "2.x.x",
-    "hoek": "2.x.x",
-    "boom": "2.x.x"
+    "boom": "2.x.x",
+    "handlebars": "^3.0.0",
+    "hoek": "2.x.x"
   },
   "peerDependencies": {
     "hapi": ">= 8",
