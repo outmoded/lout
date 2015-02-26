@@ -109,6 +109,7 @@ describe('Lout', function() {
 
             expect($('.badge').length).to.equal(2);
             expect($('h3.cors').length).to.equal(0);
+            expect($('title').text()).to.include('/test');
 
             done();
         });
