@@ -1,1 +1,1 @@
-web: npm install && node bin/test-server
+web: npm update && node bin/test-server

@@ -20,7 +20,6 @@ deploy:
     on:
       repo: hapijs/lout
       node: "0.10"
-    run: "node bin/test-server"
   - provider: npm
     email: marsup@gmail.com
     api_key:
