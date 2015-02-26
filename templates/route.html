@@ -77,7 +77,72 @@
                 <p class="vhost">{{this.vhost}}</p>
                 {{/if}} {{#if this.cors}}
                 <h3 class="cors">CORS</h3>
-                <p class="cors">{{this.cors}}</p>
+                <dl>
+                    <dt class="cors-origin">Origin</dt>
+                    <dd class="cors-origin">
+                        <ul>
+                            {{#each this.cors.origin}}
+                                <li>{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    </dd>
+                    <dt class="cors-isOriginExposed">isOriginExposed</dt>
+                    <dd class="cors-isOriginExposed">{{this.cors.isOriginExposed}}</dd>
+                    <dt class="cors-matchOrigin">matchOrigin</dt>
+                    <dd class="cors-matchOrigin">{{this.cors.matchOrigin}}</dd>
+                    <dt class="cors-maxAge">maxAge</dt>
+                    <dd class="cors-maxAge">{{this.cors.maxAge}}</dd>
+                    {{#if this.cors.headers}}
+                        <dt class="cors-headers">headers</dt>
+                        <dd class="cors-headers">
+                            <ul>
+                                {{#each this.cors.headers}}
+                                <li>{{this}}</li>
+                                {{/each}}
+                            </ul>
+                        </dd>
+                    {{/if}} {{#if this.cors.additionalHeaders}}
+                        <dt class="cors-additionalHeaders">additionalHeaders</dt>
+                        <dd class="cors-additionalHeaders">
+                            <ul>
+                                {{#each this.cors.additionalHeaders}}
+                                <li>{{this}}</li>
+                                {{/each}}
+                            </ul>
+                        </dd>
+                    {{/if}} {{#if this.cors.methods}}
+                        <dt class="cors-methods">methods</dt>
+                        <dd class="cors-methods">
+                            <ul>
+                                {{#each this.cors.methods}}
+                                <li>{{this}}</li>
+                                {{/each}}
+                            </ul>
+                        </dd>
+                    {{/if}} {{#if this.cors.additionalMethods}}
+                        <dt class="cors-additionalMethods">additionalMethods</dt>
+                        <dd class="cors-additionalMethods">
+                            <ul>
+                                {{#each this.cors.additionalMethods}}
+                                <li>{{this}}</li>
+                                {{/each}}
+                            </ul>
+                        </dd>
+                    {{/if}} {{#if this.cors.exposedHeaders}}
+                        <dt class="cors-exposedHeaders">exposedHeaders</dt>
+                        <dd class="cors-exposedHeaders">
+                            <ul>
+                                {{#each this.cors.exposedHeaders}}
+                                <li>{{this}}</li>
+                                {{/each}}
+                            </ul>
+                        </dd>
+                    {{/if}}
+                    <dt class="cors-credentials">credentials</dt>
+                    <dd class="cors-credentials">{{this.cors.credentials}}</dd>
+                    <dt class="cors-override">override</dt>
+                    <dd class="cors-override">{{this.cors.override}}</dd>
+                </dl>
                 {{/if}} {{#if this.jsonp}}
                 <h3 class="jsonp">JSONP</h3>
                 <p class="jsonp">{{this.jsonp}}</p>

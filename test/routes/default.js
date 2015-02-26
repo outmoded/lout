@@ -442,7 +442,9 @@ module.exports = [{
     vhost: 'john.doe',
     config: {
         handler: handler,
-        cors: false,
+        cors: {
+            maxAge: 12345
+        },
         jsonp: 'callback'
     }
 }, {
@@ -460,5 +462,13 @@ module.exports = [{
                 param2: t.date()
             }
         }
+    }
+}, {
+    method: 'GET',
+    path: '/withcorstrue',
+    vhost: 'john.doe',
+    config: {
+        handler: handler,
+        cors: true
     }
 }];

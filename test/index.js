@@ -108,6 +108,7 @@ describe('Lout', function() {
             });
 
             expect($('.badge').length).to.equal(2);
+            expect($('h3.cors').length).to.equal(0);
 
             done();
         });
@@ -458,8 +459,18 @@ describe('Lout', function() {
 
             var $ = cheerio.load(res.result);
             expect($('p.vhost').text()).to.equal('john.doe');
-            expect($('p.cors').text()).to.equal('false');
+            expect($('dd.cors-maxAge').text()).to.equal('12345');
             expect($('p.jsonp').text()).to.equal('callback');
+            done();
+        });
+    });
+
+    it('should handle cors: true', function (done) {
+        server.inject('/docs?server=http://test&path=/withcorstrue', function(res) {
+
+            var $ = cheerio.load(res.result);
+            expect($('h3.cors').text()).to.equal('CORS');
+            expect($('dd.cors-isOriginExposed').text()).to.equal('true');
             done();
         });
     });
