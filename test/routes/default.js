@@ -125,9 +125,11 @@ module.exports = [{
     config: {
         handler: handler,
         validate: {
-            query: t.array().includes(t.string(), t.object({
-                param1: t.number()
-            })).excludes(t.number()).min(2).max(5).length(3)
+            query: t.array().items(
+                t.string().required(),
+                t.object({ param1: t.number() }),
+                t.number().forbidden()
+            ).min(2).max(5).length(3)
         }
     }
 }, {
@@ -187,7 +189,7 @@ module.exports = [{
         handler: handler,
         validate: {
             query: {
-                param1: t.array().includes({
+                param1: t.array().items({
                     param2: t.string()
                 })
             }
@@ -200,8 +202,8 @@ module.exports = [{
         handler: handler,
         validate: {
             payload: {
-                param1: t.array().includes(t.object({
-                    param2: t.array().includes(t.object({
+                param1: t.array().items(t.object({
+                    param2: t.array().items(t.object({
                         param3: t.string()
                     })).optional()
                 }))

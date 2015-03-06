@@ -24,6 +24,9 @@
             {{#if this.flags.required}}
                 <i class="glyphicon glyphicon-star" title="This is a required field."></i>
             {{/if}}
+            {{#if this.flags.forbidden}}
+                <i class="glyphicon glyphicon-minus-sign" title="This is a forbidden field."></i>
+            {{/if}}
         </h5>
         {{#if this.description}}
             <p>{{this.description}}</p>

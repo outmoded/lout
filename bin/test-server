@@ -4,7 +4,7 @@ var Hapi = require('hapi');
 
 var port = Number(process.env.PORT || 3000);
 var server = new Hapi.Server();
-server.connection({ host: process.env.HOSTNAME || 'localhost', address: '0.0.0.0', port: port });
+server.connection({ host: process.env.HOSTNAME || 'localhost', address: process.env.IP || '0.0.0.0', port: port });
 
 server.auth.scheme('testScheme', function() {
 

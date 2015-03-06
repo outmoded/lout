@@ -66,7 +66,7 @@ describe('Registration', function() {
         }, function(err) {
 
             expect(err).to.exist();
-            expect(err.message).to.equal('foo is not allowed');
+            expect(err.message).to.equal('"foo" is not allowed');
             done();
         });
     });
