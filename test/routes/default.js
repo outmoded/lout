@@ -75,7 +75,7 @@ module.exports = [{
         }
     }
 }, {
-    method: 'HEAD',
+    method: 'PATCH',
     path: '/test',
     config: {
         handler: handler,
