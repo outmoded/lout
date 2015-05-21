@@ -3,7 +3,7 @@
   "description": "API documentation generator plugin for hapi",
   "version": "6.2.2",
   "repository": "git://github.com/hapijs/lout",
-  "main": "index",
+  "main": "lib/index.js",
   "keywords": [
     "docs",
     "hapi"
@@ -32,10 +32,5 @@
     "test": "lab -r console -t 100 -a code",
     "test-cov-html": "lab -r html -o coverage.html -a code"
   },
-  "licenses": [
-    {
-      "type": "BSD",
-      "url": "http://github.com/hapijs/lout/raw/master/LICENSE"
-    }
-  ]
+  "licenses": "BSD-3-Clause"
 }
