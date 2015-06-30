@@ -486,6 +486,16 @@ describe('Lout', function() {
         });
     });
 
+    it('should remove stripped fields', function(done) {
+
+        server.inject('/docs?server=http://test&path=/withstrip', function(res) {
+
+            var $ = cheerio.load(res.result);
+            expect($('.glyphicon-trash')).to.have.length(1);
+            done();
+        });
+    });
+
     describe('Authentication', function() {
 
         var server;

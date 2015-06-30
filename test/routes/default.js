@@ -473,4 +473,16 @@ module.exports = [{
         handler: handler,
         cors: true
     }
+}, {
+    method: 'GET',
+    path: '/withstrip',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param1: t.any().strip(),
+                param2: t.any()
+            }
+        }
+    }
 }];

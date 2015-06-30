@@ -27,6 +27,9 @@
             {{#if this.flags.forbidden}}
                 <i class="glyphicon glyphicon-minus-sign" title="This is a forbidden field."></i>
             {{/if}}
+            {{#if this.flags.stripped}}
+                <i class="glyphicon glyphicon-trash" title="This field will be removed."></i>
+            {{/if}}
         </h5>
         {{#if this.description}}
             <p>{{this.description}}</p>
