@@ -70,6 +70,28 @@ describe('Registration', function() {
             done();
         });
     });
+
+
+    it('should register with malformed endpoint', function(done) {
+
+        var server = new Hapi.Server().connection({ host: 'test' });
+
+        server.register({
+            register: require('../'),
+            options: {
+                endpoint: 'api/'
+            }
+        }, function(err) {
+
+            expect(err).to.not.exist();
+
+            var routes = server.table();
+            var endpoints = routes[0].table;
+            expect(endpoints).to.have.length(2);
+            expect(endpoints).to.part.deep.include([{ path: '/api' }, { path: '/api/css/{path*}' }]);
+            done();
+        });
+    });
 });
 
 describe('Lout', function() {

@@ -32,5 +32,5 @@
     "test": "lab -r console -t 100 -a code",
     "test-cov-html": "lab -r html -o coverage.html -a code"
   },
-  "licenses": "BSD-3-Clause"
+  "license": "BSD-3-Clause"
 }
