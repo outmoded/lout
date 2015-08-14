@@ -9,8 +9,8 @@
     "hapi"
   ],
   "engines": {
-    "node": ">=0.10.30",
-    "npm": "2.x"
+    "node": ">= 0.10.30",
+    "npm": ">= 2.x"
   },
   "dependencies": {
     "boom": "2.x.x",
@@ -18,15 +18,19 @@
     "hoek": "2.x.x"
   },
   "peerDependencies": {
-    "hapi": ">= 8",
-    "joi": ">= 5.1.x"
+    "hapi": ">= 9",
+    "inert": ">= 3.x.x",
+    "joi": ">= 5.1.x",
+    "vision": ">= 2.x.x"
   },
   "devDependencies": {
-    "hapi": ">= 8",
+    "cheerio": "0.x.x",
+    "code": "1.x.x",
+    "hapi": ">= 9",
+    "inert": ">= 3.x.x",
     "joi": ">= 5.1.x",
     "lab": "5.x.x",
-    "cheerio": "0.x.x",
-    "code": "1.x.x"
+    "vision": ">= 2.x.x"
   },
   "scripts": {
     "test": "lab -r console -t 100 -a code",

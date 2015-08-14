@@ -4,10 +4,29 @@ var Lab = require('lab');
 var Hapi = require('hapi');
 var cheerio = require('cheerio');
 var Path = require('path');
+var Inert = require('inert');
+var Vision = require('vision');
 
 // Declare internals
 
-var internals = {};
+var internals = {
+    bootstrapServer: function (server, plugins, options, callback) {
+
+        if (typeof options === 'function') {
+            callback = options;
+            options = {};
+        }
+
+        server.register([Inert, Vision].concat(plugins), options, function (err) {
+
+            if (err) {
+                return callback(err);
+            }
+
+            server.initialize(callback);
+        });
+    }
+};
 
 
 // Test shortcuts
@@ -22,9 +41,10 @@ describe('Registration', function() {
 
     it('should register', function(done) {
 
-        var server = new Hapi.Server().connection({ host: 'test' });
+        var server = new Hapi.Server();
+        server.connection({ host: 'test' });
 
-        server.register(require('../'), function() {
+        internals.bootstrapServer(server, require('../'), function() {
 
             var routes = server.table();
             expect(routes).to.have.length(1);
@@ -35,9 +55,10 @@ describe('Registration', function() {
 
     it('should register with options', function(done) {
 
-        var server = new Hapi.Server().connection({ host: 'test' });
+        var server = new Hapi.Server();
+        server.connection({ host: 'test' });
 
-        server.register({
+        internals.bootstrapServer(server, {
             register: require('../'),
             options: {
                 helpersPath: '.',
@@ -56,9 +77,10 @@ describe('Registration', function() {
 
     it('should fail to register with bad options', function (done) {
 
-        var server = new Hapi.Server().connection({ host: 'test' });
+        var server = new Hapi.Server();
+        server.connection({ host: 'test' });
 
-        server.register({
+        internals.bootstrapServer(server, {
             register: require('../'),
             options: {
                 foo: 'bar'
@@ -74,9 +96,10 @@ describe('Registration', function() {
 
     it('should register with malformed endpoint', function(done) {
 
-        var server = new Hapi.Server().connection({ host: 'test' });
+        var server = new Hapi.Server();
+        server.connection({ host: 'test' });
 
-        server.register({
+        internals.bootstrapServer(server, {
             register: require('../'),
             options: {
                 endpoint: 'api/'
@@ -100,11 +123,12 @@ describe('Lout', function() {
 
     before(function(done) {
 
-        server = new Hapi.Server().connection({ host: 'test' });
+        server = new Hapi.Server();
+        server.connection({ host: 'test' });
 
         server.route(require('./routes/default'));
 
-        server.register(require('../'), function() {
+        internals.bootstrapServer(server, require('../'), function() {
 
             done();
         });
@@ -524,7 +548,8 @@ describe('Lout', function() {
 
         before(function(done) {
 
-            server = new Hapi.Server().connection({ host: 'test' });
+            server = new Hapi.Server();
+            server.connection({ host: 'test' });
 
             server.auth.scheme('testScheme', function() {
 
@@ -537,7 +562,7 @@ describe('Lout', function() {
             server.auth.strategy('testStrategy', 'testScheme');
 
             server.route(require('./routes/withauth'));
-            server.register(require('../'), function() {
+            internals.bootstrapServer(server, require('../'), function() {
 
                 done();
             });
@@ -572,11 +597,12 @@ describe('Lout', function() {
 
         it('doesn\'t throw an error when requesting the index when there are no POST routes', function(done) {
 
-            var server = new Hapi.Server().connection();
+            var server = new Hapi.Server();
+            server.connection();
 
             server.route(require('./routes/withoutpost'));
 
-            server.register(require('../'), function() {
+            internals.bootstrapServer(server, require('../'), function() {
 
                 server.inject('/docs', function(res) {
 
@@ -593,9 +619,10 @@ describe('Customized Lout', function() {
 
     it('should succeed with a basePath without helpers', function(done) {
 
-        var server = new Hapi.Server().connection();
+        var server = new Hapi.Server();
+        server.connection();
 
-        server.register({
+        internals.bootstrapServer(server, {
             register: require('../'),
             options: {
                 basePath: Path.join(__dirname, './custom-test-files')
@@ -608,9 +635,10 @@ describe('Customized Lout', function() {
 
     it('should succeed with a correct configuration', function(done) {
 
-        var server = new Hapi.Server().connection();
+        var server = new Hapi.Server();
+        server.connection();
 
-        server.register({
+        internals.bootstrapServer(server, {
             register: require('../'),
             options: {
                 basePath: Path.join(__dirname, './custom-test-files'),
@@ -625,7 +653,8 @@ describe('Customized Lout', function() {
 
     it('should succeed with a custom engine', function(done) {
 
-        var server = new Hapi.Server().connection();
+        var server = new Hapi.Server();
+        server.connection();
 
         var options = {
             engines: {
@@ -637,7 +666,7 @@ describe('Customized Lout', function() {
             }
         };
 
-        server.register({
+        internals.bootstrapServer(server, {
             register: require('../'),
             options: options
         }, function(err) {
@@ -648,9 +677,10 @@ describe('Customized Lout', function() {
     });
 
     it('should serve a custom css', function(done) {
-        var server = new Hapi.Server().connection();
+        var server = new Hapi.Server();
+        server.connection();
 
-        server.register({
+        internals.bootstrapServer(server, {
             register: require('../'),
             options: {
                 cssPath: Path.join(__dirname, './custom-test-files/css')
@@ -668,11 +698,12 @@ describe('Customized Lout', function() {
 
     it('ignores methods', function(done) {
 
-        var server = new Hapi.Server().connection();
+        var server = new Hapi.Server();
+        server.connection();
 
         server.route(require('./routes/default'));
 
-        server.register({
+        internals.bootstrapServer(server, {
             register: require('../'),
             options: {
                 filterRoutes: function (route) {
@@ -704,7 +735,7 @@ describe('Multiple connections', function() {
 
         server.route(require('./routes/default'));
 
-        server.register(require('../'), function() {
+        internals.bootstrapServer(server, require('../'), function() {
 
             done();
         });
@@ -792,10 +823,7 @@ describe('Select connections', function() {
 
         server.route(require('./routes/default'));
 
-        server.register(require('../'), { select: 'c2' }, function() {
-
-            done();
-        });
+        internals.bootstrapServer(server, require('../'), { select: 'c2' }, done);
     });
 
     it('should load all the selected servers routes', function (done) {
@@ -835,7 +863,8 @@ describe('Multiple paths', function () {
 
     it('should show separate paths', function (done) {
 
-        var server = new Hapi.Server().connection({ host: 'test' });
+        var server = new Hapi.Server();
+        server.connection({ host: 'test' });
         server.route({
             method: 'GET',
             path: '/v1/test',
@@ -852,7 +881,7 @@ describe('Multiple paths', function () {
             handler: function() {}
         });
 
-        server.register([{
+        internals.bootstrapServer(server, [{
             register: require('../'),
             options: {
                 endpoint: '/docs/v1',
