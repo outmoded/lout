@@ -1,7 +1,7 @@
 {
   "name": "lout",
   "description": "API documentation generator plugin for hapi",
-  "version": "6.2.3",
+  "version": "7.0.0",
   "repository": "git://github.com/hapijs/lout",
   "main": "lib/index.js",
   "keywords": [
