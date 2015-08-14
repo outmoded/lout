@@ -29,7 +29,9 @@ server.connection({ port: 80 });
 server.register({ register: require('lout') }, function(err) {
 });
 
-server.start();
+server.start(function () {
+     console.log('Server running at:', server.info.uri);
+});
 ```
 
 ## Usage before Hapi 8.x
