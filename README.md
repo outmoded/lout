@@ -34,33 +34,6 @@ server.start(function () {
 });
 ```
 
-## Usage before Hapi 8.x
-
-```javascript
-var Hapi = require('hapi');
-var server = new Hapi.Server(80);
-
-server.pack.register({ plugin: require('lout') }, function() {
-    server.start();
-});
-```
-
-## Usage before Hapi 7.x
-
-```javascript
-var Hapi = require('hapi');
-var server = new Hapi.Server(80);
-
-server.route([{
-    your routes...
-}]);
-
-server.pack.require('lout', function() {
-    server.start();
-});
-
-```
-
 ## Parameters
 The following options are available when registering the plugin:
 - _'engines'_ - an object where each key is a file extension (e.g. 'html', 'jade'), mapped to the npm module name (string) used for rendering the templates.  Default is { html: 'handlebars' }.
@@ -97,14 +70,16 @@ Here is an example snippet of a route configuration :
 
 If you want to exclude multiple routes using conditions, you can use `filterRoutes` when registering lout :
 ```js
-server.pack.register({
-  plugin: require('lout'),
+server.register({
+  register: require('lout'),
   options: {
     filterRoutes: function (route) {
       return route.method !== '*' && !/^\/private\//.test(route.path);
     }
   }
 }, function() {
-    server.start();
+    server.start(function () {
+        console.log('Server running at:', server.info.uri);
+    });
 });
 ```
