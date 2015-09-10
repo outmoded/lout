@@ -443,7 +443,7 @@ describe('Lout', function() {
         server.inject('/docs?server=http://test&path=/withstringspecifics', function(res) {
 
             var $ = cheerio.load(res.result);
-            var ddRules = 'dd.rules-';
+            var ddRules = 'dt.rules-';
             var rulesSelector = ddRules + ['Alphanum', 'Regex', 'Token', 'Email', 'Guid', 'IsoDate', 'Hostname',
                 'Lowercase', 'Uppercase', 'Trim'
             ].join(',' + ddRules);

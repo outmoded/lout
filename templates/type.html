@@ -135,6 +135,7 @@
             {{/if}}
             {{#each this.rules}}
                 <dt class="rules-{{@key}}">{{@key}}</dt>
+                {{#if this}}
                 <dd class="rules-{{@key}}">
                     {{#if this.length}}
                         <ul class="list-unstyled">
@@ -157,6 +158,7 @@
                         {{/if}}
                     {{/if}}
                 </dd>
+                {{/if}}
             {{/each}}
         </dl>
     {{/if}}
