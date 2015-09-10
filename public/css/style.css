@@ -70,11 +70,9 @@ body {
 .route-details .panel-heading.OPTIONS {
     background-color: #DEF2F8;
 }
-.route-details ul.disc-bullets > li {
-    list-style-type: disc;
-}
-.route-details ul.reduced-margin-list {
-    margin-left: -20px;
+.route-details .type {
+    background-color: rgba(0, 0, 0, 0.03);
+    padding: 5px;
 }
 .conditional .consequence-text {
     font-weight: bold;

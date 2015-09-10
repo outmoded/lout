@@ -19,22 +19,22 @@
             </span>
         </div>
     {{else}}
-        <h5>
-            <em>{{this.name}}</em>
-            {{#if this.flags.required}}
-                <i class="glyphicon glyphicon-star" title="This is a required field."></i>
-            {{/if}}
-            {{#if this.flags.forbidden}}
-                <i class="glyphicon glyphicon-minus-sign" title="This is a forbidden field."></i>
-            {{/if}}
-            {{#if this.flags.stripped}}
-                <i class="glyphicon glyphicon-trash" title="This field will be removed."></i>
-            {{/if}}
-        </h5>
-        {{#if this.description}}
-            <p>{{this.description}}</p>
-        {{/if}}
         <dl class="type">
+            <h5>
+                <em>{{this.name}}</em>
+                {{#if this.flags.required}}
+                    <i class="glyphicon glyphicon-star" title="This is a required field."></i>
+                {{/if}}
+                {{#if this.flags.forbidden}}
+                    <i class="glyphicon glyphicon-minus-sign" title="This is a forbidden field."></i>
+                {{/if}}
+                {{#if this.flags.stripped}}
+                    <i class="glyphicon glyphicon-trash" title="This field will be removed."></i>
+                {{/if}}
+            </h5>
+            {{#if this.description}}
+                <p>{{this.description}}</p>
+            {{/if}}
             <dt>
                 <h6>Type</h6>
             </dt>
@@ -92,7 +92,7 @@
             {{#if this.peers}}
                 <dt class="peers-conditions">Peers conditions</dt>
                 <dd class="peers-conditions">
-                    <ul class="disc-bullets reduced-margin-list">
+                    <ul class="list-unstyled">
                         {{#each this.peers}}
                             <li class="peer-condition">{{this}}</li>
                         {{/each}}
@@ -102,7 +102,7 @@
             {{#if this.patterns}}
                 <dt class="patterns">Patterns</dt>
                 <dd class="patterns">
-                    <ul class="disc-bullets reduced-margin-list">
+                    <ul class="list-unstyled">
                         {{#each this.patterns}}
                             {{> type}}
                         {{/each}}
@@ -128,7 +128,7 @@
             {{#if this.alternatives}}
                 <dt>Alternatives</dt>
                 <dd>
-                    <ul class="disc-bullets reduced-margin-list">
+                    <ul class="list-unstyled">
                         {{#each this.alternatives}}{{> type}}{{/each}}
                     </ul>
                 </dd>
@@ -137,7 +137,7 @@
                 <dt class="rules-{{@key}}">{{@key}}</dt>
                 <dd class="rules-{{@key}}">
                     {{#if this.length}}
-                        <ul class="disc-bullets reduced-margin-list">
+                        <ul class="list-unstyled">
                             {{#each this}}{{> type}}{{/each}}
                         </ul>
                     {{else}}

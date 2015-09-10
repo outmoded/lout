@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "boom": "2.x.x",
-    "handlebars": "^3.0.0",
+    "handlebars": "^4.0.2",
     "hoek": "2.x.x"
   },
   "peerDependencies": {
