@@ -20,13 +20,15 @@ The routes are of course fake but you can get a grasp of what lout looks like gi
 
 ## Usage
 
+Lout depends on vision and inert, make sure you register them with hapi.
+
 ```javascript
 var Hapi = require('hapi');
 var server = new Hapi.Server();
 
 server.connection({ port: 80 });
 
-server.register({ register: require('lout') }, function(err) {
+server.register(require('vision'), require('inert'), { register: require('lout') }, function(err) {
 });
 
 server.start(function () {
@@ -70,7 +72,7 @@ Here is an example snippet of a route configuration :
 
 If you want to exclude multiple routes using conditions, you can use `filterRoutes` when registering lout :
 ```js
-server.register({
+server.register(require('vision'), require('inert'), {
   register: require('lout'),
   options: {
     filterRoutes: function (route) {
