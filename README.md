@@ -28,7 +28,7 @@ var server = new Hapi.Server();
 
 server.connection({ port: 80 });
 
-server.register(require('vision'), require('inert'), { register: require('lout') }, function(err) {
+server.register([require('vision'), require('inert'), { register: require('lout') }], function(err) {
 });
 
 server.start(function () {
@@ -72,14 +72,14 @@ Here is an example snippet of a route configuration :
 
 If you want to exclude multiple routes using conditions, you can use `filterRoutes` when registering lout :
 ```js
-server.register(require('vision'), require('inert'), {
+server.register([require('vision'), require('inert'), {
   register: require('lout'),
   options: {
     filterRoutes: function (route) {
       return route.method !== '*' && !/^\/private\//.test(route.path);
     }
   }
-}, function() {
+}], function() {
     server.start(function () {
         console.log('Server running at:', server.info.uri);
     });
