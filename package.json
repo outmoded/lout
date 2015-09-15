@@ -33,8 +33,8 @@
     "vision": ">= 2.x.x"
   },
   "scripts": {
-    "test": "lab -r console -t 100 -a code",
-    "test-cov-html": "lab -r html -o coverage.html -a code"
+    "test": "lab -r console -t 100 -a code -L",
+    "test-cov-html": "lab -r html -o coverage.html -a code -L"
   },
   "license": "BSD-3-Clause"
 }

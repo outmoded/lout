@@ -1,6 +1,6 @@
 var Joi = require('joi');
 
-var handler = function(request) {
+var handler = function (request) {
 
     request.reply('ok');
 };
