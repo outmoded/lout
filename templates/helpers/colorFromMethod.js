@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(context) {
+module.exports = function (context) {
 
     switch (context.method) {
         case 'GET':
