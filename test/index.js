@@ -202,7 +202,7 @@ describe('Lout', function () {
 
             server.table()[0].table.forEach(function (route) {
 
-                if ((route.settings.plugins && route.settings.plugins.lout === false) ||
+                if ((route.settings.plugins && (route.settings.plugins.lout === false || route.settings.isInternal)) ||
                     route.path === '/docs' ||
                     route.method === 'options') {
 
@@ -544,6 +544,20 @@ describe('Lout', function () {
         });
     });
 
+    it('should not show internal routes', function (done) {
+
+        server.inject('/docs', function (resRoot) {
+
+            expect(resRoot.result).to.not.contain('/result');
+
+            server.inject('/docs?server=http://test&path=/internal', function (resPath) {
+
+                expect(resPath.statusCode).to.equal(404);
+                done();
+            });
+        });
+    });
+
     describe('Authentication', function () {
 
         before(function (done) {
@@ -755,7 +769,7 @@ describe('Multiple connections', function () {
 
                 connection.table.forEach(function (route) {
 
-                    if ((route.settings.plugins && route.settings.plugins.lout === false) ||
+                    if ((route.settings.plugins && (route.settings.plugins.lout === false || route.settings.isInternal)) ||
                         route.path === '/docs' ||
                         route.method === 'options') {
 
@@ -790,7 +804,7 @@ describe('Multiple connections', function () {
             expect(res.result).to.contain('http://test:1');
             table1.forEach(function (route) {
 
-                if ((route.settings.plugins && route.settings.plugins.lout === false) ||
+                if ((route.settings.plugins && (route.settings.plugins.lout === false || route.settings.isInternal)) ||
                     route.path === '/docs' ||
                     route.method === 'options') {
 
@@ -842,7 +856,7 @@ describe('Select connections', function () {
 
                 connection.table.forEach(function (route) {
 
-                    if ((route.settings.plugins && route.settings.plugins.lout === false) ||
+                    if ((route.settings.plugins && (route.settings.plugins.lout === false || route.settings.isInternal)) ||
                         route.path === '/docs' ||
                         route.method === 'options') {
 

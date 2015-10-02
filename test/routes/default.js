@@ -485,4 +485,11 @@ module.exports = [{
             }
         }
     }
+}, {
+    method: 'GET',
+    path: '/internal',
+    config: {
+        isInternal: true,
+        handler: handler
+    }
 }];
