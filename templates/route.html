@@ -55,21 +55,21 @@
                 {{/if}} {{#if this.auth}}
                 <h3>Authentication</h3>
                 <p class="auth">
-                    <h4 class="auth-strategies">Strategies</h4>
-                    <p class="auth-strategies">{{this.auth.strategies}}</p>
-                    <h4 class="auth-mode">Mode</h4>
-                    <p class="auth-mode">{{this.auth.mode}}</p>
-                    <h4 class="auth-payload">Payload</h4>
-                    <p class="auth-payload">{{this.auth.payload}}</p>
+                    <h4 class="auth-header auth-strategies col-sm-2">Strategies</h4>
+                    <p class="auth-value auth-strategies">{{this.auth.strategies}}</p>
+                    <h4 class="auth-header auth-mode col-sm-2">Mode</h4>
+                    <p class="auth-value auth-mode">{{this.auth.mode}}</p>
+                    <h4 class="auth-header auth-payload col-sm-2">Payload</h4>
+                    <p class="auth-value auth-payload">{{this.auth.payload}}</p>
                     {{#if this.auth.scope}}
-                    <h4 class="auth-scope">Scope</h4>
-                    <p class="auth-scope">{{this.auth.scope}}</p>
+                    <h4 class="auth-header auth-scope col-sm-2">Scope</h4>
+                    <p class="auth-value auth-scope">{{this.auth.scope}}</p>
                     {{/if}} {{#if this.auth.entity}}
-                    <h4 class="auth-entity">Entity</h4>
-                    <p class="auth-entity">{{this.auth.entity}}</p>
+                    <h4 class="auth-header auth-entity col-sm-2">Entity</h4>
+                    <p class="auth-value auth-entity">{{this.auth.entity}}</p>
                     {{/if}} {{#if this.auth.tos}}
-                    <h4 class="auth-tos">Terms of service</h4>
-                    <p class="auth-tos">{{this.auth.tos}}</p>
+                    <h4 class="auth-header auth-tos col-sm-2">Terms of service</h4>
+                    <p class="auth-value auth-tos">{{this.auth.tos}}</p>
                     {{/if}}
                 </p>
                 {{/if}} {{#if this.vhost}}
@@ -78,19 +78,19 @@
                 {{/if}} {{#if this.cors}}
                 <h3 class="cors">CORS</h3>
                 <dl>
-                    <dt class="cors-origin">Origin</dt>
-                    <dd class="cors-origin">
+                    <dt class="cors-header cors-origin">Origin</dt>
+                    <dd class="cors-multi-value cors-origin">
                         <ul>
                             {{#each this.cors.origin}}
                                 <li>{{this}}</li>
                             {{/each}}
                         </ul>
                     </dd>
-                    <dt class="cors-maxAge">maxAge</dt>
-                    <dd class="cors-maxAge">{{this.cors.maxAge}}</dd>
+                    <dt class="cors-header cors-maxAge">maxAge</dt>
+                    <dd class="cors-value cors-maxAge">{{this.cors.maxAge}}</dd>
                     {{#if this.cors.headers}}
-                        <dt class="cors-headers">headers</dt>
-                        <dd class="cors-headers">
+                        <dt class="cors-header cors-headers">headers</dt>
+                        <dd class="cors-multi-value cors-headers">
                             <ul>
                                 {{#each this.cors.headers}}
                                 <li>{{this}}</li>
@@ -98,8 +98,8 @@
                             </ul>
                         </dd>
                     {{/if}} {{#if this.cors.additionalHeaders}}
-                        <dt class="cors-additionalHeaders">additionalHeaders</dt>
-                        <dd class="cors-additionalHeaders">
+                        <dt class="cors-header cors-additionalHeaders">additionalHeaders</dt>
+                        <dd class="cors-multi-value cors-additionalHeaders">
                             <ul>
                                 {{#each this.cors.additionalHeaders}}
                                 <li>{{this}}</li>
@@ -107,8 +107,8 @@
                             </ul>
                         </dd>
                     {{/if}} {{#if this.cors.methods}}
-                        <dt class="cors-methods">methods</dt>
-                        <dd class="cors-methods">
+                        <dt class="cors-header cors-methods">methods</dt>
+                        <dd class="cors-multi-value cors-methods">
                             <ul>
                                 {{#each this.cors.methods}}
                                 <li>{{this}}</li>
@@ -116,8 +116,8 @@
                             </ul>
                         </dd>
                     {{/if}} {{#if this.cors.additionalMethods}}
-                        <dt class="cors-additionalMethods">additionalMethods</dt>
-                        <dd class="cors-additionalMethods">
+                        <dt class="cors-header cors-additionalMethods">additionalMethods</dt>
+                        <dd class="cors-multi-value cors-additionalMethods">
                             <ul>
                                 {{#each this.cors.additionalMethods}}
                                 <li>{{this}}</li>
@@ -125,8 +125,8 @@
                             </ul>
                         </dd>
                     {{/if}} {{#if this.cors.exposedHeaders}}
-                        <dt class="cors-exposedHeaders">exposedHeaders</dt>
-                        <dd class="cors-exposedHeaders">
+                        <dt class="cors-header cors-exposedHeaders">exposedHeaders</dt>
+                        <dd class="cors-multi-value cors-exposedHeaders">
                             <ul>
                                 {{#each this.cors.exposedHeaders}}
                                 <li>{{this}}</li>
@@ -134,10 +134,10 @@
                             </ul>
                         </dd>
                     {{/if}}
-                    <dt class="cors-credentials">credentials</dt>
-                    <dd class="cors-credentials">{{this.cors.credentials}}</dd>
-                    <dt class="cors-override">override</dt>
-                    <dd class="cors-override">{{this.cors.override}}</dd>
+                    <dt class="cors-header cors-credentials">credentials</dt>
+                    <dd class="cors-value cors-credentials">{{this.cors.credentials}}</dd>
+                    <dt class="cors-header cors-override">override</dt>
+                    <dd class="cors-value cors-override">{{this.cors.override}}</dd>
                 </dl>
                 {{/if}} {{#if this.jsonp}}
                 <h3 class="jsonp">JSONP</h3>
@@ -210,6 +210,8 @@
         </div>
         {{/each}}
     </div>
-</body>
 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+</body>
 </html>

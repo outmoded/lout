@@ -1,0 +1,36 @@
+{{#if this.type}}
+    <div class="type-header">
+        {{#if this.name }}
+            <h5>
+                {{#if @static}}
+                    {{~ this.name ~}}
+                {{~else~}}
+                    <a role="button" data-toggle="collapse" href="#type{{@collapseId}}" aria-expanded="false" aria-controls="type{{@collapseId}}">
+                        {{~ this.name ~}}
+                    </a>
+                {{~/ if ~}}
+            </h5>
+        {{~/ if ~}}
+
+        {{~ type ~}}
+        {{#if this.flags.required}}
+            <i class="glyphicon glyphicon-star" title="This is a required field."></i>
+        {{/if}}
+        {{#if this.flags.forbidden}}
+            <i class="glyphicon glyphicon-minus-sign" title="This is a forbidden field."></i>
+        {{~/if~}}
+        {{#if this.flags.stripped}}
+            <i class="glyphicon glyphicon-trash" title="This field will be removed."></i>
+        {{~/if~}}
+
+        <div class="pull-right">
+            {{~#if this.flags.allowUnknown}}
+                <div class="badge allow-unknown">Allow unknown keys</div>
+            {{~/if~}}
+            {{#if this.flags.insensitive}}
+                <div class="badge case-insensitive">Case insensitive</div>
+            {{~/if~}}
+        </div>
+        {{~! Strip Whitespace ~}}
+    </div>
+{{~/if~}}

@@ -44,7 +44,7 @@ body {
 }
 .route-details .panel-body {
     padding-top: 0;
-    padding-bottom: 0;
+    padding-bottom: 15px;
 }
 .route-details .panel-heading {
     padding-top: 5px;
@@ -70,10 +70,35 @@ body {
 .route-details .panel-heading.OPTIONS {
     background-color: #DEF2F8;
 }
-.route-details .type {
-    background-color: rgba(0, 0, 0, 0.03);
-    padding: 5px;
+
+.auth-header,
+.auth-value,
+.cors-header,
+.cors-single-value {
+    float: left;
+    margin: 0;
+    padding: 0;
+    font-size: inherit;
+    line-height: inherit;
 }
+.auth-header,
+.cors-header {
+    clear: left;
+    font-size: inherit;
+    font-weight: bold;
+    padding-right: 0.5em;
+}
+.cors-multi-value {
+    clear: left;
+}
+.cors-multi-value > ul {
+    margin-bottom: 0;
+}
+
+.conditional {
+    margin-bottom: 15px;
+}
+
 .conditional .consequence-text {
     font-weight: bold;
 }
@@ -88,3 +113,74 @@ body {
 .reference {
     font-style: italic;
 }
+
+.route-details .type {
+    padding: 0;
+    margin: 0;
+}
+
+.type-header:hover ~ .token-open,
+.type-header:hover ~ .token-close,
+.token-open:hover,
+.token-open:hover ~ .token-close {
+    font-weight: bold;
+}
+
+.list-children,
+.list-items {
+    padding-left: 1em;
+}
+.list-children:empty,
+.list-items:empty {
+    display: none;
+}
+
+.well {
+    overflow: auto;
+    clear: both;
+}
+
+.well dt {
+    clear: both;
+    float: left;
+}
+.well dd {
+    float: left;
+}
+
+.well pre {
+    background-color: #fff;
+}
+
+.type-header {
+    display: inline;
+    font-size: 14px;
+}
+.type-header > h5 {
+    display: inline;
+    font-size: inherit;
+}
+
+.field-type {
+    padding-right: 0.5em;
+}
+.field-type:before {
+    content: ":";
+    padding-right: 0.5em;
+}
+.field-type:first-child:before {
+    content: "";
+}
+.field-type:empty {
+    padding-right: 0;
+}
+
+.field-type-rule {
+    font-weight: bold;
+}
+
+dt.field-example,
+dt.field-meta {
+    float: none;
+}
+
