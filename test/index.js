@@ -759,7 +759,7 @@ describe('Multiple connections', function () {
 
     it('should load all the servers routes', function (done) {
 
-        server.inject('/docs', function (res) {
+        server.connections[0].inject('/docs', function (res) {
 
             var tables = server.table();
             expect(tables).to.have.length(2);
@@ -785,7 +785,7 @@ describe('Multiple connections', function () {
 
     it('should only show one server if parameter is there', function (done) {
 
-        server.inject('/docs?server=http://test:1', function (res) {
+        server.connections[0].inject('/docs?server=http://test:1', function (res) {
 
             var table = server.table();
             expect(table).to.have.length(2);
