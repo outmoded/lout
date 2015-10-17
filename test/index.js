@@ -519,7 +519,7 @@ describe('Lout', function () {
 
             var $ = Cheerio.load(res.result);
             expect($('h3.cors').text()).to.equal('CORS');
-            expect($('dd.cors-isOriginExposed').text()).to.equal('true');
+            expect($('dd.cors-maxAge').text()).to.equal('86400');
             done();
         });
     });
