@@ -103,7 +103,8 @@ module.exports = [{
         validate: {
             query: {
                 param1: Joi.object({
-                    nestedparam1: Joi.string().required()
+                    nestedparam1: Joi.string().required(),
+                    array: Joi.array()
                 })
             }
         }
@@ -162,6 +163,38 @@ module.exports = [{
         validate: {
             query: {
                 param1: Joi.alternatives().try(Joi.number().required(), Joi.string().valid('first', 'last'))
+            }
+        }
+    }
+}, {
+    method: 'GET',
+    path: '/withnestedalternatives',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param1: Joi.object({
+                    param2: Joi.alternatives().try(
+                        {
+                            param3: Joi.object({
+                                param4: Joi.number().example(5)
+                            }).description('this is cool too')
+                        },
+                        Joi.number().min(42)
+                    )
+                }).description('something really cool'),
+                param2: Joi.array().items(
+                    Joi.object({
+                        param2: Joi.alternatives().try(
+                            {
+                                param3: Joi.object({
+                                    param4: Joi.number().example(5)
+                                }).description('this is cool too')
+                            },
+                            Joi.number().min(42).required()
+                        )
+                    }).description('all the way down')
+                ).description('something really cool')
             }
         }
     }
@@ -389,7 +422,8 @@ module.exports = [{
                     .hostname()
                     .lowercase()
                     .uppercase()
-                    .trim()
+                    .trim(),
+                param2: Joi.string().email()
             }
         }
     }
@@ -404,11 +438,20 @@ module.exports = [{
                     .when('b', {
                         is: 5,
                         then: Joi.string(),
-                        otherwise: Joi.number()
+                        otherwise: Joi.number().required().description('Things and stuff')
                     })
                     .when('a', {
                         is: true,
                         then: Joi.date(),
+                        otherwise: Joi.any()
+                    }),
+                param2: Joi.alternatives()
+                    .when('b', {
+                        is: 5,
+                        then: Joi.string()
+                    })
+                    .when('a', {
+                        is: true,
                         otherwise: Joi.any()
                     })
             }

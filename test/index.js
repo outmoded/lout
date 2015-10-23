@@ -153,7 +153,7 @@ describe('Lout', function () {
                 expect($(this).text().replace(/\n|\s+/g, '')).to.contain(matches.shift());
             });
 
-            expect($('.badge').length).to.equal(2);
+            expect($('.badge').length).to.equal(3);
             expect($('h3.cors').length).to.equal(0);
             expect($('title').text()).to.include('/test');
 
@@ -167,7 +167,7 @@ describe('Lout', function () {
 
             var $ = Cheerio.load(res.result);
 
-            expect($('dt h6').length).to.equal(5);
+            expect($('.type-header').length).to.equal(5);
 
             done();
         });
@@ -177,7 +177,7 @@ describe('Lout', function () {
 
         server.inject('/docs?server=http://test&path=/alternatives', function (res) {
 
-            expect(res.result).to.contain('Alternatives');
+            expect(res.result).to.contain('field-alternatives');
             expect(res.result).to.contain('number');
             expect(res.result).to.contain('string');
             expect(res.result).to.contain('first');
@@ -260,7 +260,7 @@ describe('Lout', function () {
         server.inject('/docs?server=http://test&path=/emptyobject', function (res) {
 
             expect(res.result).to.contain('param1');
-            expect(res.result.match(/Properties/g)).to.have.length(1);
+            expect(res.result.match(/list-children/g)).to.have.length(2);
             done();
         });
     });
@@ -337,7 +337,7 @@ describe('Lout', function () {
         server.inject('/docs?server=http://test&path=/withmeta', function (res) {
 
             var $ = Cheerio.load(res.result);
-            expect($('.meta pre code').length).to.equal(1);
+            expect($('.field-meta pre code').length).to.equal(1);
             done();
         });
     });
@@ -412,7 +412,6 @@ describe('Lout', function () {
 
         server.inject('/docs?server=http://test&path=/withpattern', function (res) {
 
-            expect(res.result).to.contain('Patterns');
             expect(res.result).to.contain('/\\w\\d/');
             expect(res.result).to.contain('boolean');
             done();
@@ -424,7 +423,7 @@ describe('Lout', function () {
         server.inject('/docs?server=http://test&path=/withallowunknown', function (res) {
 
             var $ = Cheerio.load(res.result);
-            expect($('dd.allow-unknown').text()).to.equal('truefalse');
+            expect($('.allow-unknown').length).to.equal(1);
             done();
         });
     });
@@ -434,7 +433,7 @@ describe('Lout', function () {
         server.inject('/docs?server=http://test&path=/test', function (res) {
 
             var $ = Cheerio.load(res.result);
-            expect($('dd.case-insensitive').length).to.equal(1);
+            expect($('.case-insensitive').length).to.equal(1);
             done();
         });
     });
@@ -463,9 +462,9 @@ describe('Lout', function () {
             expect($('.condition-text').text().replace(/\n|\s+/g, ''))
                 .to.contain('Ifbmatchesthefollowingmodel')
                 .to.contain('Ifamatchesthefollowingmodel');
-            expect($('.condition-model').length).to.equal(2);
-            expect($('.consequence-model').length).to.equal(4);
-            expect($('.type > dd').text())
+            expect($('.condition-model').length).to.equal(4);
+            expect($('.consequence-model').length).to.equal(8);
+            expect($('.field-alternatives .type-header').text())
                 .to.contain('string')
                 .to.contain('number')
                 .to.contain('boolean')
