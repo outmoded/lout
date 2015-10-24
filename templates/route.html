@@ -206,11 +206,11 @@
                         {{/if}}
                         {{#if this.statusSchema}}
                             <h3>
-                                <a role="button" data-toggle="collapse" href="#statusCode" aria-expanded="false" aria-controls="statusCode">
+                                <a role="button" data-toggle="collapse" href="#statusCode{{this.method}}" aria-expanded="false" aria-controls="statusCode{{this.method}}">
                                     Status Code Responses
                                 </a>
                             </h3>
-                            <div class="collapse" id="statusCode">
+                            <div class="collapse" id="statusCode{{this.method}}">
                                 {{#each this.statusSchema as |schema code|}}
                                 <dt>
                                     <h4>{{code}}</h4>
