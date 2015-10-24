@@ -179,7 +179,7 @@ describe('Lout', function () {
 
             expect(res.result).to.contain('field-alternatives');
             expect(res.result).to.contain('number');
-            expect(res.result).to.contain('string');
+            expect(res.result).to.contain('one of');
             expect(res.result).to.contain('first');
             expect(res.result).to.contain('last');
 
