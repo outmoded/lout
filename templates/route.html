@@ -51,7 +51,11 @@
                 <p class="description">{{{this.description}}}</p>
                 {{/if}} {{#if this.notes}}
                 <h3>Notes</h3>
-                <p class="notes">{{{this.notes}}}</p>
+                <ul class="list-unstyled list-notes">
+                    {{#each this.notes}}
+                        <li>{{{this}}}</li>
+                    {{/each}}
+                </ul>
                 {{/if}} {{#if this.auth}}
                 <h3>Authentication</h3>
                 <p class="auth">
