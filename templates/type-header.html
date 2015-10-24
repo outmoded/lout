@@ -30,6 +30,15 @@
             {{#if this.flags.insensitive}}
                 <div class="badge case-insensitive">Case insensitive</div>
             {{~/if~}}
+            {{#unless @static }}
+                <a class="more-info"
+                    role="button"
+                    data-toggle="collapse"
+                    href="#type{{@collapseId}}"
+                    aria-expanded="false"
+                    aria-controls="type{{@collapseId}}"
+                >Info</a>
+            {{/unless}}
         </div>
         {{~! Strip Whitespace ~}}
     </div>

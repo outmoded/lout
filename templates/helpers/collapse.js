@@ -15,21 +15,12 @@ module.exports = function (options) {
         data.static = false;
 
         var header = options.fn.partials.header(this, { data: data }).trim();
-        if (/data-toggle="collapse"/.test(header)) {
-            content = header
-                + '<div class="collapse" id="type' + data.collapseId + '">'
-                    + '<dl class="well">'
-                        + content
-                    + '</dl>'
-                + '</div>';
-        } else {
-            content = header
-                + '<div class="static-type">'
-                    + '<dl class="well">'
-                        + content
-                    + '</dl>'
-                + '</div>';
-        }
+        content = header
+            + '<div class="collapse" id="type' + data.collapseId + '">'
+                + '<dl class="well">'
+                    + content
+                + '</dl>'
+            + '</div>';
     } else {
         data.static = true;
         content = options.fn.partials.header(this, { data: data });

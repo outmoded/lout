@@ -1,4 +1,4 @@
-<li class="{{#if this.condition}}conditional{{else}}type{{/if}}">
+<li class="{{#if this.condition}}conditional{{else}}type type-{{this.type}}{{/if}}">
     {{#if this.condition}}
             <span class="condition">
                 <span class="condition-text">
@@ -37,7 +37,7 @@
                     <span class="token-close">]</span>
                 {{~/if~}}
                 {{#if this.alternatives}}
-                    <span class="token-open">(</span>
+                    <span class="token-before-open">Any of </span><span class="token-open">(</span>
                     <ul class="list-unstyled list-children field-alternatives">
                         {{#each this.alternatives}}{{> type}}{{/each}}
                     </ul>
