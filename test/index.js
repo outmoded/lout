@@ -557,6 +557,22 @@ describe('Lout', function () {
         });
     });
 
+
+    it('should support status schema', function (done) {
+
+        server.inject('/docs?server=http://test&path=/withstatus', function (res) {
+
+            var $ = Cheerio.load(res.result);
+            expect($('.collapse').text())
+                .to.contain('204')
+                .to.contain('param2')
+                .to.contain('404')
+                .to.contain('Failure');
+            done();
+        });
+    });
+
+
     describe('Authentication', function () {
 
         before(function (done) {
