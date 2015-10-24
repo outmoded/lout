@@ -32,7 +32,30 @@
                 {{~#if (exists this.items) ~}}
                     <span class="token-open">[</span>
                     <ul class="list-unstyled list-items">
-                        {{~#each this.items}}{{> type}}{{/each~}}
+                        {{#if this.orderedItems}}
+                            <li>
+                                <div>Ordered:</div>
+                                <ol class="list-unstyled list-items">
+                                    {{~#each this.orderedItems}}{{> type}}{{/each~}}
+                                </ol>
+                            </li>
+                        {{/if}}
+
+                        <li>
+                            <div>{{#if this.orderedItems}}Followed by any:{{else}}Any of:{{/if}}</div>
+                            <ul class="list-unstyled list-items">
+                                {{~#each this.items}}{{> type}}{{/each~}}
+                            </ul>
+                        </li>
+
+                        {{#if this.forbiddenItems}}
+                            <li>
+                                <div>None of:</div>
+                                <ul class="list-unstyled list-items">
+                                    {{~#each this.forbiddenItems}}{{> type}}{{/each~}}
+                                </ul>
+                            </li>
+                        {{/if}}
                     </ul>
                     <span class="token-close">]</span>
                 {{~/if~}}
