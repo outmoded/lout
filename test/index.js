@@ -448,6 +448,16 @@ describe('Lout', function () {
         });
     });
 
+    it('should not show forbidden values for simple numbers', function (done) {
+
+        server.inject('/docs?server=http://test&path=/test', function (res) {
+
+            var $ = Cheerio.load(res.result);
+            expect($('.field-forbidden-values').length).to.equal(0);
+            done();
+        });
+    });
+
     it('should support string specifics', function (done) {
 
         server.inject('/docs?server=http://test&path=/withstringspecifics', function (res) {
