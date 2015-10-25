@@ -276,6 +276,20 @@ module.exports = [{
     }
 }, {
     method: 'GET',
+    path: '/withnotesarray',
+    config: {
+        handler: handler,
+        validate: {
+            query: {
+                param1: Joi.string().notes([
+                    '<span class="htmltypenote">HTML type note</span>',
+                    '<span class="htmltypenote">HTML type note</span>'
+                ])
+            }
+        }
+    }
+}, {
+    method: 'GET',
     path: '/withexample',
     config: {
         handler: handler,

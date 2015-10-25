@@ -294,6 +294,16 @@ describe('Lout', function () {
         });
     });
 
+    it('should show note arrays', function (done) {
+
+        server.inject('/docs?server=http://test&path=/withnotesarray', function (res) {
+
+            var $ = Cheerio.load(res.result);
+            expect($('.htmltypenote').length).to.equal(2);
+            done();
+        });
+    });
+
     it('should show example', function (done) {
 
         server.inject('/docs?server=http://test&path=/withexample', function (res) {

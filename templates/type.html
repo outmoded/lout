@@ -110,7 +110,13 @@
 
             {{#if this.notes}}
                 <dt>Notes</dt>
-                <dd>{{{this.notes}}}</dd>
+                <dd>
+                    <ul class="list-unstyled list-notes">
+                        {{#each this.notes}}
+                            <li>{{{this}}}</li>
+                        {{/each}}
+                    </ul>
+                </dd>
             {{/if}}
             {{#if this.flags.default}}
                 <dt class="default-value">Default value</dt>
