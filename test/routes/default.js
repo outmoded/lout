@@ -217,6 +217,25 @@ module.exports = [{
     }
 }, {
     method: 'GET',
+    path: '/withstatus',
+    config: {
+        handler: handler,
+        response: {
+            schema: {
+                param1: Joi.string()
+            },
+            status: {
+                204: {
+                    param2: Joi.string()
+                },
+                404: {
+                    error: 'Failure'
+                }
+            }
+        }
+    }
+}, {
+    method: 'GET',
     path: '/withpojoinarray',
     config: {
         handler: handler,
