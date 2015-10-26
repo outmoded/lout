@@ -191,7 +191,9 @@ module.exports = [{
                                     param4: Joi.number().example(5)
                                 }).description('this is cool too')
                             },
-                            Joi.number().min(42).required()
+                            Joi.array().items('foo', 'bar'),
+                            Joi.number().min(42).required(),
+                            Joi.number().max(42).required()
                         )
                     }).description('all the way down')
                 ).description('something really cool')

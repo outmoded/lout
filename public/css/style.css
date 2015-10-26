@@ -119,8 +119,34 @@ body {
     margin: 0;
 }
 
+.type-header {
+    display: inline;
+    font-size: 14px;
+}
+.type-header > h5 {
+    display: inline;
+    font-size: inherit;
+}
+.type-header > h5 > a {
+    color: inherit;
+    text-decoration: none;
+}
+.type-header > h5 > a:hover,
+.type-header > h5 > a:hover {
+    text-decoration: none;
+}
+
+.more-info {
+    padding-right: 5em;
+}
+
+.type-header:hover .more-info {
+    text-decoration: underline;
+}
 .type-header:hover ~ .token-open,
 .type-header:hover ~ .token-close,
+.token-before-open:hover ~ .token-open,
+.token-before-open:hover ~ .token-close,
 .token-open:hover,
 .token-open:hover ~ .token-close {
     font-weight: bold;
@@ -152,13 +178,13 @@ body {
     background-color: #fff;
 }
 
-.type-header {
-    display: inline;
-    font-size: 14px;
+.field-alternatives > .type-alternatives,
+.field-alternatives > .type-array,
+.field-alternatives > .type-object {
+    padding-bottom: 1em;
 }
-.type-header > h5 {
-    display: inline;
-    font-size: inherit;
+.field-alternatives > .type:last-of-type {
+    padding-bottom: 0;
 }
 
 .field-type {
@@ -170,6 +196,7 @@ body {
 }
 .field-type:first-child:before {
     content: "";
+    padding-right: 0;
 }
 .field-type:empty {
     padding-right: 0;
