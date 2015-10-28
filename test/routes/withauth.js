@@ -1,6 +1,6 @@
-var handler = function (request) {
+var handler = function (request, reply) {
 
-    request.reply('ok');
+    reply('ok');
 };
 
 module.exports = [{
@@ -22,5 +22,11 @@ module.exports = [{
             scope: ['test'],
             entity: 'user'
         }
+    }
+}, {
+    method: 'GET',
+    path: '/withimplicitauth',
+    config: {
+        handler: handler
     }
 }];

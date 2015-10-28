@@ -63,9 +63,10 @@
                     <p class="auth-value auth-strategies">{{this.auth.strategies}}</p>
                     <h4 class="auth-header auth-mode col-sm-2">Mode</h4>
                     <p class="auth-value auth-mode">{{this.auth.mode}}</p>
+                    {{#if this.auth.payload}}
                     <h4 class="auth-header auth-payload col-sm-2">Payload</h4>
                     <p class="auth-value auth-payload">{{this.auth.payload}}</p>
-                    {{#if this.auth.scope}}
+                    {{/if}} {{#if this.auth.scope}}
                     <h4 class="auth-header auth-scope col-sm-2">Scope</h4>
                     <p class="auth-value auth-scope">{{this.auth.scope}}</p>
                     {{/if}} {{#if this.auth.entity}}

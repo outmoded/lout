@@ -598,13 +598,10 @@ describe('Lout', function () {
                     response: function () {}
                 };
             });
-            server.auth.strategy('testStrategy', 'testScheme');
+            server.auth.strategy('testStrategy', 'testScheme', true);
 
             server.route(require('./routes/withauth'));
-            internals.bootstrapServer(server, require('../'), function () {
-
-                done();
-            });
+            internals.bootstrapServer(server, require('../'), done);
         });
 
         it('should display authentication information', function (done) {
@@ -627,6 +624,20 @@ describe('Lout', function () {
                 expect($('p.auth-payload').text()).to.equal('optional');
                 expect($('p.auth-scope').text()).to.equal('test');
                 expect($('p.auth-entity').text()).to.equal('user');
+                done();
+            });
+        });
+
+        it('should display authentication information with a default auth', function (done) {
+
+            server.inject('/docs?server=http://test&path=/withimplicitauth', function (res) {
+
+                var $ = Cheerio.load(res.result);
+                expect($('p.auth-strategies').text()).to.equal('testStrategy');
+                expect($('p.auth-mode').text()).to.equal('required');
+                expect($('p.auth-payload').length).to.equal(0);
+                expect($('p.auth-scope').length).to.equal(0);
+                expect($('p.auth-entity').length).to.equal(0);
                 done();
             });
         });
