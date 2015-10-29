@@ -135,6 +135,26 @@ module.exports = [{
     }
 }, {
     method: 'GET',
+    path: '/complexarray',
+    config: {
+        handler: handler,
+        validate: {
+            query: Joi.array()
+            .ordered('foo', 'bar')
+            .items(
+                Joi.string().required(),
+                Joi.string().valid('four').forbidden(),
+                Joi.object({ param1: Joi.number() }),
+                Joi.number().forbidden()
+            ).min(2).max(5).length(3)
+            .ordered('bar', 'bar')
+            .items(
+                Joi.number().required()
+            )
+        }
+    }
+}, {
+    method: 'GET',
     path: '/path/{pparam}/test',
     config: {
         handler: handler,
