@@ -34,7 +34,7 @@
                     <ul class="list-unstyled list-items">
                         {{#if this.orderedItems}}
                             <li>
-                                <div>Ordered:</div>
+                                <div class="text-danger">Ordered:</div>
                                 <ol class="list-unstyled list-items">
                                     {{~#each this.orderedItems}}{{> type}}{{/each~}}
                                 </ol>
@@ -42,7 +42,7 @@
                         {{/if}}
 
                         <li>
-                            <div>{{#if this.orderedItems}}Followed by any:{{else}}Any of:{{/if}}</div>
+                            <div class="text-danger">{{#if this.orderedItems}}Followed by any:{{else}}Any of:{{/if}}</div>
                             <ul class="list-unstyled list-items">
                                 {{~#each this.items}}{{> type}}{{/each~}}
                             </ul>
@@ -50,7 +50,7 @@
 
                         {{#if this.forbiddenItems}}
                             <li>
-                                <div>None of:</div>
+                                <div class="text-danger">None of:</div>
                                 <ul class="list-unstyled list-items">
                                     {{~#each this.forbiddenItems}}{{> type}}{{/each~}}
                                 </ul>
@@ -60,7 +60,7 @@
                     <span class="token-close">]</span>
                 {{~/if~}}
                 {{#if this.alternatives}}
-                    <span class="token-before-open">Any of </span><span class="token-open">(</span>
+                    <span class="token-before-open text-danger">Any of </span><span class="token-open">(</span>
                     <ul class="list-unstyled list-children field-alternatives">
                         {{#each this.alternatives}}{{> type}}{{/each}}
                     </ul>
