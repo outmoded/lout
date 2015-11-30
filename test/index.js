@@ -683,6 +683,33 @@ describe('Customized Lout', function () {
         });
     });
 
+    it('should succeed with a apiVersion', function (done) {
+
+        var server = new Hapi.Server();
+        server.connection();
+        server.route(require('./routes/default'));
+
+        internals.bootstrapServer(server, {
+            register: require('../'),
+            options: {
+                apiVersion: '3.3.3'
+            }
+        }, function (err) {
+
+            expect(err).to.not.exist();
+
+            server.inject('/docs', function (res) {
+
+                expect(res).to.exist();
+                var $ = Cheerio.load(res.result);
+                expect($('a.navbar-brand').text()).to.match(/v3\.3\.3$/);
+                done();
+            });
+        });
+    });
+
+
+
     it('should succeed with a correct configuration', function (done) {
 
         var server = new Hapi.Server();

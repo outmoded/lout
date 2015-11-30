@@ -4,8 +4,9 @@ sudo: false
 language: node_js
 
 node_js:
-  - "0.10"
+  - "4"
   - "4.0"
+  - "5"
 
 deploy:
   - provider: heroku
