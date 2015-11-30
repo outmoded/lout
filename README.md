@@ -48,6 +48,7 @@ The following options are available when registering the plugin:
 - _'indexTemplate'_ - the name of the template file to contain docs main page.  Default is 'index'.
 - _'routeTemplate'_ - the name of the route template file.  Default is 'route'.
 - _'filterRoutes'_ - a function that receives a route object containing `method` and `path` and returns a boolean value to exclude routes.
+- _'apiVersion'_ - an optional api version that would be displayed in the documentation
 
 ### Ignoring a route in documentation
 
