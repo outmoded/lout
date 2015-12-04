@@ -179,7 +179,7 @@ describe('Lout', function () {
 
             expect(res.result).to.contain('field-alternatives');
             expect(res.result).to.contain('number');
-            expect(res.result).to.contain('string');
+            expect(res.result).to.contain('one of');
             expect(res.result).to.contain('first');
             expect(res.result).to.contain('last');
 
@@ -444,6 +444,16 @@ describe('Lout', function () {
 
             var $ = Cheerio.load(res.result);
             expect($('.case-insensitive').length).to.equal(1);
+            done();
+        });
+    });
+
+    it('should not show forbidden values for simple numbers', function (done) {
+
+        server.inject('/docs?server=http://test&path=/test', function (res) {
+
+            var $ = Cheerio.load(res.result);
+            expect($('.field-forbidden-values').length).to.equal(0);
             done();
         });
     });

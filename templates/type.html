@@ -83,11 +83,6 @@
                 <dt class="encoding">Encoding</dt>
                 <dd class="encoding">{{this.flags.encoding}}</dd>
             {{/if}}
-            {{#if this.allowedValues}}
-                <dt class="field-allowed-values">one of</dt>
-                {{~! Strip Whitespace ~}}
-                <dd class="field-allowed-values">{{this.allowedValues}}</dd>
-            {{/if}}
             {{#if this.disallowedValues}}
                 <dt class="field-forbidden-values">none of</dt>
                 {{~! Strip Whitespace ~}}

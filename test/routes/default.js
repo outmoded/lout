@@ -48,7 +48,9 @@ module.exports = [{
         handler: handler,
         validate: {
             query: {
-                param2: Joi.string().valid('first', 'last')
+                param2: Joi.string().valid('first', 'last'),
+                param3: 'third',
+                param4: 42
             }
         }
     }
