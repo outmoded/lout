@@ -1,20 +1,19 @@
-var handler = function (request, reply) {
+'use strict';
 
-    reply('ok');
-};
+const handler = (request, reply) => reply('ok');
 
 module.exports = [{
     method: 'GET',
     path: '/withauth',
     config: {
-        handler: handler,
+        handler,
         auth: 'testStrategy'
     }
 }, {
     method: 'GET',
     path: '/withauthasobject',
     config: {
-        handler: handler,
+        handler,
         auth: {
             mode: 'try',
             strategy: 'testStrategy',
@@ -27,6 +26,6 @@ module.exports = [{
     method: 'GET',
     path: '/withimplicitauth',
     config: {
-        handler: handler
+        handler
     }
 }];

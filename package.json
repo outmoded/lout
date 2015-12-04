@@ -13,24 +13,24 @@
     "npm": ">= 3.x"
   },
   "dependencies": {
-    "boom": "2.x.x",
-    "handlebars": "^4.0.2",
-    "hoek": "2.x.x"
+    "boom": "3.x.x",
+    "handlebars": "4.x.x",
+    "hoek": "3.x.x"
   },
   "peerDependencies": {
-    "hapi": ">= 9",
+    "hapi": ">= 11",
     "inert": ">= 3.x.x",
-    "joi": ">= 5.1.x",
-    "vision": ">= 2.x.x"
+    "joi": ">= 7.x.x",
+    "vision": ">= 3.x.x"
   },
   "devDependencies": {
     "cheerio": "0.x.x",
-    "code": "1.x.x",
-    "hapi": ">= 9",
+    "code": "2.x.x",
+    "hapi": ">= 11",
     "inert": ">= 3.x.x",
-    "joi": ">= 5.1.x",
-    "lab": "6.x.x",
-    "vision": ">= 2.x.x"
+    "joi": ">= 7.x.x",
+    "lab": "8.x.x",
+    "vision": ">= 4.x.x"
   },
   "scripts": {
     "test": "lab -r console -t 100 -a code -L",

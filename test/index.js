@@ -1,23 +1,25 @@
+'use strict';
+
 // Load modules
 
-var Lab = require('lab');
-var Hapi = require('hapi');
-var Cheerio = require('cheerio');
-var Path = require('path');
-var Inert = require('inert');
-var Vision = require('vision');
+const Lab = require('lab');
+const Hapi = require('hapi');
+const Cheerio = require('cheerio');
+const Path = require('path');
+const Inert = require('inert');
+const Vision = require('vision');
 
 // Declare internals
 
-var internals = {
-    bootstrapServer: function (server, plugins, options, callback) {
+const internals = {
+    bootstrapServer(server, plugins, options, callback) {
 
         if (typeof options === 'function') {
             callback = options;
             options = {};
         }
 
-        server.register([Inert, Vision].concat(plugins), options, function (err) {
+        server.register([Inert, Vision].concat(plugins), options, (err) => {
 
             if (err) {
                 return callback(err);
@@ -31,31 +33,31 @@ var internals = {
 
 // Test shortcuts
 
-var lab = exports.lab = Lab.script();
-var before = lab.before;
-var describe = lab.experiment;
-var it = lab.test;
-var expect = require('code').expect;
+const lab = exports.lab = Lab.script();
+const before = lab.before;
+const describe = lab.experiment;
+const it = lab.test;
+const expect = require('code').expect;
 
-describe('Registration', function () {
+describe('Registration', () => {
 
-    it('should register', function (done) {
+    it('should register', (done) => {
 
-        var server = new Hapi.Server();
+        const server = new Hapi.Server();
         server.connection({ host: 'test' });
 
-        internals.bootstrapServer(server, require('../'), function () {
+        internals.bootstrapServer(server, require('../'), () => {
 
-            var routes = server.table();
+            const routes = server.table();
             expect(routes).to.have.length(1);
             expect(routes[0].table).to.have.length(2);
             done();
         });
     });
 
-    it('should register with options', function (done) {
+    it('should register with options', (done) => {
 
-        var server = new Hapi.Server();
+        const server = new Hapi.Server();
         server.connection({ host: 'test' });
 
         internals.bootstrapServer(server, {
@@ -65,19 +67,19 @@ describe('Registration', function () {
                 cssPath: null,
                 endpoint: '/'
             }
-        }, function (err) {
+        }, (err) => {
 
             expect(err).to.not.exist();
 
-            var routes = server.table();
+            const routes = server.table();
             expect(routes[0].table).to.have.length(1);
             done();
         });
     });
 
-    it('should fail to register with bad options', function (done) {
+    it('should fail to register with bad options', (done) => {
 
-        var server = new Hapi.Server();
+        const server = new Hapi.Server();
         server.connection({ host: 'test' });
 
         internals.bootstrapServer(server, {
@@ -85,7 +87,7 @@ describe('Registration', function () {
             options: {
                 foo: 'bar'
             }
-        }, function (err) {
+        }, (err) => {
 
             expect(err).to.exist();
             expect(err.message).to.equal('"foo" is not allowed');
@@ -94,9 +96,9 @@ describe('Registration', function () {
     });
 
 
-    it('should register with malformed endpoint', function (done) {
+    it('should register with malformed endpoint', (done) => {
 
-        var server = new Hapi.Server();
+        const server = new Hapi.Server();
         server.connection({ host: 'test' });
 
         internals.bootstrapServer(server, {
@@ -104,12 +106,12 @@ describe('Registration', function () {
             options: {
                 endpoint: 'api/'
             }
-        }, function (err) {
+        }, (err) => {
 
             expect(err).to.not.exist();
 
-            var routes = server.table();
-            var endpoints = routes[0].table;
+            const routes = server.table();
+            const endpoints = routes[0].table;
             expect(endpoints).to.have.length(2);
             expect(endpoints).to.part.deep.include([{ path: '/api' }, { path: '/api/css/{path*}' }]);
             done();
@@ -117,34 +119,31 @@ describe('Registration', function () {
     });
 });
 
-describe('Lout', function () {
+describe('Lout', () => {
 
-    var server = null;
+    let server;
 
-    before(function (done) {
+    before((done) => {
 
         server = new Hapi.Server();
         server.connection({ host: 'test' });
 
         server.route(require('./routes/default'));
 
-        internals.bootstrapServer(server, require('../'), function () {
-
-            done();
-        });
+        internals.bootstrapServer(server, require('../'), done);
     });
 
-    it('shows template when correct path is provided', function (done) {
+    it('shows template when correct path is provided', (done) => {
 
-        server.inject('/docs?server=http://test&path=/test', function (res) {
+        server.inject('/docs?server=http://test&path=/test', (res) => {
 
-            var $ = Cheerio.load(res.result);
+            const $ = Cheerio.load(res.result);
 
             expect($('.anchor-link').length).to.equal(5);
             expect($('.anchor').length).to.equal(5);
 
-            var matches = ['GET/test', 'POST/test', 'PUT/test', 'PATCH/test', 'DELETE/test'];
-            var methodHeadings = $('.panel-heading .method-title');
+            const matches = ['GET/test', 'POST/test', 'PUT/test', 'PATCH/test', 'DELETE/test'];
+            const methodHeadings = $('.panel-heading .method-title');
 
             expect(methodHeadings.length).to.equal(5);
 
@@ -161,11 +160,11 @@ describe('Lout', function () {
         });
     });
 
-    it('shows array objects', function (done) {
+    it('shows array objects', (done) => {
 
-        server.inject('/docs?server=http://test&path=/rootarray', function (res) {
+        server.inject('/docs?server=http://test&path=/rootarray', (res) => {
 
-            var $ = Cheerio.load(res.result);
+            const $ = Cheerio.load(res.result);
 
             expect($('.type-header').length).to.equal(5);
 
@@ -173,9 +172,9 @@ describe('Lout', function () {
         });
     });
 
-    it('shows alternatives', function (done) {
+    it('shows alternatives', (done) => {
 
-        server.inject('/docs?server=http://test&path=/alternatives', function (res) {
+        server.inject('/docs?server=http://test&path=/alternatives', (res) => {
 
             expect(res.result).to.contain('field-alternatives');
             expect(res.result).to.contain('number');
@@ -187,55 +186,56 @@ describe('Lout', function () {
         });
     });
 
-    it('returns a Not Found response when wrong path is provided', function (done) {
+    it('returns a Not Found response when wrong path is provided', (done) => {
 
-        server.inject('/docs?server=http://test&path=blah', function (res) {
+        server.inject('/docs?server=http://test&path=blah', (res) => {
 
             expect(res.result.error).to.equal('Not Found');
             done();
         });
     });
 
-    it('displays the index if no path is provided', function (done) {
+    it('displays the index if no path is provided', (done) => {
 
-        server.inject('/docs', function (res) {
+        server.inject('/docs', (res) => {
 
-            server.table()[0].table.forEach(function (route) {
+            server.table()[0].table.forEach((route) => {
 
                 if ((route.settings.plugins && (route.settings.plugins.lout === false || route.settings.isInternal)) ||
                     route.path === '/docs' ||
                     route.method === 'options') {
 
-                    expect(res.result).to.not.contain('?server=http://test&path=' + route.path);
-                } else {
-                    expect(res.result).to.contain('?server=http://test&path=' + route.path);
+                    expect(res.result).to.not.contain(`?server=http://test&path=${route.path}`);
+                }
+                else {
+                    expect(res.result).to.contain(`?server=http://test&path=${route.path}`);
                 }
             });
             done();
         });
     });
 
-    it('index doesn\'t have the docs endpoint listed', function (done) {
+    it('index doesn\'t have the docs endpoint listed', (done) => {
 
-        server.inject('/docs', function (res) {
+        server.inject('/docs', (res) => {
 
             expect(res.result).to.not.contain('?server=http://test&path=/docs');
             done();
         });
     });
 
-    it('index doesn\'t include routes that are configured with docs disabled', function (done) {
+    it('index doesn\'t include routes that are configured with docs disabled', (done) => {
 
-        server.inject('/docs', function (res) {
+        server.inject('/docs', (res) => {
 
             expect(res.result).to.not.contain('/notincluded');
             done();
         });
     });
 
-    it('displays nested rules', function (done) {
+    it('displays nested rules', (done) => {
 
-        server.inject('/docs?server=http://test&path=/nested', function (res) {
+        server.inject('/docs?server=http://test&path=/nested', (res) => {
 
             expect(res.result).to.contain('param1');
             expect(res.result).to.contain('nestedparam1');
@@ -244,9 +244,9 @@ describe('Lout', function () {
         });
     });
 
-    it('displays path parameters', function (done) {
+    it('displays path parameters', (done) => {
 
-        server.inject('/docs?server=http://test&path=/path/{pparam}/test', function (res) {
+        server.inject('/docs?server=http://test&path=/path/{pparam}/test', (res) => {
 
             expect(res.result).to.contain('Path Parameters');
             expect(res.result).to.contain('pparam');
@@ -255,9 +255,9 @@ describe('Lout', function () {
         });
     });
 
-    it('should not show properties on empty objects', function (done) {
+    it('should not show properties on empty objects', (done) => {
 
-        server.inject('/docs?server=http://test&path=/emptyobject', function (res) {
+        server.inject('/docs?server=http://test&path=/emptyobject', (res) => {
 
             expect(res.result).to.contain('param1');
             expect(res.result.match(/list-children/g)).to.have.length(2);
@@ -265,96 +265,96 @@ describe('Lout', function () {
         });
     });
 
-    it('should show routes without any validation', function (done) {
+    it('should show routes without any validation', (done) => {
 
-        server.inject('/docs?path=/novalidation', function (res) {
+        server.inject('/docs?path=/novalidation', (res) => {
 
             expect(res.result).to.not.contain('Parameters');
             done();
         });
     });
 
-    it('should handle invalid array of rules', function (done) {
+    it('should handle invalid array of rules', (done) => {
 
-        server.inject('/docs?server=http://test&path=/withnestedrulesarray', function (res) {
+        server.inject('/docs?server=http://test&path=/withnestedrulesarray', (res) => {
 
             expect(res.result).to.contain('Request Parameters');
             done();
         });
     });
 
-    it('should show html notes', function (done) {
+    it('should show html notes', (done) => {
 
-        server.inject('/docs?server=http://test&path=/withhtmlnote', function (res) {
+        server.inject('/docs?server=http://test&path=/withhtmlnote', (res) => {
 
-            var $ = Cheerio.load(res.result);
+            const $ = Cheerio.load(res.result);
             expect($('.htmlroutenote').length).to.equal(1);
             expect($('.htmltypenote').length).to.equal(1);
             done();
         });
     });
 
-    it('should show note arrays', function (done) {
+    it('should show note arrays', (done) => {
 
-        server.inject('/docs?server=http://test&path=/withnotesarray', function (res) {
+        server.inject('/docs?server=http://test&path=/withnotesarray', (res) => {
 
-            var $ = Cheerio.load(res.result);
+            const $ = Cheerio.load(res.result);
             expect($('.htmltypenote').length).to.equal(2);
             done();
         });
     });
 
-    it('should show example', function (done) {
+    it('should show example', (done) => {
 
-        server.inject('/docs?server=http://test&path=/withexample', function (res) {
+        server.inject('/docs?server=http://test&path=/withexample', (res) => {
 
-            var $ = Cheerio.load(res.result);
+            const $ = Cheerio.load(res.result);
             expect($('.example').length).to.equal(1);
             done();
         });
     });
 
-    it('should support multiple nested examples', function (done) {
+    it('should support multiple nested examples', (done) => {
 
-        server.inject('/docs?server=http://test&path=/withnestedexamples', function (res) {
+        server.inject('/docs?server=http://test&path=/withnestedexamples', (res) => {
 
-            var $ = Cheerio.load(res.result);
+            const $ = Cheerio.load(res.result);
             expect($('.example').length).to.equal(3);
             done();
         });
     });
 
-    it('should support "false" as validation rule', function (done) {
+    it('should support "false" as validation rule', (done) => {
 
-        server.inject('/docs?server=http://test&path=/denybody', function (res) {
+        server.inject('/docs?server=http://test&path=/denybody', (res) => {
 
             expect(res.result).to.contain('Denied');
             done();
         });
     });
 
-    it('should not detect "false" on an empty object', function (done) {
+    it('should not detect "false" on an empty object', (done) => {
 
-        server.inject('/docs?server=http://test&path=/rootemptyobject', function (res) {
+        server.inject('/docs?server=http://test&path=/rootemptyobject', (res) => {
 
             expect(res.result).to.not.contain('Denied');
             done();
         });
     });
 
-    it('should show meta informations', function (done) {
+    it('should show meta informations', (done) => {
 
-        server.inject('/docs?server=http://test&path=/withmeta', function (res) {
+        server.inject('/docs?server=http://test&path=/withmeta', (res) => {
 
-            var $ = Cheerio.load(res.result);
+            const $ = Cheerio.load(res.result);
             expect($('.field-meta pre code').length).to.equal(1);
             done();
         });
     });
 
-    it('should show units', function (done) {
+    it('should show units', (done) => {
 
-        server.inject('/docs?server=http://test&path=/withunit', function (res) {
+        server.inject('/docs?server=http://test&path=/withunit', (res) => {
 
             expect(res.result).to.contain('Unit');
             expect(res.result).to.contain('ms');
@@ -362,22 +362,22 @@ describe('Lout', function () {
         });
     });
 
-    it('should show default values', function (done) {
+    it('should show default values', (done) => {
 
-        server.inject('/docs?server=http://test&path=/withdefaultvalue', function (res) {
+        server.inject('/docs?server=http://test&path=/withdefaultvalue', (res) => {
 
-            var $ = Cheerio.load(res.result);
+            const $ = Cheerio.load(res.result);
             expect($('dt.default-value').text()).to.equal('Default value');
             expect($('dd.default-value').text()).to.contain('42');
             done();
         });
     });
 
-    it('should show binary types encoding', function (done) {
+    it('should show binary types encoding', (done) => {
 
-        server.inject('/docs?server=http://test&path=/withbinaryencoding', function (res) {
+        server.inject('/docs?server=http://test&path=/withbinaryencoding', (res) => {
 
-            var $ = Cheerio.load(res.result);
+            const $ = Cheerio.load(res.result);
             expect($('dt.encoding').text()).to.equal('Encoding');
             expect($('dd.encoding').text()).to.equal('base64');
             expect($('dt.rules-Min').text()).to.equal('Min');
@@ -390,13 +390,13 @@ describe('Lout', function () {
         });
     });
 
-    it('should show dates with min and max', function (done) {
+    it('should show dates with min and max', (done) => {
 
-        server.inject('/docs?server=http://test&path=/withdate', function (res) {
+        server.inject('/docs?server=http://test&path=/withdate', (res) => {
 
             // The tests results will depend on the timezone it is executed on, so I'll only test for the presence
             // of something.
-            var $ = Cheerio.load(res.result);
+            const $ = Cheerio.load(res.result);
             expect($('dt.rules-Min').text()).to.equal('Min');
             expect($('dd.rules-Min').text().replace(/\n|\s+/g, '')).to.not.be.empty();
             expect($('dt.rules-Max').text()).to.equal('Max');
@@ -405,9 +405,9 @@ describe('Lout', function () {
         });
     });
 
-    it('should show peer dependencies', function (done) {
+    it('should show peer dependencies', (done) => {
 
-        server.inject('/docs?server=http://test&path=/withpeersconditions', function (res) {
+        server.inject('/docs?server=http://test&path=/withpeersconditions', (res) => {
 
             expect(res.result).to.contain('Requires a and b and c.');
             expect(res.result).to.contain('Requires a or b or c.');
@@ -418,9 +418,9 @@ describe('Lout', function () {
         });
     });
 
-    it('should show pattern on objects', function (done) {
+    it('should show pattern on objects', (done) => {
 
-        server.inject('/docs?server=http://test&path=/withpattern', function (res) {
+        server.inject('/docs?server=http://test&path=/withpattern', (res) => {
 
             expect(res.result).to.contain('/\\w\\d/');
             expect(res.result).to.contain('boolean');
@@ -428,45 +428,45 @@ describe('Lout', function () {
         });
     });
 
-    it('should show peer dependencies', function (done) {
+    it('should show peer dependencies', (done) => {
 
-        server.inject('/docs?server=http://test&path=/withallowunknown', function (res) {
+        server.inject('/docs?server=http://test&path=/withallowunknown', (res) => {
 
-            var $ = Cheerio.load(res.result);
+            const $ = Cheerio.load(res.result);
             expect($('.allow-unknown').length).to.equal(1);
             done();
         });
     });
 
-    it('should show case insensitive string', function (done) {
+    it('should show case insensitive string', (done) => {
 
-        server.inject('/docs?server=http://test&path=/test', function (res) {
+        server.inject('/docs?server=http://test&path=/test', (res) => {
 
-            var $ = Cheerio.load(res.result);
+            const $ = Cheerio.load(res.result);
             expect($('.case-insensitive').length).to.equal(1);
             done();
         });
     });
 
-    it('should not show forbidden values for simple numbers', function (done) {
+    it('should not show forbidden values for simple numbers', (done) => {
 
-        server.inject('/docs?server=http://test&path=/test', function (res) {
+        server.inject('/docs?server=http://test&path=/test', (res) => {
 
-            var $ = Cheerio.load(res.result);
+            const $ = Cheerio.load(res.result);
             expect($('.field-forbidden-values').length).to.equal(0);
             done();
         });
     });
 
-    it('should support string specifics', function (done) {
+    it('should support string specifics', (done) => {
 
-        server.inject('/docs?server=http://test&path=/withstringspecifics', function (res) {
+        server.inject('/docs?server=http://test&path=/withstringspecifics', (res) => {
 
-            var $ = Cheerio.load(res.result);
-            var ddRules = 'dt.rules-';
-            var rulesSelector = ddRules + ['Alphanum', 'Regex', 'Token', 'Email', 'Guid', 'IsoDate', 'Hostname',
+            const $ = Cheerio.load(res.result);
+            const ddRules = 'dt.rules-';
+            const rulesSelector = ddRules + ['Alphanum', 'Regex', 'Token', 'Email', 'Guid', 'IsoDate', 'Hostname',
                 'Lowercase', 'Uppercase', 'Trim'
-            ].join(',' + ddRules);
+            ].join(`,${ddRules}`);
 
             expect($('dd.rules-Regex').text()).to.contain('/\\d{3}.*/');
             expect($(rulesSelector).length).to.equal(10);
@@ -474,11 +474,11 @@ describe('Lout', function () {
         });
     });
 
-    it('should support conditional alternatives', function (done) {
+    it('should support conditional alternatives', (done) => {
 
-        server.inject('/docs?server=http://test&path=/withconditionalalternatives', function (res) {
+        server.inject('/docs?server=http://test&path=/withconditionalalternatives', (res) => {
 
-            var $ = Cheerio.load(res.result);
+            const $ = Cheerio.load(res.result);
             expect($('.condition-text').text().replace(/\n|\s+/g, ''))
                 .to.contain('Ifbmatchesthefollowingmodel')
                 .to.contain('Ifamatchesthefollowingmodel');
@@ -493,11 +493,11 @@ describe('Lout', function () {
         });
     });
 
-    it('should support references', function (done) {
+    it('should support references', (done) => {
 
-        server.inject('/docs?server=http://test&path=/withreferences', function (res) {
+        server.inject('/docs?server=http://test&path=/withreferences', (res) => {
 
-            var $ = Cheerio.load(res.result);
+            const $ = Cheerio.load(res.result);
             expect($('dd.ref-target').text())
                 .to.contain('a.b')
                 .to.contain('$x');
@@ -505,11 +505,11 @@ describe('Lout', function () {
         });
     });
 
-    it('should support assertions', function (done) {
+    it('should support assertions', (done) => {
 
-        server.inject('/docs?server=http://test&path=/withassert', function (res) {
+        server.inject('/docs?server=http://test&path=/withassert', (res) => {
 
-            var $ = Cheerio.load(res.result);
+            const $ = Cheerio.load(res.result);
             expect($('.assertion-text').text().replace(/\n|\s+/g, ''))
                 .to.contain('Assertsthatd.ematchesthefollowingmodel')
                 .to.contain('Assertsthat$xmatchesthefollowingmodel');
@@ -520,11 +520,11 @@ describe('Lout', function () {
         });
     });
 
-    it('should show properties of the route', function (done) {
+    it('should show properties of the route', (done) => {
 
-        server.inject('/docs?server=http://test&path=/withproperties', function (res) {
+        server.inject('/docs?server=http://test&path=/withproperties', (res) => {
 
-            var $ = Cheerio.load(res.result);
+            const $ = Cheerio.load(res.result);
             expect($('p.vhost').text()).to.equal('john.doe');
             expect($('dd.cors-maxAge').text()).to.equal('12345');
             expect($('p.jsonp').text()).to.equal('callback');
@@ -532,44 +532,44 @@ describe('Lout', function () {
         });
     });
 
-    it('should handle cors: true', function (done) {
+    it('should handle cors: true', (done) => {
 
-        server.inject('/docs?server=http://test&path=/withcorstrue', function (res) {
+        server.inject('/docs?server=http://test&path=/withcorstrue', (res) => {
 
-            var $ = Cheerio.load(res.result);
+            const $ = Cheerio.load(res.result);
             expect($('h3.cors').text()).to.equal('CORS');
             expect($('dd.cors-maxAge').text()).to.equal('86400');
             done();
         });
     });
 
-    it('should support references in rules', function (done) {
+    it('should support references in rules', (done) => {
 
-        server.inject('/docs?server=http://test&path=/withrulereference', function (res) {
+        server.inject('/docs?server=http://test&path=/withrulereference', (res) => {
 
-            var $ = Cheerio.load(res.result);
+            const $ = Cheerio.load(res.result);
             expect($('.rules-Min .reference').text()).to.equal('param2');
             done();
         });
     });
 
-    it('should remove stripped fields', function (done) {
+    it('should remove stripped fields', (done) => {
 
-        server.inject('/docs?server=http://test&path=/withstrip', function (res) {
+        server.inject('/docs?server=http://test&path=/withstrip', (res) => {
 
-            var $ = Cheerio.load(res.result);
+            const $ = Cheerio.load(res.result);
             expect($('.glyphicon-trash')).to.have.length(1);
             done();
         });
     });
 
-    it('should not show internal routes', function (done) {
+    it('should not show internal routes', (done) => {
 
-        server.inject('/docs', function (resRoot) {
+        server.inject('/docs', (resRoot) => {
 
             expect(resRoot.result).to.not.contain('/result');
 
-            server.inject('/docs?server=http://test&path=/internal', function (resPath) {
+            server.inject('/docs?server=http://test&path=/internal', (resPath) => {
 
                 expect(resPath.statusCode).to.equal(404);
                 done();
@@ -578,11 +578,11 @@ describe('Lout', function () {
     });
 
 
-    it('should support status schema', function (done) {
+    it('should support status schema', (done) => {
 
-        server.inject('/docs?server=http://test&path=/withstatus', function (res) {
+        server.inject('/docs?server=http://test&path=/withstatus', (res) => {
 
-            var $ = Cheerio.load(res.result);
+            const $ = Cheerio.load(res.result);
             expect($('.collapse').text())
                 .to.contain('204')
                 .to.contain('param2')
@@ -593,30 +593,27 @@ describe('Lout', function () {
     });
 
 
-    describe('Authentication', function () {
+    describe('Authentication', () => {
 
-        before(function (done) {
+        before((done) => {
 
             server = new Hapi.Server();
             server.connection({ host: 'test' });
 
-            server.auth.scheme('testScheme', function () {
-
-                return {
-                    authenticate: function () {},
-                    payload: function () {},
-                    response: function () {}
-                };
-            });
+            server.auth.scheme('testScheme', () => ({
+                authenticate() {},
+                payload() {},
+                response() {}
+            }));
             server.auth.strategy('testStrategy', 'testScheme', true);
 
             server.route(require('./routes/withauth'));
             internals.bootstrapServer(server, require('../'), done);
         });
 
-        it('should display authentication information', function (done) {
+        it('should display authentication information', (done) => {
 
-            server.inject('/docs?server=http://test&path=/withauth', function (res) {
+            server.inject('/docs?server=http://test&path=/withauth', (res) => {
 
                 expect(res).to.exist();
                 expect(res.result).to.contain('Strategies');
@@ -624,11 +621,11 @@ describe('Lout', function () {
             });
         });
 
-        it('should display authentication information with an object', function (done) {
+        it('should display authentication information with an object', (done) => {
 
-            server.inject('/docs?server=http://test&path=/withauthasobject', function (res) {
+            server.inject('/docs?server=http://test&path=/withauthasobject', (res) => {
 
-                var $ = Cheerio.load(res.result);
+                const $ = Cheerio.load(res.result);
                 expect($('p.auth-strategies').text()).to.equal('testStrategy');
                 expect($('p.auth-mode').text()).to.equal('try');
                 expect($('p.auth-payload').text()).to.equal('optional');
@@ -638,11 +635,11 @@ describe('Lout', function () {
             });
         });
 
-        it('should display authentication information with a default auth', function (done) {
+        it('should display authentication information with a default auth', (done) => {
 
-            server.inject('/docs?server=http://test&path=/withimplicitauth', function (res) {
+            server.inject('/docs?server=http://test&path=/withimplicitauth', (res) => {
 
-                var $ = Cheerio.load(res.result);
+                const $ = Cheerio.load(res.result);
                 expect($('p.auth-strategies').text()).to.equal('testStrategy');
                 expect($('p.auth-mode').text()).to.equal('required');
                 expect($('p.auth-payload').length).to.equal(0);
@@ -653,18 +650,20 @@ describe('Lout', function () {
         });
     });
 
-    describe('Index', function () {
+    describe('Index', () => {
 
-        it('doesn\'t throw an error when requesting the index when there are no POST routes', function (done) {
+        it('doesn\'t throw an error when requesting the index when there are no POST routes', (done) => {
 
             server = new Hapi.Server();
             server.connection();
 
             server.route(require('./routes/withoutpost'));
 
-            internals.bootstrapServer(server, require('../'), function () {
+            internals.bootstrapServer(server, require('../'), (err) => {
 
-                server.inject('/docs', function (res) {
+                expect(err).to.not.exist();
+
+                server.inject('/docs', (res) => {
 
                     expect(res).to.exist();
                     expect(res.result).to.contain('/test');
@@ -675,11 +674,11 @@ describe('Lout', function () {
     });
 });
 
-describe('Customized Lout', function () {
+describe('Customized Lout', () => {
 
-    it('should succeed with a basePath without helpers', function (done) {
+    it('should succeed with a basePath without helpers', (done) => {
 
-        var server = new Hapi.Server();
+        const server = new Hapi.Server();
         server.connection();
 
         internals.bootstrapServer(server, {
@@ -687,15 +686,12 @@ describe('Customized Lout', function () {
             options: {
                 basePath: Path.join(__dirname, './custom-test-files')
             }
-        }, function () {
-
-            done();
-        });
+        }, done);
     });
 
-    it('should succeed with an apiVersion', function (done) {
+    it('should succeed with an apiVersion', (done) => {
 
-        var server = new Hapi.Server();
+        const server = new Hapi.Server();
         server.connection();
         server.route(require('./routes/default'));
 
@@ -704,23 +700,23 @@ describe('Customized Lout', function () {
             options: {
                 apiVersion: '3.3.3'
             }
-        }, function (err) {
+        }, (err) => {
 
             expect(err).to.not.exist();
 
-            server.inject('/docs', function (res) {
+            server.inject('/docs', (res) => {
 
                 expect(res).to.exist();
-                var $ = Cheerio.load(res.result);
+                const $ = Cheerio.load(res.result);
                 expect($('a.navbar-brand').text()).to.match(/v3\.3\.3$/);
                 done();
             });
         });
     });
 
-    it('should succeed with a correct configuration', function (done) {
+    it('should succeed with a correct configuration', (done) => {
 
-        var server = new Hapi.Server();
+        const server = new Hapi.Server();
         server.connection();
 
         internals.bootstrapServer(server, {
@@ -730,22 +726,19 @@ describe('Customized Lout', function () {
                 helpersPath: '.',
                 cssPath: null
             }
-        }, function () {
-
-            done();
-        });
+        }, done);
     });
 
-    it('should succeed with a custom engine', function (done) {
+    it('should succeed with a custom engine', (done) => {
 
-        var server = new Hapi.Server();
+        const server = new Hapi.Server();
         server.connection();
 
-        var options = {
+        const options = {
             engines: {
                 custom: {
                     module: {
-                        compile: function () {}
+                        compile() {}
                     }
                 }
             }
@@ -754,16 +747,12 @@ describe('Customized Lout', function () {
         internals.bootstrapServer(server, {
             register: require('../'),
             options: options
-        }, function (err) {
-
-            expect(err).to.not.exist();
-            done();
-        });
+        }, done);
     });
 
-    it('should serve a custom css', function (done) {
+    it('should serve a custom css', (done) => {
 
-        var server = new Hapi.Server();
+        const server = new Hapi.Server();
         server.connection();
 
         internals.bootstrapServer(server, {
@@ -771,9 +760,11 @@ describe('Customized Lout', function () {
             options: {
                 cssPath: Path.join(__dirname, './custom-test-files/css')
             }
-        }, function () {
+        }, (err) => {
 
-            server.inject('/docs/css/style.css', function (res) {
+            expect(err).not.to.exist();
+
+            server.inject('/docs/css/style.css', (res) => {
 
                 expect(res).to.exist();
                 expect(res.result).to.contain('.cssTest');
@@ -782,9 +773,9 @@ describe('Customized Lout', function () {
         });
     });
 
-    it('ignores methods', function (done) {
+    it('ignores methods', (done) => {
 
-        var server = new Hapi.Server();
+        const server = new Hapi.Server();
         server.connection();
 
         server.route(require('./routes/default'));
@@ -792,14 +783,15 @@ describe('Customized Lout', function () {
         internals.bootstrapServer(server, {
             register: require('../'),
             options: {
-                filterRoutes: function (route) {
+                filterRoutes(route) {
 
                     return route.method !== 'delete' && route.path !== '/test';
                 }
             }
-        }, function () {
+        }, (err) => {
 
-            server.inject('/docs', function (res) {
+            expect(err).not.to.exist();
+            server.inject('/docs', (res) => {
 
                 expect(res.result).to.not.contain('?server=http://test&path=/test');
                 expect(res.result).to.not.contain('#DELETE');
@@ -810,11 +802,11 @@ describe('Customized Lout', function () {
 });
 
 
-describe('Multiple connections', function () {
+describe('Multiple connections', () => {
 
-    var server = null;
+    let server = null;
 
-    before(function (done) {
+    before((done) => {
 
         server = new Hapi.Server();
         server.connection({ host: 'test', port: 1, labels: 'c1' });
@@ -822,31 +814,29 @@ describe('Multiple connections', function () {
 
         server.route(require('./routes/default'));
 
-        internals.bootstrapServer(server, require('../'), function () {
-
-            done();
-        });
+        internals.bootstrapServer(server, require('../'), done);
     });
 
-    it('should load all the servers routes', function (done) {
+    it('should load all the servers routes', (done) => {
 
-        server.connections[0].inject('/docs', function (res) {
+        server.connections[0].inject('/docs', (res) => {
 
-            var tables = server.table();
+            const tables = server.table();
             expect(tables).to.have.length(2);
-            tables.forEach(function (connection) {
+            tables.forEach((connection) => {
 
                 expect(res.result).to.contain(connection.info.uri);
 
-                connection.table.forEach(function (route) {
+                connection.table.forEach((route) => {
 
                     if ((route.settings.plugins && (route.settings.plugins.lout === false || route.settings.isInternal)) ||
                         route.path === '/docs' ||
                         route.method === 'options') {
 
-                        expect(res.result).to.not.contain('?server=' + connection.info.uri + '&path=' + route.path);
-                    } else {
-                        expect(res.result).to.contain('?server=' + connection.info.uri + '&path=' + route.path);
+                        expect(res.result).to.not.contain(`?server=${connection.info.uri}&path=${route.path}`);
+                    }
+                    else {
+                        expect(res.result).to.contain(`?server=${connection.info.uri}&path=${route.path}`);
                     }
                 });
             });
@@ -854,55 +844,55 @@ describe('Multiple connections', function () {
         });
     });
 
-    it('should only show one server if parameter is there', function (done) {
+    it('should only show one server if parameter is there', (done) => {
 
-        server.connections[0].inject('/docs?server=http://test:1', function (res) {
+        server.connections[0].inject('/docs?server=http://test:1', (res) => {
 
-            var table = server.table();
+            const table = server.table();
             expect(table).to.have.length(2);
 
-            var table1, table2;
-            table.forEach(function (connection) {
+            let table1;
+            let table2;
+            table.forEach((connection) => {
 
-                var uri = connection.info.uri;
+                const uri = connection.info.uri;
                 if (uri === 'http://test:1') {
                     table1 = connection.table;
-                } else if (uri === 'http://test:2') {
+                }
+                else if (uri === 'http://test:2') {
                     table2 = connection.table;
                 }
             });
 
             expect(res.result).to.contain('http://test:1');
-            table1.forEach(function (route) {
+            table1.forEach((route) => {
 
                 if ((route.settings.plugins && (route.settings.plugins.lout === false || route.settings.isInternal)) ||
                     route.path === '/docs' ||
                     route.method === 'options') {
 
-                    expect(res.result).to.not.contain('?server=http://test:1&path=' + route.path);
-                } else {
-                    expect(res.result).to.contain('?server=http://test:1&path=' + route.path);
+                    expect(res.result).to.not.contain(`?server=http://test:1&path=${route.path}`);
+                }
+                else {
+                    expect(res.result).to.contain(`?server=http://test:1&path=${route.path}`);
                 }
             });
 
             expect(res.result).to.not.contain('http://test:2');
-            table2.forEach(function (route) {
-
-                expect(res.result).to.not.contain('?server=http://test:2&path=' + route.path);
-            });
+            table2.forEach((route) => expect(res.result).to.not.contain(`?server=http://test:2&path=${route.path}`));
 
             done();
         });
     });
 });
 
-describe('Select connections', function () {
+describe('Select connections', () => {
 
-    var server = null;
-    var selected = ['c2'];
-    var unselected = ['c1'];
+    let server;
+    const selected = ['c2'];
+    const unselected = ['c1'];
 
-    before(function (done) {
+    before((done) => {
 
         server = new Hapi.Server();
         server.connection({ host: 'test', port: 1, labels: 'c1' });
@@ -913,66 +903,66 @@ describe('Select connections', function () {
         internals.bootstrapServer(server, require('../'), { select: 'c2' }, done);
     });
 
-    it('should load all the selected servers routes', function (done) {
+    it('should load all the selected servers routes', (done) => {
 
-        server.select(selected).inject('/docs', function (res) {
+        server.select(selected).inject('/docs', (res) => {
 
-            var selectedTables = server.select(selected).table();
-            var unselectedTables = server.select(unselected).table();
+            const selectedTables = server.select(selected).table();
+            const unselectedTables = server.select(unselected).table();
             expect(selectedTables).to.have.length(1);
             expect(unselectedTables).to.have.length(1);
-            selectedTables.forEach(function (connection) {
+            selectedTables.forEach((connection) => {
 
                 expect(res.result).to.contain(connection.info.uri);
 
-                connection.table.forEach(function (route) {
+                connection.table.forEach((route) => {
 
                     if ((route.settings.plugins && (route.settings.plugins.lout === false || route.settings.isInternal)) ||
                         route.path === '/docs' ||
                         route.method === 'options') {
 
-                        expect(res.result).to.not.contain('?server=' + connection.info.uri + '&path=' + route.path);
-                    } else {
-                        expect(res.result).to.contain('?server=' + connection.info.uri + '&path=' + route.path);
+                        expect(res.result).to.not.contain(`?server=${connection.info.uri}&path=${route.path}`);
+                    }
+                    else {
+                        expect(res.result).to.contain(`?server=${connection.info.uri}&path=${route.path}`);
                     }
                 });
             });
-            unselectedTables.forEach(function (connection) {
 
-                expect(res.result).to.not.contain(connection.info.uri);
-            });
+            unselectedTables.forEach((connection) => expect(res.result).to.not.contain(connection.info.uri));
+
             done();
         });
     });
 });
 
-describe('Multiple paths', function () {
+describe('Multiple paths', () => {
 
-    it('should show separate paths', function (done) {
+    it('should show separate paths', (done) => {
 
-        var server = new Hapi.Server();
+        const server = new Hapi.Server();
         server.connection({ host: 'test' });
         server.route({
             method: 'GET',
             path: '/v1/test',
-            handler: function () {}
+            handler() {}
         });
         server.route({
             method: 'GET',
             path: '/v2/test',
-            handler: function () {}
+            handler() {}
         });
         server.route({
             method: 'GET',
             path: '/another',
-            handler: function () {}
+            handler() {}
         });
 
         internals.bootstrapServer(server, [{
             register: require('../'),
             options: {
                 endpoint: '/docs/v1',
-                filterRoutes: function (route) {
+                filterRoutes(route) {
 
                     return /^\/v1/.test(route.path);
                 }
@@ -981,31 +971,31 @@ describe('Multiple paths', function () {
             register: require('../'),
             options: {
                 endpoint: '/docs/v2',
-                filterRoutes: function (route) {
+                filterRoutes(route) {
 
                     return /^\/v2/.test(route.path);
                 }
             }
-        }], function (err) {
+        }], (err) => {
 
             expect(err).to.not.exist();
 
-            var routes = server.table();
+            const routes = server.table();
             expect(routes[0].table).to.have.length(7); // 3 routes, 2 docs routes, 2 css routes
 
-            server.inject('/docs/v1', function (resv1) {
+            server.inject('/docs/v1', (resv1) => {
 
-                var $ = Cheerio.load(resv1.result);
+                const $ = Cheerio.load(resv1.result);
                 expect($('.route-index > a').length).to.equal(1);
                 expect($('.route-index > a').attr('href')).to.equal('?server=http://test&path=/v1/test#GET');
 
-                server.inject('/docs/v2', function (resv2) {
+                server.inject('/docs/v2', (resv2) => {
 
-                    $ = Cheerio.load(resv2.result);
-                    expect($('.route-index > a').length).to.equal(1);
-                    expect($('.route-index > a').attr('href')).to.equal('?server=http://test&path=/v2/test#GET');
+                    const $$ = Cheerio.load(resv2.result);
+                    expect($$('.route-index > a').length).to.equal(1);
+                    expect($$('.route-index > a').attr('href')).to.equal('?server=http://test&path=/v2/test#GET');
 
-                    server.inject('/docs', function (res) {
+                    server.inject('/docs', (res) => {
 
                         expect(res.statusCode).to.equal(404);
                         done();

@@ -1,27 +1,28 @@
 'use strict';
 
-var Handlebars = require('handlebars');
+const Handlebars = require('handlebars');
 
-var uniqueId = 0;
+let uniqueId = 0;
 
 module.exports = function (options) {
 
-    var data = Handlebars.createFrame(options.data);
+    const data = Handlebars.createFrame(options.data);
     data.collapseId = uniqueId++;
 
-    var children = options.fn.partials.children(this).trim(),
-        content = options.fn(this).trim();
+    const children = options.fn.partials.children(this).trim();
+    let content = options.fn(this).trim();
     if (content) {
         data.static = false;
 
-        var header = options.fn.partials.header(this, { data: data }).trim();
-        content = header
-            + '<div class="collapse" id="type' + data.collapseId + '">'
-                + '<dl class="well">'
-                    + content
-                + '</dl>'
-            + '</div>';
-    } else {
+        const header = options.fn.partials.header(this, { data }).trim();
+        content = `${header}
+            <div class="collapse" id="type${data.collapseId}">
+                <dl class="well">
+                    ${content}
+                </dl>
+            </div>`;
+    }
+    else {
         data.static = true;
         content = options.fn.partials.header(this, { data: data });
     }

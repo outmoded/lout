@@ -1,15 +1,14 @@
-var Joi = require('joi');
+'use strict';
 
-var handler = function (request) {
+const Joi = require('joi');
 
-    request.reply('ok');
-};
+const handler = (request) => request.reply('ok');
 
 module.exports = {
     method: 'GET',
     path: '/test',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param1: Joi.string().required()

@@ -1,28 +1,26 @@
 #!/usr/bin/env node
 
-var Hapi = require('hapi');
-var Inert = require('inert');
-var Vision = require('vision');
+const Hapi = require('hapi');
+const Inert = require('inert');
+const Vision = require('vision');
 
-var port = Number(process.env.PORT || 3000);
-var server = new Hapi.Server();
+const port = Number(process.env.PORT || 3000);
+const server = new Hapi.Server();
 server.connection({ host: process.env.HOSTNAME || 'localhost', address: process.env.IP || '0.0.0.0', port: port });
 
-server.auth.scheme('testScheme', function() {
+server.auth.scheme('testScheme', () => ({
+    authenticate() {},
+    payload() {},
+    response() {}
+}));
 
-    return {
-        authenticate: function() {},
-        payload: function() {},
-        response: function() {}
-    };
-});
 server.auth.strategy('testStrategy', 'testScheme');
 
 server.route({
   method: 'GET',
   path: '/',
-  handler: function(request, reply) {
-    reply.redirect('http://' + request.info.host + '/docs');
+  handler(request, reply) {
+    reply.redirect(`http://${request.info.host}/docs`);
   }
 });
 
@@ -31,7 +29,7 @@ server.route(require('../test/routes/default'));
 server.route(require('../test/routes/withauth'));
 
 server.register([Inert, Vision, require('../')], function(err) {
-  server.start(function() {
+  server.start(() => {
     console.log('Listening on', server.info.uri);
   });
 });

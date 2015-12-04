@@ -1,6 +1,6 @@
 'use strict';
 
-var Handlebars = require('handlebars');
+const Handlebars = require('handlebars');
 
 module.exports = function (context) {
 

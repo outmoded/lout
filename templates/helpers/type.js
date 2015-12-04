@@ -1,10 +1,10 @@
 'use strict';
 
-var Handlebars = require('handlebars');
+const Handlebars = require('handlebars');
 
 module.exports = function () {
 
-    var type = this.type;
+    let type = this.type;
     if (type === 'object'
         || type === 'alternatives'
         || (type === 'array' && this.items)) {
@@ -15,5 +15,5 @@ module.exports = function () {
         return new Handlebars.SafeString('<span>&nbsp;</span>');
     }
 
-    return new Handlebars.SafeString('<span class="field-type">' + type + '</span>');
+    return new Handlebars.SafeString(`<span class="field-type">${type}</span>`);
 };

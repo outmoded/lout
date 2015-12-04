@@ -1,15 +1,14 @@
-var Joi = require('joi');
+'use strict';
 
-var handler = function (request) {
+const Joi = require('joi');
 
-    request.reply('ok');
-};
+const handler = (request) => request.reply('ok');
 
 module.exports = [{
     method: 'GET',
     path: '/test',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param1: Joi.string().insensitive().required()
@@ -23,7 +22,7 @@ module.exports = [{
     method: 'GET',
     path: '/another/test',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param1: Joi.string().required()
@@ -34,7 +33,7 @@ module.exports = [{
     method: 'GET',
     path: '/zanother/test',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param1: Joi.string().required()
@@ -45,7 +44,7 @@ module.exports = [{
     method: 'POST',
     path: '/test',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param2: Joi.string().valid('first', 'last'),
@@ -58,7 +57,7 @@ module.exports = [{
     method: 'DELETE',
     path: '/test',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param2: Joi.string().valid('first', 'last')
@@ -69,7 +68,7 @@ module.exports = [{
     method: 'PUT',
     path: '/test',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param2: Joi.string().valid('first', 'last')
@@ -80,7 +79,7 @@ module.exports = [{
     method: 'PATCH',
     path: '/test',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param2: Joi.string().valid('first', 'last'),
@@ -92,7 +91,7 @@ module.exports = [{
     method: 'GET',
     path: '/notincluded',
     config: {
-        handler: handler,
+        handler,
         plugins: {
             lout: false
         }
@@ -101,7 +100,7 @@ module.exports = [{
     method: 'GET',
     path: '/nested',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param1: Joi.object({
@@ -115,7 +114,7 @@ module.exports = [{
     method: 'GET',
     path: '/rootobject',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: Joi.object({
                 param1: Joi.string().required()
@@ -126,7 +125,7 @@ module.exports = [{
     method: 'GET',
     path: '/rootarray',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: Joi.array().items(
                 Joi.string().required(),
@@ -139,7 +138,7 @@ module.exports = [{
     method: 'GET',
     path: '/complexarray',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: Joi.array()
             .ordered('foo', 'bar')
@@ -159,7 +158,7 @@ module.exports = [{
     method: 'GET',
     path: '/path/{pparam}/test',
     config: {
-        handler: handler,
+        handler,
         validate: {
             params: {
                 pparam: Joi.string().required()
@@ -170,7 +169,7 @@ module.exports = [{
     method: 'GET',
     path: '/emptyobject',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param1: Joi.object()
@@ -181,7 +180,7 @@ module.exports = [{
     method: 'GET',
     path: '/alternatives',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param1: Joi.alternatives().try(Joi.number().required(), Joi.string().valid('first', 'last'))
@@ -192,7 +191,7 @@ module.exports = [{
     method: 'GET',
     path: '/withnestedalternatives',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param1: Joi.object({
@@ -226,13 +225,13 @@ module.exports = [{
     method: 'GET',
     path: '/novalidation',
     config: {
-        handler: handler
+        handler
     }
 }, {
     method: 'GET',
     path: '/withresponse',
     config: {
-        handler: handler,
+        handler,
         response: {
             schema: {
                 param1: Joi.string()
@@ -243,7 +242,7 @@ module.exports = [{
     method: 'GET',
     path: '/withstatus',
     config: {
-        handler: handler,
+        handler,
         response: {
             schema: {
                 param1: Joi.string()
@@ -262,7 +261,7 @@ module.exports = [{
     method: 'GET',
     path: '/withpojoinarray',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param1: Joi.array().items({
@@ -275,7 +274,7 @@ module.exports = [{
     method: 'POST',
     path: '/withnestedrulesarray',
     config: {
-        handler: handler,
+        handler,
         validate: {
             payload: {
                 param1: Joi.array().items(Joi.object({
@@ -290,7 +289,7 @@ module.exports = [{
     method: 'GET',
     path: '/withhtmlnote',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param1: Joi.string().notes('<span class="htmltypenote">HTML type note</span>')
@@ -302,7 +301,7 @@ module.exports = [{
     method: 'GET',
     path: '/withnotesarray',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param1: Joi.string().notes([
@@ -316,7 +315,7 @@ module.exports = [{
     method: 'GET',
     path: '/withexample',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param1: Joi.string().regex(/^\w{1,5}$/).example('abcde')
@@ -327,7 +326,7 @@ module.exports = [{
     method: 'POST',
     path: '/denybody',
     config: {
-        handler: handler,
+        handler,
         validate: {
             payload: false
         }
@@ -336,7 +335,7 @@ module.exports = [{
     method: 'POST',
     path: '/rootemptyobject',
     config: {
-        handler: handler,
+        handler,
         validate: {
             payload: Joi.object()
         }
@@ -345,7 +344,7 @@ module.exports = [{
     method: 'GET',
     path: '/withnestedexamples',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param1: Joi.object({
@@ -366,7 +365,7 @@ module.exports = [{
     method: 'GET',
     path: '/withmeta',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param1: Joi.string().meta({
@@ -380,7 +379,7 @@ module.exports = [{
     method: 'GET',
     path: '/withunit',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param1: Joi.number().unit('ms')
@@ -391,7 +390,7 @@ module.exports = [{
     method: 'GET',
     path: '/withdefaultvalue',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param1: Joi.number().default(42)
@@ -402,7 +401,7 @@ module.exports = [{
     method: 'GET',
     path: '/withbinaryencoding',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param1: Joi.binary().min(42).max(128).length(64).encoding('base64')
@@ -413,7 +412,7 @@ module.exports = [{
     method: 'GET',
     path: '/withdate',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param1: Joi.date().min('1-1-1974').max('12-31-2020')
@@ -424,7 +423,7 @@ module.exports = [{
     method: 'GET',
     path: '/withpeersconditions',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param1: Joi.object()
@@ -440,7 +439,7 @@ module.exports = [{
     method: 'GET',
     path: '/withpattern',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param1: Joi.object({
@@ -454,7 +453,7 @@ module.exports = [{
     method: 'GET',
     path: '/withallowunknown',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param1: Joi.object().unknown(),
@@ -466,7 +465,7 @@ module.exports = [{
     method: 'GET',
     path: '/withstringspecifics',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param1: Joi.string()
@@ -488,7 +487,7 @@ module.exports = [{
     method: 'GET',
     path: '/withconditionalalternatives',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param1: Joi.alternatives()
@@ -518,7 +517,7 @@ module.exports = [{
     method: 'GET',
     path: '/withreferences',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param1: Joi.ref('a.b'),
@@ -530,7 +529,7 @@ module.exports = [{
     method: 'GET',
     path: '/withassert',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param1: Joi.object().assert('d.e', Joi.ref('a.c'), 'equal to a.c'),
@@ -543,7 +542,7 @@ module.exports = [{
     path: '/withproperties',
     vhost: 'john.doe',
     config: {
-        handler: handler,
+        handler,
         cors: {
             maxAge: 12345
         },
@@ -552,12 +551,12 @@ module.exports = [{
 }, {
     method: 'OPTIONS',
     path: '/optionstest',
-    handler: handler
+    handler
 }, {
     method: 'GET',
     path: '/withrulereference',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param1: Joi.date().min(Joi.ref('param2')),
@@ -570,14 +569,14 @@ module.exports = [{
     path: '/withcorstrue',
     vhost: 'john.doe',
     config: {
-        handler: handler,
+        handler,
         cors: true
     }
 }, {
     method: 'GET',
     path: '/withstrip',
     config: {
-        handler: handler,
+        handler,
         validate: {
             query: {
                 param1: Joi.any().strip(),
@@ -590,6 +589,6 @@ module.exports = [{
     path: '/internal',
     config: {
         isInternal: true,
-        handler: handler
+        handler
     }
 }];
