@@ -24,7 +24,7 @@ module.exports = function (options) {
     }
     else {
         data.static = true;
-        content = options.fn.partials.header(this, { data: data });
+        content = options.fn.partials.header(this, { data });
     }
 
     return new Handlebars.SafeString(content + children);

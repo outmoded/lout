@@ -453,7 +453,7 @@ describe('Lout', () => {
         server.inject('/docs?server=http://test&path=/test', (res) => {
 
             const $ = Cheerio.load(res.result);
-            expect($('.field-forbidden-values').length).to.equal(0);
+            expect($('.field-forbidden-values').text()).to.equal('none of"second"');
             done();
         });
     });

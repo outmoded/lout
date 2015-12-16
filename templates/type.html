@@ -6,20 +6,20 @@
                     <span class="condition-key">{{this.condition.key}}</span>
                     <span>matches the following model :</span>
                 </span>
-                <ul class="list-unstyled list-children condition-model">{{> type this.condition.value}}</ul>
+                <ul class="list-unstyled list-children condition-model">{{> type this.condition.value alternative=true}}</ul>
             </span>
             <span class="consequence">
                 <span class="consequence-text">Then :</span>
-                <ul class="list-unstyled list-children consequence-model">{{> type this.then}}</ul>
+                <ul class="list-unstyled list-children consequence-model">{{> type this.then alternative=true}}</ul>
             </span>
             <span class="consequence">
                 <span class="consequence-text">Otherwise :</span>
-                <ul class="list-unstyled list-children consequence-model">{{> type this.otherwise}}</ul>
+                <ul class="list-unstyled list-children consequence-model">{{> type this.otherwise alternative=true}}</ul>
             </span>
     {{else}}
         {{#collapse}}
             {{#*inline "header"}}
-                {{> type-header ~}}
+                {{> type-header alternative=alternative ~}}
             {{/inline}}
             {{#*inline "children"}}
                 {{~#if (exists this.children) ~}}
@@ -73,7 +73,7 @@
             {{/if}}
             {{#if this.target}}
                 <dt class="ref-target">Target</dt>
-                <dd class="ref-target">{{this.target}}</dd>
+                <dd class="ref-target">{{join this.target}}</dd>
             {{/if}}
             {{#if this.unit}}
                 <dt>Unit</dt>
@@ -86,7 +86,7 @@
             {{#if this.disallowedValues}}
                 <dt class="field-forbidden-values">none of</dt>
                 {{~! Strip Whitespace ~}}
-                <dd class="field-forbidden-values">{{this.disallowedValues}}</dd>
+                <dd class="field-forbidden-values">{{join this.disallowedValues}}</dd>
             {{/if}}
             {{#if this.peers}}
                 <dt class="peers-conditions">Peers conditions</dt>

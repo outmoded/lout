@@ -3,16 +3,18 @@
         {{#if this.name }}
             <h5>
                 {{#if @static}}
-                    {{~ this.name ~}}
+                    {{~ name ~}}
                 {{~else~}}
                     <a role="button" data-toggle="collapse" href="#type{{@collapseId}}" aria-expanded="false" aria-controls="type{{@collapseId}}">
-                        {{~ this.name ~}}
+                        {{~ name ~}}
                     </a>
                 {{~/ if ~}}
             </h5>
+        {{else}}
+            {{~ name ~}}
         {{~/ if ~}}
 
-        {{~ type ~}}
+        {{~ type alternative ~}}
         {{#if this.flags.required}}
             <i class="glyphicon glyphicon-star" title="This is a required field."></i>
         {{/if}}
