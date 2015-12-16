@@ -15,4 +15,4 @@ deploy:
     app: lout
     on:
       repo: hapijs/lout
-      node: "0.10"
+      node: "4"
