@@ -3,7 +3,7 @@
 
 <head>
     <title>Documentation for {{#if this}}{{this.0.path}}{{/if}}</title>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href=".{{@cssBaseUrl}}/style.css" rel="stylesheet">
 </head>
 
@@ -28,8 +28,8 @@
         {{#each this}}
         <div class="panel panel-default route">
             <a name="{{this.method}}" class="anchor"></a>
-            <div class="panel-heading h2 {{this.method}}">
-                <span class="method-title">
+            <div class="panel-heading {{this.method}}">
+                <span class="method-title h2">
                     {{#if this.name}}
                     <span>{{this.name}}</span>
                     {{else}}
@@ -240,6 +240,6 @@
     </div>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>
 </html>
