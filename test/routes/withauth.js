@@ -24,6 +24,24 @@ module.exports = [{
     }
 }, {
     method: 'GET',
+    path: '/withmultipleaccess',
+    config: {
+        handler,
+        auth: {
+            mode: 'try',
+            strategy: 'testStrategy',
+            payload: 'optional',
+            access: [{
+                scope: ['!a', '+b', 'c', 'd'],
+                entity: 'user'
+            }, {
+                scope: ['abcd'],
+                entity: 'any'
+            }]
+        }
+    }
+}, {
+    method: 'GET',
     path: '/withimplicitauth',
     config: {
         handler

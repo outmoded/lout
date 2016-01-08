@@ -635,6 +635,20 @@ describe('Lout', () => {
             });
         });
 
+        it('should display authentication information with multiple access', (done) => {
+
+            server.inject('/docs?server=http://test&path=/withmultipleaccess', (res) => {
+
+                const $ = Cheerio.load(res.result);
+                expect($('p.auth-strategies').text()).to.equal('testStrategy');
+                expect($('p.auth-mode').text()).to.equal('try');
+                expect($('p.auth-payload').text()).to.equal('optional');
+                expect($('p.auth-scope').text()).to.equal('bc,daabcd');
+                expect($('p.auth-entity').text()).to.equal('userany');
+                done();
+            });
+        });
+
         it('should display authentication information with a default auth', (done) => {
 
             server.inject('/docs?server=http://test&path=/withimplicitauth', (res) => {

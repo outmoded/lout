@@ -66,13 +66,35 @@
                     {{#if this.auth.payload}}
                     <h4 class="auth-header auth-payload col-sm-2">Payload</h4>
                     <p class="auth-value auth-payload">{{this.auth.payload}}</p>
-                    {{/if}} {{#if this.auth.scope}}
-                    <h4 class="auth-header auth-scope col-sm-2">Scope</h4>
-                    <p class="auth-value auth-scope">{{this.auth.scope}}</p>
-                    {{/if}} {{#if this.auth.entity}}
-                    <h4 class="auth-header auth-entity col-sm-2">Entity</h4>
-                    <p class="auth-value auth-entity">{{this.auth.entity}}</p>
-                    {{/if}} {{#if this.auth.tos}}
+                    {{/if}}
+                    {{#if this.auth.access}}
+                        <h4 class="auth-header auth-scope col-sm-2">Scopes</h4>
+                        <ul class="auth-access">
+                        {{#each this.auth.access}}
+                            <li>
+                                {{#if this.scope}}
+                                    {{#if this.scope.required}}
+                                        <h5 class="auth-header auth-scope col-sm-2">Required</h5>
+                                        <p class="auth-value auth-scope">{{this.scope.required}}</p>
+                                    {{/if}}
+                                    {{#if this.scope.selection}}
+                                        <h5 class="auth-header auth-scope col-sm-2">Selection</h5>
+                                        <p class="auth-value auth-scope">{{this.scope.selection}}</p>
+                                    {{/if}}
+                                    {{#if this.scope.forbidden}}
+                                        <h5 class="auth-header auth-scope col-sm-2">Forbidden</h5>
+                                        <p class="auth-value auth-scope">{{this.scope.forbidden}}</p>
+                                    {{/if}}
+                                {{/if}}
+                                {{#if this.entity}}
+                                <h4 class="auth-header auth-entity col-sm-2">Entity</h4>
+                                <p class="auth-value auth-entity">{{this.entity}}</p>
+                                {{/if}}
+                            </li>
+                        {{/each}}
+                        </ul>
+                    {{/if}}
+                    {{#if this.auth.tos}}
                     <h4 class="auth-header auth-tos col-sm-2">Terms of service</h4>
                     <p class="auth-value auth-tos">{{this.auth.tos}}</p>
                     {{/if}}

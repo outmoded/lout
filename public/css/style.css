@@ -88,6 +88,17 @@ body {
     font-weight: bold;
     padding-right: 0.5em;
 }
+.auth-access {
+    clear: left;
+    float: left;
+    list-style-type: none;
+    width: 100%;
+}
+.auth-access > li:not(:last-child) {
+    margin-bottom: 5px;
+    width: 100%;
+    display: inline-block;
+}
 .cors-multi-value {
     clear: left;
 }
