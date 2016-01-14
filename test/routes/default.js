@@ -399,6 +399,17 @@ module.exports = [{
     }
 }, {
     method: 'GET',
+    path: '/withdefaultvaluefn',
+    config: {
+        handler,
+        validate: {
+            query: {
+                param1: Joi.number().default(() => 42, 'default test')
+            }
+        }
+    }
+}, {
+    method: 'GET',
     path: '/withbinaryencoding',
     config: {
         handler,

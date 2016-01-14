@@ -373,6 +373,17 @@ describe('Lout', () => {
         });
     });
 
+    it('should show default values as function', (done) => {
+
+        server.inject('/docs?server=http://test&path=/withdefaultvaluefn', (res) => {
+
+            const $ = Cheerio.load(res.result);
+            expect($('dt.default-value').text()).to.equal('Default value');
+            expect($('dd.default-value').text()).to.equal('default test');
+            done();
+        });
+    });
+
     it('should show binary types encoding', (done) => {
 
         server.inject('/docs?server=http://test&path=/withbinaryencoding', (res) => {
