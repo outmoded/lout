@@ -379,7 +379,7 @@ describe('Lout', () => {
 
             const $ = Cheerio.load(res.result);
             expect($('dt.default-value').text()).to.equal('Default value');
-            expect($('dd.default-value').text()).to.equal('default test');
+            expect($('dd.default-value').text()).to.equal('"default test"');
             done();
         });
     });

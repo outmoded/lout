@@ -10,9 +10,9 @@ module.exports = {
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param1: Joi.string().required()
-            }
+            })
         }
     }
 };

@@ -10,9 +10,9 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param1: Joi.string().insensitive().required()
-            }
+            })
         },
         tags: ['admin', 'api'],
         description: 'Test GET',
@@ -24,9 +24,9 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param1: Joi.string().required()
-            }
+            })
         }
     }
 }, {
@@ -35,9 +35,9 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param1: Joi.string().required()
-            }
+            })
         }
     }
 }, {
@@ -46,11 +46,11 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param2: Joi.string().valid('first', 'last').invalid('second'),
                 param3: 'third',
                 param4: 42
-            }
+            })
         }
     }
 }, {
@@ -59,9 +59,9 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param2: Joi.string().valid('first', 'last')
-            }
+            })
         }
     }
 }, {
@@ -70,9 +70,9 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param2: Joi.string().valid('first', 'last')
-            }
+            })
         }
     }
 }, {
@@ -81,10 +81,10 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param2: Joi.string().valid('first', 'last'),
                 param3: Joi.number().valid(42)
-            }
+            })
         }
     }
 }, {
@@ -102,12 +102,12 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param1: Joi.object({
                     nestedparam1: Joi.string().required(),
                     array: Joi.array()
                 })
-            }
+            })
         }
     }
 }, {
@@ -160,9 +160,9 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            params: {
+            params: Joi.object({
                 pparam: Joi.string().required()
-            }
+            })
         }
     }
 }, {
@@ -171,9 +171,9 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param1: Joi.object()
-            }
+            })
         }
     }
 }, {
@@ -182,9 +182,9 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param1: Joi.alternatives().try(Joi.number().required(), Joi.string().valid('first', 'last'))
-            }
+            })
         }
     }
 }, {
@@ -193,7 +193,7 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param1: Joi.object({
                     param2: Joi.alternatives().try(
                         {
@@ -218,7 +218,7 @@ module.exports = [{
                         )
                     }).description('all the way down')
                 ).description('something really cool')
-            }
+            })
         }
     }
 }, {
@@ -233,9 +233,9 @@ module.exports = [{
     config: {
         handler,
         response: {
-            schema: {
+            schema: Joi.object({
                 param1: Joi.string()
-            }
+            })
         }
     }
 }, {
@@ -244,16 +244,16 @@ module.exports = [{
     config: {
         handler,
         response: {
-            schema: {
+            schema: Joi.object({
                 param1: Joi.string()
-            },
+            }),
             status: {
-                204: {
+                204: Joi.object({
                     param2: Joi.string()
-                },
-                404: {
+                }),
+                404: Joi.object({
                     error: 'Failure'
-                }
+                })
             }
         }
     }
@@ -276,13 +276,13 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            payload: {
+            payload: Joi.object({
                 param1: Joi.array().items(Joi.object({
                     param2: Joi.array().items(Joi.object({
                         param3: Joi.string()
                     })).optional()
                 }))
-            }
+            })
         }
     }
 }, {
@@ -291,9 +291,9 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param1: Joi.string().notes('<span class="htmltypenote">HTML type note</span>')
-            }
+            })
         },
         notes: '<span class="htmlroutenote">HTML route note</span>'
     }
@@ -303,12 +303,12 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param1: Joi.string().notes([
                     '<span class="htmltypenote">HTML type note</span>',
                     '<span class="htmltypenote">HTML type note</span>'
                 ])
-            }
+            })
         }
     }
 }, {
@@ -317,9 +317,9 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param1: Joi.string().regex(/^\w{1,5}$/).example('abcde')
-            }
+            })
         }
     }
 }, {
@@ -346,7 +346,7 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param1: Joi.object({
                     param2: Joi.object({
                         param3: Joi.number().example(5)
@@ -358,7 +358,7 @@ module.exports = [{
                         param3: 5
                     }
                 })
-            }
+            })
         }
     }
 }, {
@@ -367,12 +367,12 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param1: Joi.string().meta({
                     index: true,
                     unique: true
                 })
-            }
+            })
         }
     }
 }, {
@@ -381,9 +381,9 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param1: Joi.number().unit('ms')
-            }
+            })
         }
     }
 }, {
@@ -392,9 +392,9 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param1: Joi.number().default(42)
-            }
+            })
         }
     }
 }, {
@@ -403,9 +403,9 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param1: Joi.number().default(() => 42, 'default test')
-            }
+            })
         }
     }
 }, {
@@ -414,9 +414,9 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param1: Joi.binary().min(42).max(128).length(64).encoding('base64')
-            }
+            })
         }
     }
 }, {
@@ -425,9 +425,9 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param1: Joi.date().min('1-1-1974').max('12-31-2020')
-            }
+            })
         }
     }
 }, {
@@ -436,14 +436,14 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param1: Joi.object()
                     .and('a', 'b', 'c')
                     .or('a', 'b', 'c')
                     .xor('a', 'b', 'c')
                     .with('a', ['b', 'c'])
                     .without('a', ['b', 'c'])
-            }
+            })
         }
     }
 }, {
@@ -452,12 +452,11 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param1: Joi.object({
                     a: Joi.string()
                 }).pattern(/\w\d/, Joi.boolean())
-
-            }
+            })
         }
     }
 }, {
@@ -466,10 +465,10 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param1: Joi.object().unknown(),
                 param2: Joi.object().unknown(false)
-            }
+            })
         }
     }
 }, {
@@ -478,7 +477,7 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param1: Joi.string()
                     .alphanum()
                     .regex(/\d{3}.*/)
@@ -491,7 +490,7 @@ module.exports = [{
                     .uppercase()
                     .trim(),
                 param2: Joi.string().email()
-            }
+            })
         }
     }
 }, {
@@ -500,7 +499,7 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param1: Joi.alternatives()
                     .when('b', {
                         is: 5,
@@ -521,7 +520,7 @@ module.exports = [{
                         is: true,
                         otherwise: Joi.any()
                     })
-            }
+            })
         }
     }
 }, {
@@ -530,10 +529,10 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param1: Joi.ref('a.b'),
                 param2: Joi.ref('$x')
-            }
+            })
         }
     }
 }, {
@@ -542,10 +541,10 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param1: Joi.object().assert('d.e', Joi.ref('a.c'), 'equal to a.c'),
                 param2: Joi.object().assert('$x', Joi.ref('b.e'), 'equal to b.e')
-            }
+            })
         }
     }
 }, {
@@ -569,10 +568,10 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param1: Joi.date().min(Joi.ref('param2')),
                 param2: Joi.date()
-            }
+            })
         }
     }
 }, {
@@ -589,10 +588,10 @@ module.exports = [{
     config: {
         handler,
         validate: {
-            query: {
+            query: Joi.object({
                 param1: Joi.any().strip(),
                 param2: Joi.any()
-            }
+            })
         }
     }
 }, {
