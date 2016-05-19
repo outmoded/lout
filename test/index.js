@@ -63,7 +63,7 @@ describe('Registration', () => {
         internals.bootstrapServer(server, {
             register: require('../'),
             options: {
-                helpersPath: '.',
+                helpersPath: Path.join(__dirname, '../templates/helpers'),
                 cssPath: null,
                 endpoint: '/'
             }
@@ -748,7 +748,7 @@ describe('Customized Lout', () => {
             register: require('../'),
             options: {
                 basePath: Path.join(__dirname, './custom-test-files'),
-                helpersPath: '.',
+                helpersPath: Path.join(__dirname, '../templates/helpers'),
                 cssPath: null
             }
         }, done);
