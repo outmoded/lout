@@ -215,6 +215,26 @@ describe('Lout', () => {
         });
     });
 
+    it('displays the index even with an unknown query param', (done) => {
+
+        server.inject('/docs?foo=bar', (res) => {
+
+            server.table()[0].table.forEach((route) => {
+
+                if ((route.settings.plugins && (route.settings.plugins.lout === false || route.settings.isInternal)) ||
+                    route.path === '/docs' ||
+                    route.method === 'options') {
+
+                    expect(res.result).to.not.contain(`?server=http://test&path=${route.path}`);
+                }
+                else {
+                    expect(res.result).to.contain(`?server=http://test&path=${route.path}`);
+                }
+            });
+            done();
+        });
+    });
+
     it('index doesn\'t have the docs endpoint listed', (done) => {
 
         server.inject('/docs', (res) => {
