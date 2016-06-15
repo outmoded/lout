@@ -113,7 +113,7 @@ describe('Registration', () => {
             const routes = server.table();
             const endpoints = routes[0].table;
             expect(endpoints).to.have.length(2);
-            expect(endpoints).to.part.deep.include([{ path: '/api' }, { path: '/api/css/{path*}' }]);
+            expect(endpoints).to.part.include([{ path: '/api' }, { path: '/api/css/{path*}' }]);
             done();
         });
     });
