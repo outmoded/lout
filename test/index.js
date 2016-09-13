@@ -186,6 +186,53 @@ describe('Lout', () => {
         });
     });
 
+    it('shows a single value with only one valid', (done) => {
+
+        server.inject('/docs?server=http://test&path=/only-one-valid', (res) => {
+
+            expect(res.result).to.contain('onlyvalid');
+
+            done();
+        });
+    });
+
+    it('shows multiple values with multiple valids', (done) => {
+
+        server.inject('/docs?server=http://test&path=/multiple-valids', (res) => {
+
+            expect(res.result).to.contain('must be one of');
+            expect(res.result).to.contain('onlyvalid');
+            expect(res.result).to.contain('metoo');
+
+            done();
+        });
+    });
+
+    it('shows a single value on a single allow', (done) => {
+
+        server.inject('/docs?server=http://test&path=/single-allow', (res) => {
+
+            expect(res.result).to.contain('string');
+            expect(res.result).to.contain('can also be');
+            expect(res.result).to.contain('alsoallow');
+
+            done();
+        });
+    });
+
+    it('shows multiple values on multiple allows', (done) => {
+
+        server.inject('/docs?server=http://test&path=/multiple-allows', (res) => {
+
+            expect(res.result).to.contain('number');
+            expect(res.result).to.contain('can also be one of');
+            expect(res.result).to.contain('null');
+            expect(res.result).to.contain('alsoallow');
+
+            done();
+        });
+    });
+
     it('returns a Not Found response when wrong path is provided', (done) => {
 
         server.inject('/docs?server=http://test&path=blah', (res) => {
