@@ -189,6 +189,50 @@ module.exports = [{
     }
 }, {
     method: 'GET',
+    path: '/only-one-valid',
+    config: {
+        handler,
+        validate: {
+            query: Joi.object({
+                param1: Joi.string().valid('onlyvalid')
+            })
+        }
+    }
+}, {
+    method: 'GET',
+    path: '/multiple-valids',
+    config: {
+        handler,
+        validate: {
+            query: Joi.object({
+                param1: Joi.string().valid('onlyvalid', 'metoo')
+            })
+        }
+    }
+}, {
+    method: 'GET',
+    path: '/single-allow',
+    config: {
+        handler,
+        validate: {
+            query: Joi.object({
+                param1: Joi.string().allow('alsoallow')
+            })
+        }
+    }
+}, {
+    method: 'GET',
+    path: '/multiple-allows',
+    config: {
+        handler,
+        validate: {
+            query: Joi.object({
+                param1: Joi.number().allow(null, 'alsoallow')
+            })
+        }
+    }
+}, {
+    method: 'GET',
     path: '/withnestedalternatives',
     config: {
         handler,
