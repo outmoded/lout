@@ -1096,14 +1096,14 @@ describe('Multiple paths', () => {
             server.inject('/docs/v1', (resv1) => {
 
                 const $ = Cheerio.load(resv1.result);
-                expect($('.route-index > a').length).to.equal(1);
-                expect($('.route-index > a').attr('href')).to.equal('?server=http://test&path=/v1/test#GET');
+                expect($('.route-index .row > a').length).to.equal(1);
+                expect($('.route-index .row > a').attr('href')).to.equal('?server=http://test&path=/v1/test#GET');
 
                 server.inject('/docs/v2', (resv2) => {
 
                     const $$ = Cheerio.load(resv2.result);
-                    expect($$('.route-index > a').length).to.equal(1);
-                    expect($$('.route-index > a').attr('href')).to.equal('?server=http://test&path=/v2/test#GET');
+                    expect($$('.route-index .row > a').length).to.equal(1);
+                    expect($$('.route-index .row > a').attr('href')).to.equal('?server=http://test&path=/v2/test#GET');
 
                     server.inject('/docs', (res) => {
 
