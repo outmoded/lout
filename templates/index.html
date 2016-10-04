@@ -20,20 +20,25 @@
         <pre class="h3 server-uri-block"><span class="text-muted server-uri-prefix">Routes for </span><span class="server-uri">{{this.info.uri}}</span></pre>
         <div class="route-index">
             {{#each this.table}}
-            <a href="?server={{../info.uri}}&path={{this.path}}#{{this.method}}">
+
                 <div class="row route">
-                    <div class="col-md-2 h2">
-                        <span class="{{colorFromMethod this}} full-width-label">
-                            {{this.method}}
-                        </span>
-                    </div>
-                    <div class="col-md-10 h2">
+                    <a href="?server={{../info.uri}}&path={{this.path}}#{{this.method}}">
+                        <div class="col-md-2 h2">
+                            <span class="{{colorFromMethod this}} full-width-label">
+                                {{this.method}}
+                            </span>
+                        </div>
+                        <div class="col-md-8 h2">
+
+                            {{this.path}}
+                        </div>
+                    </a>
+                    <div class="col-md-1 h2">
                         <div class="pull-right">
                             {{#each this.tags}}
-                            <div class="badge">{{this}}</div>
+                            <a href="?tag={{this}}"><span class="badge">{{this}}</span></a>
                             {{/each}}
                         </div>
-                        {{this.path}}
                     </div>
                 </div>
             </a>

@@ -27,7 +27,8 @@ module.exports = [{
             query: Joi.object({
                 param1: Joi.string().required()
             })
-        }
+        },
+        tags: ['testTag']
     }
 }, {
     method: 'GET',

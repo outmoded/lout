@@ -262,6 +262,24 @@ describe('Lout', () => {
         });
     });
 
+    it('filters the index if the tag is provided', (done) => {
+
+        server.inject('/docs?tag=testTag', (res) => {
+
+            server.table()[0].table.forEach((route) => {
+
+                if (route.path !== '/another/test') {
+
+                    expect(res.result).to.not.contain(`?server=http://test&path=${route.path}`);
+                }
+                else {
+                    expect(res.result).to.contain(`?server=http://test&path=${route.path}`);
+                }
+            });
+            done();
+        });
+    });
+
     it('displays the index even with an unknown query param', (done) => {
 
         server.inject('/docs?foo=bar', (res) => {
