@@ -57,48 +57,54 @@
                     {{/each}}
                 </ul>
                 {{/if}} {{#if this.auth}}
-                <h3>Authentication</h3>
-                <p class="auth">
-                    <h4 class="auth-header auth-strategies col-sm-2">Strategies</h4>
-                    <p class="auth-value auth-strategies">{{this.auth.strategies}}</p>
-                    <h4 class="auth-header auth-mode col-sm-2">Mode</h4>
-                    <p class="auth-value auth-mode">{{this.auth.mode}}</p>
+                <h3 class="auth">Authentication</h3>
+                <dl>
+                    <dt class="auth-header auth-strategies">Strategies</dt>
+                    <dd class="auth-value auth-strategies">{{this.auth.strategies}}</dd>
+                    <dt class="auth-header auth-mode">Mode</dt>
+                    <dd class="auth-value auth-mode">{{this.auth.mode}}</dd>
                     {{#if this.auth.payload}}
-                    <h4 class="auth-header auth-payload col-sm-2">Payload</h4>
-                    <p class="auth-value auth-payload">{{this.auth.payload}}</p>
+                    <dt class="auth-header auth-payload">Payload</dt>
+                    <dd class="auth-value auth-payload">{{this.auth.payload}}</dd>
                     {{/if}}
+                </dl>
                     {{#if this.auth.access}}
-                        <h4 class="auth-header auth-scope col-sm-2">Scopes</h4>
+                <dl>
+                    <dt class="auth-header auth-scope">Scopes</dt>
+                    <dd>
                         <ul class="auth-access">
                         {{#each this.auth.access}}
                             <li>
-                                {{#if this.scope}}
-                                    {{#if this.scope.required}}
-                                        <h5 class="auth-header auth-scope col-sm-2">Required</h5>
-                                        <p class="auth-value auth-scope">{{this.scope.required}}</p>
-                                    {{/if}}
-                                    {{#if this.scope.selection}}
-                                        <h5 class="auth-header auth-scope col-sm-2">Selection</h5>
-                                        <p class="auth-value auth-scope">{{this.scope.selection}}</p>
-                                    {{/if}}
-                                    {{#if this.scope.forbidden}}
-                                        <h5 class="auth-header auth-scope col-sm-2">Forbidden</h5>
-                                        <p class="auth-value auth-scope">{{this.scope.forbidden}}</p>
-                                    {{/if}}
+                            {{#if this.scope}}
+                                {{#if this.scope.required}}
+                                <dt> class="auth-header auth-scope">Required</dt>
+                                <dd class="auth-value auth-scope">{{this.scope.required}}</dd>
                                 {{/if}}
-                                {{#if this.entity}}
-                                <h4 class="auth-header auth-entity col-sm-2">Entity</h4>
-                                <p class="auth-value auth-entity">{{this.entity}}</p>
+                                {{#if this.scope.selection}}
+                                <dt class="auth-header auth-scope">Selection</dt>
+                                <dd class="auth-value auth-scope">{{this.scope.selection}}</dd>
                                 {{/if}}
+                                {{#if this.scope.forbidden}}
+                                <dt class="auth-header auth-scope">Forbidden</dt>
+                                <dd class="auth-value auth-scope">{{this.scope.forbidden}}</dd>
+                                {{/if}}
+                            {{/if}}
+                            {{#if this.entity}}
+                                <dt class="auth-header auth-entity">Entity</dt>
+                                <dd class="auth-value auth-entity">{{this.entity}}</dd>
+                            {{/if}}
                             </li>
                         {{/each}}
                         </ul>
+                    </dd>
+                </dl>
+                    {{/if}} {{#if this.auth.tos}}
+                <dl>
+                    <dt class="auth-header auth-tos">Terms of service</dt>
+                    <dd class="auth-value auth-tos">{{this.auth.tos}}</dd>
+                </dl>
                     {{/if}}
-                    {{#if this.auth.tos}}
-                    <h4 class="auth-header auth-tos col-sm-2">Terms of service</h4>
-                    <p class="auth-value auth-tos">{{this.auth.tos}}</p>
-                    {{/if}}
-                </p>
+                <br />
                 {{/if}} {{#if this.vhost}}
                 <h3 class="vhost">Virtual host</h3>
                 <p class="vhost">{{this.vhost}}</p>
@@ -108,9 +114,9 @@
                     <dt class="cors-header cors-origin">Origin</dt>
                     <dd class="cors-multi-value cors-origin">
                         <ul>
-                            {{#each this.cors.origin}}
-                                <li>{{this}}</li>
-                            {{/each}}
+                    {{#each this.cors.origin}}
+                            <li>{{this}}</li>
+                    {{/each}}
                         </ul>
                     </dd>
                     <dt class="cors-header cors-maxAge">maxAge</dt>
@@ -119,45 +125,45 @@
                         <dt class="cors-header cors-headers">headers</dt>
                         <dd class="cors-multi-value cors-headers">
                             <ul>
-                                {{#each this.cors.headers}}
+                        {{#each this.cors.headers}}
                                 <li>{{this}}</li>
-                                {{/each}}
+                        {{/each}}
                             </ul>
                         </dd>
                     {{/if}} {{#if this.cors.additionalHeaders}}
                         <dt class="cors-header cors-additionalHeaders">additionalHeaders</dt>
                         <dd class="cors-multi-value cors-additionalHeaders">
                             <ul>
-                                {{#each this.cors.additionalHeaders}}
+                        {{#each this.cors.additionalHeaders}}
                                 <li>{{this}}</li>
-                                {{/each}}
+                        {{/each}}
                             </ul>
                         </dd>
                     {{/if}} {{#if this.cors.methods}}
                         <dt class="cors-header cors-methods">methods</dt>
                         <dd class="cors-multi-value cors-methods">
                             <ul>
-                                {{#each this.cors.methods}}
+                        {{#each this.cors.methods}}
                                 <li>{{this}}</li>
-                                {{/each}}
+                        {{/each}}
                             </ul>
                         </dd>
                     {{/if}} {{#if this.cors.additionalMethods}}
                         <dt class="cors-header cors-additionalMethods">additionalMethods</dt>
                         <dd class="cors-multi-value cors-additionalMethods">
                             <ul>
-                                {{#each this.cors.additionalMethods}}
+                        {{#each this.cors.additionalMethods}}
                                 <li>{{this}}</li>
-                                {{/each}}
+                        {{/each}}
                             </ul>
                         </dd>
                     {{/if}} {{#if this.cors.exposedHeaders}}
                         <dt class="cors-header cors-exposedHeaders">exposedHeaders</dt>
                         <dd class="cors-multi-value cors-exposedHeaders">
                             <ul>
-                                {{#each this.cors.exposedHeaders}}
+                        {{#each this.cors.exposedHeaders}}
                                 <li>{{this}}</li>
-                                {{/each}}
+                        {{/each}}
                             </ul>
                         </dd>
                     {{/if}}
