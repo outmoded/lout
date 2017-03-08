@@ -525,6 +525,7 @@ module.exports = [{
                 param1: Joi.string()
                     .alphanum()
                     .regex(/\d{3}.*/)
+                    .regex(/foo/, { name: 'No foo !', invert: true })
                     .token()
                     .email()
                     .guid()

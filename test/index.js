@@ -545,9 +545,11 @@ describe('Lout', () => {
             const rulesSelector = ddRules + ['Alphanum', 'Regex', 'Token', 'Email', 'Guid', 'IsoDate', 'Hostname',
                 'Lowercase', 'Uppercase', 'Trim'
             ].join(`,${ddRules}`);
-
-            expect($('dd.rules-Regex').text()).to.contain('/\\d{3}.*/');
-            expect($(rulesSelector).length).to.equal(10);
+            const regexps = $('dd.rules-Regex');
+            expect(regexps.length).to.equal(2);
+            expect(regexps.first().text()).to.contain('/\\d{3}.*/');
+            expect(regexps.last().text()).to.contain('/foo/ (No foo !) - inverted');
+            expect($(rulesSelector).length).to.equal(12);
             done();
         });
     });
@@ -838,7 +840,7 @@ describe('Customized Lout', () => {
 
         internals.bootstrapServer(server, {
             register: require('../'),
-            options: options
+            options
         }, done);
     });
 

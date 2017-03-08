@@ -99,28 +99,22 @@
                 </dd>
             {{/if}}
             {{#each this.rules}}
-                <dt class="rules-{{@key}}">{{@key}}</dt>
-                {{#if this}}
-                <dd class="rules-{{@key}}">
-                    {{#if this.length}}
-                        <ul class="list-unstyled">
-                            {{#each this}}{{> type}}{{/each}}
-                        </ul>
-                    {{else}}
-                        {{#if this.key}}
-                            <span class="assertion">
-                                <span class="assertion-text">
-                                    <span>Asserts that</span>
-                                    <span class="assertion-key">{{this.key}}</span>
-                                    <span>matches the following model :</span>
-                                </span>
-                                <ul class="list-unstyled assertion-model">{{> type this.value}}</ul>
+                <dt class="rules-{{name}}">{{name}}</dt>
+                {{#if params}}
+                <dd class="rules-{{name}}">
+                    {{#if params.key}}
+                        <span class="assertion">
+                            <span class="assertion-text">
+                                <span>Asserts that</span>
+                                <span class="assertion-key">{{params.key}}</span>
+                                <span>matches the following model :</span>
                             </span>
-                        {{else}}
-                            {{#if this.ref}}
-                                <span class="reference">{{this.ref}}</span>
-                            {{else}}{{this}}{{/if}}
-                        {{/if}}
+                            <ul class="list-unstyled assertion-model">{{> type params.value}}</ul>
+                        </span>
+                    {{else}}
+                        {{#if params.ref}}
+                            <span class="reference">{{params.ref}}</span>
+                        {{else}}{{params}}{{/if}}
                     {{/if}}
                 </dd>
                 {{/if}}

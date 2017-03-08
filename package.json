@@ -13,23 +13,23 @@
     "npm": ">= 3.x"
   },
   "dependencies": {
-    "boom": "3.x.x",
+    "boom": "4.x.x",
     "handlebars": "4.x.x",
     "hoek": "4.x.x"
   },
   "peerDependencies": {
-    "hapi": ">= 11",
-    "inert": ">= 3.x.x",
-    "joi": ">= 8.x.x",
-    "vision": ">= 3.x.x"
+    "hapi": ">= 16",
+    "inert": ">= 4.x.x",
+    "joi": ">= 10.x.x",
+    "vision": ">= 4.x.x"
   },
   "devDependencies": {
     "cheerio": "0.x.x",
-    "code": "3.x.x",
+    "code": "4.x.x",
     "hapi": ">= 11",
     "inert": ">= 3.x.x",
-    "joi": ">= 7.x.x",
-    "lab": "10.x.x",
+    "joi": ">= 10.x.x",
+    "lab": "12.x.x",
     "vision": ">= 4.x.x"
   },
   "scripts": {
