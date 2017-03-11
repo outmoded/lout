@@ -11,6 +11,14 @@ module.exports = [{
     }
 }, {
     method: 'GET',
+    path: '/withauthandcors',
+    config: {
+        handler,
+        auth: 'testStrategy',
+        cors: true
+    }
+}, {
+    method: 'GET',
     path: '/withauthasobject',
     config: {
         handler,
