@@ -58,7 +58,7 @@
                 </ul>
                 {{/if}} {{#if this.auth}}
                 <h3>Authentication</h3>
-                <p class="auth">
+                <div class="auth">
                     <h4 class="auth-header auth-strategies col-sm-2">Strategies</h4>
                     <p class="auth-value auth-strategies">{{this.auth.strategies}}</p>
                     <h4 class="auth-header auth-mode col-sm-2">Mode</h4>
@@ -98,7 +98,7 @@
                     <h4 class="auth-header auth-tos col-sm-2">Terms of service</h4>
                     <p class="auth-value auth-tos">{{this.auth.tos}}</p>
                     {{/if}}
-                </p>
+                </div>
                 {{/if}} {{#if this.vhost}}
                 <h3 class="vhost">Virtual host</h3>
                 <p class="vhost">{{this.vhost}}</p>

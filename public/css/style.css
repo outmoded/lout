@@ -71,6 +71,12 @@ body {
     background-color: #DEF2F8;
 }
 
+.auth::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
 .auth-header,
 .auth-value,
 .cors-header,
