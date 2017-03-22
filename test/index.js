@@ -434,8 +434,12 @@ describe('Lout', () => {
         server.inject('/docs?server=http://test&path=/withdefaultvalue', (res) => {
 
             const $ = Cheerio.load(res.result);
-            expect($('dt.default-value').text()).to.equal('Default value');
-            expect($('dd.default-value').text()).to.contain('42');
+            expect($('dt.default-value').length).to.equal(2);
+            expect($('dd.default-value').length).to.equal(2);
+            expect($('dt.default-value').first().text()).to.equal('Default value');
+            expect($('dt.default-value').last().text()).to.equal('Default value');
+            expect($('dd.default-value').first().text()).to.equal('42');
+            expect($('dd.default-value').last().text()).to.equal('false');
             done();
         });
     });

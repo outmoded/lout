@@ -130,7 +130,7 @@
                     </ul>
                 </dd>
             {{/if}}
-            {{#if this.flags.default}}
+            {{#if (exists this.flags.default)}}
                 <dt class="default-value">Default value</dt>
                 <dd class="default-value">{{json this.flags.default}}</dd>
             {{/if}}

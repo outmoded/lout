@@ -2,5 +2,5 @@
 
 module.exports = function (value) {
 
-    return !!value;
+    return value !== undefined && value !== null;
 };

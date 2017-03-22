@@ -437,7 +437,8 @@ module.exports = [{
         handler,
         validate: {
             query: Joi.object({
-                param1: Joi.number().default(42)
+                param1: Joi.number().default(42),
+                param2: Joi.boolean().default(false)
             })
         }
     }

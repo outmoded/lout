@@ -6,30 +6,41 @@ const Vision = require('vision');
 
 const port = Number(process.env.PORT || 3000);
 const server = new Hapi.Server();
-server.connection({ host: process.env.HOSTNAME || 'localhost', address: process.env.IP || '0.0.0.0', port: port, uri: 'http://lout.herokuapp.com' });
+server.connection({
+    host: process.env.HOSTNAME || 'localhost',
+    address: process.env.IP || '0.0.0.0',
+    port: port,
+    uri: 'http://lout.herokuapp.com'
+});
 
 server.auth.scheme('testScheme', () => ({
-    authenticate() {},
-    payload() {},
-    response() {}
+    authenticate() {
+    },
+    payload() {
+    },
+    response() {
+    }
 }));
 
 server.auth.strategy('testStrategy', 'testScheme');
 
 server.route({
-  method: 'GET',
-  path: '/',
-  handler(request, reply) {
-    reply.redirect(`http://${request.info.host}/docs`);
-  }
+    method: 'GET',
+    path: '/',
+    handler(request, reply) {
+        reply.redirect(`http://${request.info.host}/docs`);
+    }
 });
 
 // Reuse the test default routes, since they are quite complete.
 server.route(require('../test/routes/default'));
 server.route(require('../test/routes/withauth'));
 
-server.register([Inert, Vision, require('../')], function(err) {
-  server.start(() => {
-    console.log('Listening on', server.info.uri);
-  });
+server.register([Inert, Vision, require('../')], function (err) {
+    server.start((err) => {
+        if (err) {
+            throw err;
+        }
+        console.log('Listening on', server.info.uri);
+    });
 });
