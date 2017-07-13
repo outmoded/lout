@@ -37,7 +37,7 @@ const lab = exports.lab = Lab.script();
 const before = lab.before;
 const describe = lab.experiment;
 const it = lab.test;
-const expect = require('code').expect;
+const expect = lab.expect;
 
 describe('Registration', () => {
 

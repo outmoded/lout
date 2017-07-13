@@ -141,17 +141,17 @@ module.exports = [{
         handler,
         validate: {
             query: Joi.array()
-            .ordered('foo', 'bar')
-            .items(
-                Joi.string().required(),
-                Joi.string().valid('four').forbidden(),
-                Joi.object({ param1: Joi.number() }),
-                Joi.number().forbidden()
-            ).min(2).max(5).length(3)
-            .ordered('bar', 'bar')
-            .items(
-                Joi.number().required()
-            )
+                .ordered('foo', 'bar')
+                .items(
+                    Joi.string().required(),
+                    Joi.string().valid('four').forbidden(),
+                    Joi.object({ param1: Joi.number() }),
+                    Joi.number().forbidden()
+                ).min(2).max(5).length(3)
+                .ordered('bar', 'bar')
+                .items(
+                    Joi.number().required()
+                )
         }
     }
 }, {
