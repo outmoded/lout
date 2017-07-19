@@ -32,6 +32,7 @@
     "vision": ">= 4.x.x"
   },
   "scripts": {
+    "start": "./bin/test-server",
     "test": "lab -r console -t 100 -a code -L",
     "test-cov-html": "lab -r html -o coverage.html -a code -L"
   },

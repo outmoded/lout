@@ -242,7 +242,7 @@ module.exports = [{
                     param2: Joi.alternatives().try(
                         {
                             param3: Joi.object({
-                                param4: Joi.number().example(5)
+                                param4: Joi.number().min(0).example(5)
                             }).description('this is cool too')
                         },
                         Joi.number().min(42)
