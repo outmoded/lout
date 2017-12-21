@@ -16,10 +16,8 @@
         </div>
     </div>
     <div class="container">
-        {{#each this}}
-        <pre class="h3 server-uri-block"><span class="text-muted server-uri-prefix">Routes for </span><span class="server-uri">{{this.info.uri}}</span></pre>
         <div class="route-index">
-            {{#each this.table}}
+            {{#each this}}
             <a href="?server={{../info.uri}}&path={{this.path}}#{{this.method}}">
                 <div class="row route">
                     <div class="col-md-2 h2">
@@ -39,7 +37,6 @@
             </a>
             {{/each}}
         </div>
-        {{/each}}
     </div>
 </body>
 
