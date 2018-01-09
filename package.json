@@ -24,11 +24,12 @@
     "vision": ">= 5.x.x"
   },
   "devDependencies": {
-    "cheerio": "0.x.x",
+    "cheerio": ">= 0.x.x",
+    "code": ">= 5.x.x",
     "hapi": ">= 17",
     "inert": ">= 5.x.x",
     "joi": ">= 13.x.x",
-    "lab": "15.x.x",
+    "lab": ">= 15.x.x",
     "vision": ">= 5.x.x"
   },
   "scripts": {
