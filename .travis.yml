@@ -4,9 +4,8 @@ sudo: false
 language: node_js
 
 node_js:
-  - "4"
-  - "6"
   - "8"
+  - "9"
   - "node"
 
 deploy:
@@ -16,4 +15,4 @@ deploy:
     app: lout
     on:
       repo: hapijs/lout
-      node: "4"
+      node: "8"
