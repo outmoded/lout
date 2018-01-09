@@ -41,27 +41,24 @@ const expect = lab.expect;
 
 describe('Registration', () => {
 
-    it('should register', (done) => {
+    it('should register', () => {
 
-        const server = new Hapi.Server();
-        server.connection({ host: 'test' });
+        const server = new Hapi.Server({ host: 'test' });
 
         internals.bootstrapServer(server, require('../'), () => {
 
             const routes = server.table();
             expect(routes).to.have.length(1);
             expect(routes[0].table).to.have.length(2);
-            done();
         });
     });
 
-    it('should register with options', (done) => {
+    it('should register with options', () => {
 
-        const server = new Hapi.Server();
-        server.connection({ host: 'test' });
+        const server = new Hapi.Server({ host: 'test' });
 
         internals.bootstrapServer(server, {
-            register: require('../'),
+            plugin: require('../'),
             options: {
                 helpersPath: Path.join(__dirname, '../templates/helpers'),
                 cssPath: null,
@@ -73,17 +70,15 @@ describe('Registration', () => {
 
             const routes = server.table();
             expect(routes[0].table).to.have.length(1);
-            done();
         });
     });
 
-    it('should fail to register with bad options', (done) => {
+    it('should fail to register with bad options', () => {
 
-        const server = new Hapi.Server();
-        server.connection({ host: 'test' });
+        const server = new Hapi.Server({ host: 'test' });
 
         internals.bootstrapServer(server, {
-            register: require('../'),
+            plugin: require('../'),
             options: {
                 foo: 'bar'
             }
@@ -91,18 +86,16 @@ describe('Registration', () => {
 
             expect(err).to.exist();
             expect(err.message).to.equal('"foo" is not allowed');
-            done();
         });
     });
 
 
-    it('should register with malformed endpoint', (done) => {
+    it('should register with malformed endpoint', () => {
 
-        const server = new Hapi.Server();
-        server.connection({ host: 'test' });
+        const server = new Hapi.Server({ host: 'test' });
 
         internals.bootstrapServer(server, {
-            register: require('../'),
+            plugin: require('../'),
             options: {
                 endpoint: 'api/'
             }
@@ -114,7 +107,6 @@ describe('Registration', () => {
             const endpoints = routes[0].table;
             expect(endpoints).to.have.length(2);
             expect(endpoints).to.part.include([{ path: '/api' }, { path: '/api/css/{path*}' }]);
-            done();
         });
     });
 });
