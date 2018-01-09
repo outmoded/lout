@@ -16,4 +16,3 @@ config.json
 */*/._*
 coverage.*
 lib-cov
-*.lock
