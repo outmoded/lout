@@ -25,7 +25,7 @@ Lout depends on vision and inert, make sure you register them with hapi.
 ```javascript
 const Hapi = require('hapi');
 
-const server = new Hapi.Server({ port: 80 });
+const server = Hapi.server({ port: 80 });
 
 await server.register([require('vision'), require('inert'), require('lout')]);
 
