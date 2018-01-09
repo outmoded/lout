@@ -27,7 +27,7 @@ const Hapi = require('hapi');
 
 const server = new Hapi.Server({ port: 80 });
 
-server.register([require('vision'), require('inert'), { register: require('lout') }]);
+await server.register([require('vision'), require('inert'), require('lout')]);
 
 server.start().then(
   console.log('Server running at:', server.info.uri)
