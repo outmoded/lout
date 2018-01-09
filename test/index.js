@@ -41,7 +41,7 @@ const expect = lab.expect;
 
 describe('Registration', () => {
 
-    it('should register', () => {
+    it('should register', (done) => {
 
         const server = new Hapi.Server({ host: 'test' });
 
@@ -50,10 +50,11 @@ describe('Registration', () => {
             const routes = server.table();
             expect(routes).to.have.length(1);
             expect(routes[0].table).to.have.length(2);
+            done();
         });
     });
 
-    it('should register with options', () => {
+    it('should register with options', (done) => {
 
         const server = new Hapi.Server({ host: 'test' });
 
@@ -70,10 +71,11 @@ describe('Registration', () => {
 
             const routes = server.table();
             expect(routes[0].table).to.have.length(1);
+            done();
         });
     });
 
-    it('should fail to register with bad options', () => {
+    it('should fail to register with bad options', (done) => {
 
         const server = new Hapi.Server({ host: 'test' });
 
@@ -86,11 +88,12 @@ describe('Registration', () => {
 
             expect(err).to.exist();
             expect(err.message).to.equal('"foo" is not allowed');
+            done();
         });
     });
 
 
-    it('should register with malformed endpoint', () => {
+    it('should register with malformed endpoint', (done) => {
 
         const server = new Hapi.Server({ host: 'test' });
 
@@ -107,6 +110,7 @@ describe('Registration', () => {
             const endpoints = routes[0].table;
             expect(endpoints).to.have.length(2);
             expect(endpoints).to.part.include([{ path: '/api' }, { path: '/api/css/{path*}' }]);
+            done();
         });
     });
 });
@@ -117,8 +121,7 @@ describe('Lout', () => {
 
     before((done) => {
 
-        server = new Hapi.Server();
-        server.connection({ host: 'test' });
+        server = new Hapi.Server({ host: 'test' });
 
         server.route(require('./routes/default'));
 
@@ -392,33 +395,27 @@ describe('Lout', () => {
         });
     });
 
-    it('should not detect "false" on an empty object', (done) => {
+    it('should not detect "false" on an empty object', async () => {
 
-        server.inject('/docs?server=http://test&path=/rootemptyobject', (res) => {
+        const res = await server.inject('/docs?server=http://test&path=/rootemptyobject');
 
-            expect(res.result).to.not.contain('Denied');
-            done();
-        });
+        expect(res.result).to.not.contain('Denied');
     });
 
-    it('should show meta informations', (done) => {
+    it('should show meta informations', async () => {
 
-        server.inject('/docs?server=http://test&path=/withmeta', (res) => {
+        const res = await server.inject('/docs?server=http://test&path=/withmeta');
 
-            const $ = Cheerio.load(res.result);
-            expect($('.field-meta pre code').length).to.equal(1);
-            done();
-        });
+        const $ = Cheerio.load(res.result);
+        expect($('.field-meta pre code').length).to.equal(1);
     });
 
-    it('should show units', (done) => {
+    it('should show units', async () => {
 
-        server.inject('/docs?server=http://test&path=/withunit', (res) => {
+        const res = await server.inject('/docs?server=http://test&path=/withunit');
 
-            expect(res.result).to.contain('Unit');
-            expect(res.result).to.contain('ms');
-            done();
-        });
+        expect(res.result).to.contain('Unit');
+        expect(res.result).to.contain('ms');
     });
 
     it('should show default values', (done) => {
@@ -673,8 +670,7 @@ describe('Lout', () => {
 
         before((done) => {
 
-            server = new Hapi.Server();
-            server.connection({ host: 'test' });
+            server = new Hapi.Server({ host: 'test' });
 
             server.auth.scheme('testScheme', () => ({
                 authenticate() {},
@@ -745,7 +741,6 @@ describe('Lout', () => {
         it('doesn\'t throw an error when requesting the index when there are no POST routes', (done) => {
 
             server = new Hapi.Server();
-            server.connection();
 
             server.route(require('./routes/withoutpost'));
 
@@ -769,10 +764,9 @@ describe('Customized Lout', () => {
     it('should succeed with a basePath without helpers', (done) => {
 
         const server = new Hapi.Server();
-        server.connection();
 
         internals.bootstrapServer(server, {
-            register: require('../'),
+            plugin: require('../'),
             options: {
                 basePath: Path.join(__dirname, './custom-test-files')
             }
@@ -782,11 +776,10 @@ describe('Customized Lout', () => {
     it('should succeed with an apiVersion', (done) => {
 
         const server = new Hapi.Server();
-        server.connection();
         server.route(require('./routes/default'));
 
         internals.bootstrapServer(server, {
-            register: require('../'),
+            plugin: require('../'),
             options: {
                 apiVersion: '3.3.3'
             }
@@ -807,10 +800,9 @@ describe('Customized Lout', () => {
     it('should succeed with a correct configuration', (done) => {
 
         const server = new Hapi.Server();
-        server.connection();
 
         internals.bootstrapServer(server, {
-            register: require('../'),
+            plugin: require('../'),
             options: {
                 basePath: Path.join(__dirname, './custom-test-files'),
                 helpersPath: Path.join(__dirname, '../templates/helpers'),
@@ -822,7 +814,6 @@ describe('Customized Lout', () => {
     it('should succeed with a custom engine', (done) => {
 
         const server = new Hapi.Server();
-        server.connection();
 
         const options = {
             engines: {
@@ -835,7 +826,7 @@ describe('Customized Lout', () => {
         };
 
         internals.bootstrapServer(server, {
-            register: require('../'),
+            plugin: require('../'),
             options
         }, done);
     });
@@ -843,10 +834,9 @@ describe('Customized Lout', () => {
     it('should serve a custom css', (done) => {
 
         const server = new Hapi.Server();
-        server.connection();
 
         internals.bootstrapServer(server, {
-            register: require('../'),
+            plugin: require('../'),
             options: {
                 cssPath: Path.join(__dirname, './custom-test-files/css')
             }
@@ -866,12 +856,11 @@ describe('Customized Lout', () => {
     it('ignores methods', (done) => {
 
         const server = new Hapi.Server();
-        server.connection();
 
         server.route(require('./routes/default'));
 
         internals.bootstrapServer(server, {
-            register: require('../'),
+            plugin: require('../'),
             options: {
                 filterRoutes(route) {
 
@@ -891,147 +880,11 @@ describe('Customized Lout', () => {
     });
 });
 
-
-describe('Multiple connections', () => {
-
-    let server = null;
-
-    before((done) => {
-
-        server = new Hapi.Server();
-        server.connection({ host: 'test', port: 1, labels: 'c1' });
-        server.connection({ host: 'test', port: 2, labels: 'c2' });
-
-        server.route(require('./routes/default'));
-
-        internals.bootstrapServer(server, require('../'), done);
-    });
-
-    it('should load all the servers routes', (done) => {
-
-        server.connections[0].inject('/docs', (res) => {
-
-            const tables = server.table();
-            expect(tables).to.have.length(2);
-            tables.forEach((connection) => {
-
-                expect(res.result).to.contain(connection.info.uri);
-
-                connection.table.forEach((route) => {
-
-                    if ((route.settings.plugins && (route.settings.plugins.lout === false || route.settings.isInternal)) ||
-                        route.path === '/docs' ||
-                        route.method === 'options') {
-
-                        expect(res.result).to.not.contain(`?server=${connection.info.uri}&path=${route.path}`);
-                    }
-                    else {
-                        expect(res.result).to.contain(`?server=${connection.info.uri}&path=${route.path}`);
-                    }
-                });
-            });
-            done();
-        });
-    });
-
-    it('should only show one server if parameter is there', (done) => {
-
-        server.connections[0].inject('/docs?server=http://test:1', (res) => {
-
-            const table = server.table();
-            expect(table).to.have.length(2);
-
-            let table1;
-            let table2;
-            table.forEach((connection) => {
-
-                const uri = connection.info.uri;
-                if (uri === 'http://test:1') {
-                    table1 = connection.table;
-                }
-                else if (uri === 'http://test:2') {
-                    table2 = connection.table;
-                }
-            });
-
-            expect(res.result).to.contain('http://test:1');
-            table1.forEach((route) => {
-
-                if ((route.settings.plugins && (route.settings.plugins.lout === false || route.settings.isInternal)) ||
-                    route.path === '/docs' ||
-                    route.method === 'options') {
-
-                    expect(res.result).to.not.contain(`?server=http://test:1&path=${route.path}`);
-                }
-                else {
-                    expect(res.result).to.contain(`?server=http://test:1&path=${route.path}`);
-                }
-            });
-
-            expect(res.result).to.not.contain('http://test:2');
-            table2.forEach((route) => expect(res.result).to.not.contain(`?server=http://test:2&path=${route.path}`));
-
-            done();
-        });
-    });
-});
-
-describe('Select connections', () => {
-
-    let server;
-    const selected = ['c2'];
-    const unselected = ['c1'];
-
-    before((done) => {
-
-        server = new Hapi.Server();
-        server.connection({ host: 'test', port: 1, labels: 'c1' });
-        server.connection({ host: 'test', port: 2, labels: 'c2' });
-
-        server.route(require('./routes/default'));
-
-        internals.bootstrapServer(server, require('../'), { select: 'c2' }, done);
-    });
-
-    it('should load all the selected servers routes', (done) => {
-
-        server.select(selected).inject('/docs', (res) => {
-
-            const selectedTables = server.select(selected).table();
-            const unselectedTables = server.select(unselected).table();
-            expect(selectedTables).to.have.length(1);
-            expect(unselectedTables).to.have.length(1);
-            selectedTables.forEach((connection) => {
-
-                expect(res.result).to.contain(connection.info.uri);
-
-                connection.table.forEach((route) => {
-
-                    if ((route.settings.plugins && (route.settings.plugins.lout === false || route.settings.isInternal)) ||
-                        route.path === '/docs' ||
-                        route.method === 'options') {
-
-                        expect(res.result).to.not.contain(`?server=${connection.info.uri}&path=${route.path}`);
-                    }
-                    else {
-                        expect(res.result).to.contain(`?server=${connection.info.uri}&path=${route.path}`);
-                    }
-                });
-            });
-
-            unselectedTables.forEach((connection) => expect(res.result).to.not.contain(connection.info.uri));
-
-            done();
-        });
-    });
-});
-
 describe('Multiple paths', () => {
 
     it('should show separate paths', (done) => {
 
-        const server = new Hapi.Server();
-        server.connection({ host: 'test' });
+        const server = new Hapi.Server({ host: 'test' });
         server.route({
             method: 'GET',
             path: '/v1/test',
@@ -1049,7 +902,7 @@ describe('Multiple paths', () => {
         });
 
         internals.bootstrapServer(server, [{
-            register: require('../'),
+            plugin: require('../'),
             options: {
                 endpoint: '/docs/v1',
                 filterRoutes(route) {
@@ -1058,7 +911,7 @@ describe('Multiple paths', () => {
                 }
             }
         }, {
-            register: require('../'),
+            plugin: require('../'),
             options: {
                 endpoint: '/docs/v2',
                 filterRoutes(route) {
