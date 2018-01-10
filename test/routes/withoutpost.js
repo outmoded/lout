@@ -2,12 +2,15 @@
 
 const Joi = require('joi');
 
-const handler = (request) => request.reply('ok');
+const handler = (request, h) => {
+
+    return 'ok';
+};
 
 module.exports = {
     method: 'GET',
     path: '/test',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({

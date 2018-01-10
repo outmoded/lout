@@ -1,18 +1,21 @@
 'use strict';
 
-const handler = (request, reply) => reply('ok');
+const handler = (request, h) => {
+
+    return 'ok';
+};
 
 module.exports = [{
     method: 'GET',
     path: '/withauth',
-    config: {
+    options: {
         handler,
         auth: 'testStrategy'
     }
 }, {
     method: 'GET',
     path: '/withauthandcors',
-    config: {
+    options: {
         handler,
         auth: 'testStrategy',
         cors: true
@@ -20,7 +23,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/withauthasobject',
-    config: {
+    options: {
         handler,
         auth: {
             mode: 'try',
@@ -33,7 +36,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/withmultipleaccess',
-    config: {
+    options: {
         handler,
         auth: {
             mode: 'try',
@@ -51,7 +54,10 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/withimplicitauth',
-    config: {
-        handler
+    options: {
+        handler,
+        auth: {
+            mode: 'required'
+        }
     }
 }];
