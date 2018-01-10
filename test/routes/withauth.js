@@ -55,9 +55,6 @@ module.exports = [{
     method: 'GET',
     path: '/withimplicitauth',
     options: {
-        handler,
-        auth: {
-            mode: 'required'
-        }
+        handler
     }
 }];
