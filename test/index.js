@@ -14,15 +14,8 @@ const Vision = require('vision');
 const internals = {
     async bootstrapServer(server, plugins, options) {
 
-        try {
-            await server.register([Inert, Vision].concat(plugins), options);
-            await server.initialize();
-
-            return;
-        }
-        catch (err) {
-            throw err;
-        }
+        await server.register([Inert, Vision].concat(plugins), options);
+        await server.initialize();
     }
 };
 
@@ -50,19 +43,14 @@ describe('Registration', () => {
 
         const server = Hapi.server();
 
-        try {
-            await internals.bootstrapServer(server, {
-                plugin: require('../'),
-                options: {
-                    helpersPath: Path.join(__dirname, '../templates/helpers'),
-                    cssPath: null,
-                    endpoint: '/'
-                }
-            });
-        }
-        catch (err) {
-            expect(err).to.not.exist();
-        }
+        await internals.bootstrapServer(server, {
+            plugin: require('../'),
+            options: {
+                helpersPath: Path.join(__dirname, '../templates/helpers'),
+                cssPath: null,
+                endpoint: '/'
+            }
+        });
 
         const routes = server.table();
         expect(routes).to.have.length(1);
@@ -72,18 +60,12 @@ describe('Registration', () => {
 
         const server = Hapi.server();
 
-        try {
-            await internals.bootstrapServer(server, {
-                plugin: require('../'),
-                options: {
-                    foo: 'bar'
-                }
-            });
-        }
-        catch (err) {
-            expect(err).to.exist();
-            expect(err.message).to.equal('"foo" is not allowed');
-        }
+        await expect(internals.bootstrapServer(server, {
+            plugin: require('../'),
+            options: {
+                foo: 'bar'
+            }
+        })).to.reject('"foo" is not allowed');
     });
 
 
@@ -91,20 +73,14 @@ describe('Registration', () => {
 
         const server = Hapi.server();
 
-        try {
-            await internals.bootstrapServer(server, {
-                plugin: require('../'),
-                options: {
-                    endpoint: 'api/'
-                }
-            });
-        }
-        catch (err) {
-            expect(err).to.not.exist();
-        }
+        await internals.bootstrapServer(server, {
+            plugin: require('../'),
+            options: {
+                endpoint: 'api/'
+            }
+        });
 
-        const routes = server.table();
-        const endpoints = routes;
+        const endpoints = server.table();
         expect(endpoints).to.have.length(2);
         expect(endpoints).to.part.include([{ path: '/api' }, { path: '/api/css/{path*}' }]);
     });
@@ -639,12 +615,7 @@ describe('Lout', () => {
 
             server.route(require('./routes/withoutpost'));
 
-            try {
-                await internals.bootstrapServer(server, require('../'));
-            }
-            catch (err) {
-                expect(err).to.not.exist();
-            }
+            await internals.bootstrapServer(server, require('../'));
 
             const res = await server.inject('/docs');
 
@@ -673,17 +644,12 @@ describe('Customized Lout', () => {
         const server = Hapi.server();
         server.route(require('./routes/default'));
 
-        try {
-            await internals.bootstrapServer(server, {
-                plugin: require('../'),
-                options: {
-                    apiVersion: '3.3.3'
-                }
-            });
-        }
-        catch (err) {
-            expect(err).to.not.exist();
-        }
+        await internals.bootstrapServer(server, {
+            plugin: require('../'),
+            options: {
+                apiVersion: '3.3.3'
+            }
+        });
 
         const res = await server.inject('/docs');
 
@@ -730,17 +696,12 @@ describe('Customized Lout', () => {
 
         const server = Hapi.server();
 
-        try {
-            await internals.bootstrapServer(server, {
-                plugin: require('../'),
-                options: {
-                    cssPath: Path.join(__dirname, './custom-test-files/css')
-                }
-            });
-        }
-        catch (err) {
-            expect(err).not.to.exist();
-        }
+        await internals.bootstrapServer(server, {
+            plugin: require('../'),
+            options: {
+                cssPath: Path.join(__dirname, './custom-test-files/css')
+            }
+        });
 
         const res = await server.inject('/docs/css/style.css');
 
@@ -754,20 +715,15 @@ describe('Customized Lout', () => {
 
         server.route(require('./routes/default'));
 
-        try {
-            await internals.bootstrapServer(server, {
-                plugin: require('../'),
-                options: {
-                    filterRoutes(route) {
+        await internals.bootstrapServer(server, {
+            plugin: require('../'),
+            options: {
+                filterRoutes(route) {
 
-                        return route.method !== 'delete' && route.path !== '/test';
-                    }
+                    return route.method !== 'delete' && route.path !== '/test';
                 }
-            });
-        }
-        catch (err) {
-            expect(err).not.to.exist();
-        }
+            }
+        });
 
         const res = await server.inject('/docs');
 
@@ -798,30 +754,25 @@ describe('Multiple paths', () => {
             handler() {}
         });
 
-        try {
-            await internals.bootstrapServer(server, [{
-                plugin: require('../'),
-                options: {
-                    endpoint: '/docs/v1',
-                    filterRoutes(route) {
+        await internals.bootstrapServer(server, [{
+            plugin: require('../'),
+            options: {
+                endpoint: '/docs/v1',
+                filterRoutes(route) {
 
-                        return /^\/v1/.test(route.path);
-                    }
+                    return /^\/v1/.test(route.path);
                 }
-            }, {
-                plugin: require('../'),
-                options: {
-                    endpoint: '/docs/v2',
-                    filterRoutes(route) {
+            }
+        }, {
+            plugin: require('../'),
+            options: {
+                endpoint: '/docs/v2',
+                filterRoutes(route) {
 
-                        return /^\/v2/.test(route.path);
-                    }
+                    return /^\/v2/.test(route.path);
                 }
-            }]);
-        }
-        catch (err) {
-            expect(err).to.not.exist();
-        }
+            }
+        }]);
 
         const routes = server.table();
         expect(routes).to.have.length(7); // 3 routes, 2 docs routes, 2 css routes
