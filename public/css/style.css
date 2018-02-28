@@ -11,16 +11,6 @@ body {
 .anchor-link, .anchor-link > span {
     text-decoration: none !important;
 }
-.server-uri-block {
-    background-color: #DAE7F0;
-    margin-bottom: 20px;
-}
-.server-uri-block:not(:first-child) {
-    margin-top: 40px;
-}
-.server-uri {
-    font-style: italic;
-}
 .route-index .route {
     -webkit-transition: all 200ms ease;
     -o-transition: all 200ms ease;
@@ -227,4 +217,3 @@ dt.field-example,
 dt.field-meta {
     float: none;
 }
-

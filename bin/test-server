@@ -5,8 +5,7 @@ const Inert = require('inert');
 const Vision = require('vision');
 
 const port = Number(process.env.PORT || 3000);
-const server = new Hapi.Server();
-server.connection({
+const server = Hapi.server({
     host: process.env.HOSTNAME || 'localhost',
     address: process.env.IP || '0.0.0.0',
     port: port,
@@ -27,8 +26,8 @@ server.auth.strategy('testStrategy', 'testScheme');
 server.route({
     method: 'GET',
     path: '/',
-    handler(request, reply) {
-        reply.redirect(`http://${request.info.host}/docs`);
+    handler(request, h) {
+        return h.redirect(`http://${request.info.host}/docs`);
     }
 });
 
@@ -36,7 +35,7 @@ server.route({
 server.route(require('../test/routes/default'));
 server.route(require('../test/routes/withauth'));
 
-server.register([Inert, Vision, require('../')], function (err) {
+server.register([Inert, Vision, require('../')]).then((err) => {
     server.start((err) => {
         if (err) {
             throw err;

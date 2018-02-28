@@ -2,12 +2,15 @@
 
 const Joi = require('joi');
 
-const handler = (request) => request.reply('ok');
+const handler = (request, h) => {
+
+    return 'ok';
+};
 
 module.exports = [{
     method: 'GET',
     path: '/test',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -21,7 +24,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/another/test',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -32,7 +35,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/zanother/test',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -43,7 +46,7 @@ module.exports = [{
 }, {
     method: 'POST',
     path: '/test',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -56,7 +59,7 @@ module.exports = [{
 }, {
     method: 'DELETE',
     path: '/test',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -67,7 +70,7 @@ module.exports = [{
 }, {
     method: 'PUT',
     path: '/test',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -78,7 +81,7 @@ module.exports = [{
 }, {
     method: 'PATCH',
     path: '/test',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -90,7 +93,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/notincluded',
-    config: {
+    options: {
         handler,
         plugins: {
             lout: false
@@ -99,7 +102,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/nested',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -113,7 +116,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/rootobject',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -124,7 +127,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/rootarray',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.array().items(
@@ -137,7 +140,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/complexarray',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.array()
@@ -157,7 +160,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/path/{pparam}/test',
-    config: {
+    options: {
         handler,
         validate: {
             params: Joi.object({
@@ -168,7 +171,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/emptyobject',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -179,7 +182,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/alternatives',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -190,7 +193,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/only-one-valid',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -201,7 +204,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/multiple-valids',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -212,7 +215,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/single-allow',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -223,7 +226,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/multiple-allows',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -234,7 +237,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/withnestedalternatives',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -268,13 +271,13 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/novalidation',
-    config: {
+    options: {
         handler
     }
 }, {
     method: 'GET',
     path: '/withresponse',
-    config: {
+    options: {
         handler,
         response: {
             schema: Joi.object({
@@ -285,7 +288,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/withstatus',
-    config: {
+    options: {
         handler,
         response: {
             schema: Joi.object({
@@ -304,7 +307,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/withpojoinarray',
-    config: {
+    options: {
         handler,
         validate: {
             query: {
@@ -317,7 +320,7 @@ module.exports = [{
 }, {
     method: 'POST',
     path: '/withnestedrulesarray',
-    config: {
+    options: {
         handler,
         validate: {
             payload: Joi.object({
@@ -332,7 +335,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/withhtmlnote',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -344,7 +347,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/withnotesarray',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -358,7 +361,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/withexample',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -369,7 +372,7 @@ module.exports = [{
 }, {
     method: 'POST',
     path: '/denybody',
-    config: {
+    options: {
         handler,
         validate: {
             payload: false
@@ -378,7 +381,7 @@ module.exports = [{
 }, {
     method: 'POST',
     path: '/rootemptyobject',
-    config: {
+    options: {
         handler,
         validate: {
             payload: Joi.object()
@@ -387,7 +390,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/withnestedexamples',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -408,7 +411,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/withmeta',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -422,7 +425,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/withunit',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -433,7 +436,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/withdefaultvalue',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -445,7 +448,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/withdefaultvaluefn',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -456,7 +459,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/withbinaryencoding',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -467,7 +470,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/withdate',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -478,7 +481,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/withpeersconditions',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -494,7 +497,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/withpattern',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -507,7 +510,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/withallowunknown',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -519,7 +522,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/withstringspecifics',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -542,7 +545,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/withconditionalalternatives',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -572,7 +575,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/withreferences',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -584,7 +587,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/withassert',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -597,7 +600,7 @@ module.exports = [{
     method: 'GET',
     path: '/withproperties',
     vhost: 'john.doe',
-    config: {
+    options: {
         handler,
         cors: {
             maxAge: 12345
@@ -611,7 +614,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/withrulereference',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -624,14 +627,14 @@ module.exports = [{
     method: 'GET',
     path: '/withcorstrue',
     vhost: 'john.doe',
-    config: {
+    options: {
         handler,
         cors: true
     }
 }, {
     method: 'GET',
     path: '/withstrip',
-    config: {
+    options: {
         handler,
         validate: {
             query: Joi.object({
@@ -643,7 +646,7 @@ module.exports = [{
 }, {
     method: 'GET',
     path: '/internal',
-    config: {
+    options: {
         isInternal: true,
         handler
     }

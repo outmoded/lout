@@ -23,17 +23,15 @@ The routes are of course fake but you can get a grasp of what lout looks like gi
 Lout depends on vision and inert, make sure you register them with hapi.
 
 ```javascript
-var Hapi = require('hapi');
-var server = new Hapi.Server();
+const Hapi = require('hapi');
 
-server.connection({ port: 80 });
+const server = Hapi.server({ port: 80 });
 
-server.register([require('vision'), require('inert'), { register: require('lout') }], function(err) {
-});
+await server.register([require('vision'), require('inert'), require('lout')]);
 
-server.start(function () {
-     console.log('Server running at:', server.info.uri);
-});
+server.start().then(
+  console.log('Server running at:', server.info.uri)
+);
 ```
 
 ## Parameters
@@ -60,7 +58,7 @@ Here is an example snippet of a route configuration :
 {
   method: 'GET',
   path: '/myroute',
-  config: {
+  options: {
     handler: [...],
     [...]
     plugins: {
@@ -74,14 +72,14 @@ Here is an example snippet of a route configuration :
 If you want to exclude multiple routes using conditions, you can use `filterRoutes` when registering lout :
 ```js
 server.register([require('vision'), require('inert'), {
-  register: require('lout'),
+  plugin: require('lout'),
   options: {
-    filterRoutes: function (route) {
+    filterRoutes: (route) => {
       return route.method !== '*' && !/^\/private\//.test(route.path);
     }
   }
-}], function() {
-    server.start(function () {
+}]).then(() => {
+    server.start(() => {
         console.log('Server running at:', server.info.uri);
     });
 });
