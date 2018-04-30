@@ -196,10 +196,10 @@ describe('Lout', () => {
                 route.path === '/docs' ||
                 route.method === 'options') {
 
-                expect(res.result).to.not.contain(`?path=${route.path}`);
+                expect(res.result).to.not.contain(`?path=${encodeURI(route.path)}`);
             }
             else {
-                expect(res.result).to.contain(`?path=${route.path}`);
+                expect(res.result).to.contain(`?path=${encodeURI(route.path)}`);
             }
         });
     });
@@ -214,10 +214,10 @@ describe('Lout', () => {
                 route.path === '/docs' ||
                 route.method === 'options') {
 
-                expect(res.result).to.not.contain(`?path=${route.path}`);
+                expect(res.result).to.not.contain(`?path=${encodeURI(route.path)}`);
             }
             else {
-                expect(res.result).to.contain(`?path=${route.path}`);
+                expect(res.result).to.contain(`?path=${encodeURI(route.path)}`);
             }
         });
     });
@@ -551,9 +551,9 @@ describe('Lout', () => {
             server = Hapi.server();
 
             server.auth.scheme('testScheme', () => ({
-                async authenticate() {},
-                async payload() {},
-                async response() {}
+                async authenticate() { },
+                async payload() { },
+                async response() { }
             }));
             server.auth.strategy('testStrategy', 'testScheme');
             server.auth.default('testStrategy');
@@ -680,7 +680,7 @@ describe('Customized Lout', () => {
             engines: {
                 custom: {
                     module: {
-                        compile() {}
+                        compile() { }
                     }
                 }
             }
@@ -741,17 +741,17 @@ describe('Multiple paths', () => {
         server.route({
             method: 'GET',
             path: '/v1/test',
-            handler() {}
+            handler() { }
         });
         server.route({
             method: 'GET',
             path: '/v2/test',
-            handler() {}
+            handler() { }
         });
         server.route({
             method: 'GET',
             path: '/another',
-            handler() {}
+            handler() { }
         });
 
         await internals.bootstrapServer(server, [{

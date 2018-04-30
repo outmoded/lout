@@ -18,7 +18,7 @@
     <div class="container">
         <div class="route-index">
             {{#each this}}
-            <a href="?path={{this.path}}#{{this.method}}">
+            <a href="?path={{encodeUri this.path}}#{{this.method}}">
                 <div class="row route">
                     <div class="col-md-2 h2">
                         <span class="{{colorFromMethod this}} full-width-label">
