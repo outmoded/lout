@@ -544,6 +544,16 @@ describe('Lout', () => {
     });
 
 
+    it('displays headers parameters', async () => {
+
+        const res = await server.inject('/docs?path=/headers');
+
+        expect(res.result).to.contain('Headers Parameters');
+        expect(res.result).to.contain('param1');
+        expect(res.result).to.contain('icon-star');
+    });
+
+
     describe('Authentication', () => {
 
         before(() => {

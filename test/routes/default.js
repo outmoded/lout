@@ -650,4 +650,15 @@ module.exports = [{
         isInternal: true,
         handler
     }
+}, {
+    method: 'GET',
+    path: '/headers',
+    options: {
+        handler,
+        validate: {
+            headers: Joi.object({
+                param1: Joi.string().insensitive().required()
+            })
+        }
+    }
 }];

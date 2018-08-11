@@ -176,9 +176,22 @@
             <ul class="list-group">
                 <li class="list-group-item">
                     <dl class="parameters">
-                        {{#multipleIf this.queryParams this.payloadParams this.pathParams}}
+                        {{#multipleIf this.queryParams this.payloadParams this.pathParams this.headersParams}}
                         <h3>Request Parameters</h3>
-                        {{/multipleIf}} {{#if this.pathParams}}
+                        {{/multipleIf}} {{#if this.headersParams}}
+                        <dt>
+                            <h4>Headers Parameters</h4>
+                        </dt>
+                        <dd>
+                            {{#if this.headersParams.isDenied}}
+                            <h5>Denied</h5>
+                            {{else}}
+                            <ul class="list-unstyled">
+                                {{> type this.headersParams}}
+                            </ul>
+                            {{/if}}
+                        </dd>
+                        {{/if}} {{#if this.pathParams}}
                         <dt>
                             <h4>Path Parameters</h4>
                         </dt>
