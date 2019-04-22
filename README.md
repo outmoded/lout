@@ -1,14 +1,8 @@
-![lout Logo](https://raw.github.com/hapijs/lout/master/images/lout.png)
+# lout
 
 API documentation generator for [**hapi**](https://github.com/hapijs/hapi)
 
-[![npm version](https://badge.fury.io/js/lout.svg)](http://badge.fury.io/js/lout)
-[![Build Status](https://secure.travis-ci.org/hapijs/lout.svg)](http://travis-ci.org/hapijs/lout)
-[![Build status](https://ci.appveyor.com/api/projects/status/05c8hiy96fmn0s37/branch/master?svg=true)](https://ci.appveyor.com/project/hapijs/lout/branch/master)
-[![Dependencies Status](https://david-dm.org/hapijs/lout.svg)](https://david-dm.org/hapijs/lout)
-[![DevDependencies Status](https://david-dm.org/hapijs/lout/dev-status.svg)](https://david-dm.org/hapijs/lout#info=devDependencies)
-
-Lead Maintainer: [Nicolas Morel](https://github.com/Marsup)
+[![Build Status](https://secure.travis-ci.org/hapijs/lout.svg?branch=master)](http://travis-ci.org/hapijs/lout)
 
 ## Description
 **lout** is a documentation generator for **hapi** servers, providing a human-readable guide for every endpoint
