@@ -4,14 +4,17 @@ const Handlebars = require('handlebars');
 
 module.exports = function (isAlternative) {
 
-    if (isAlternative || this.root) {
+    if (isAlternative ||
+        this.root) {
+
         return new Handlebars.SafeString('<span>&nbsp;</span>');
     }
 
     let type = this.type;
-    if (type === 'object'
-        || type === 'alternatives'
-        || (type === 'array' && this.items)) {
+    if (type === 'object' ||
+        type === 'alternatives' ||
+        (type === 'array' && this.items)) {
+
         type = '';
     }
 
@@ -22,14 +25,17 @@ module.exports = function (isAlternative) {
         }
 
         // with only one `.valid()`, just show that, it's the only possiblity
-        else if (this.allowedValues.length === 1
-            && this.flags
-            && this.flags.allowOnly) {
+        else if (this.flags &&
+            this.flags.allowOnly &&
+            this.allowedValues.length === 1) {
+
             type = this.allowedValues[0];
         }
 
         // with multiple `.valid()` values, delcare it must be one of those
-        else if (this.flags && this.flags.allowOnly) {
+        else if (this.flags &&
+            this.flags.allowOnly) {
+
             type = `<span class="text-danger">must be one of</span> <span>${this.allowedValues.join(', ')}</span>`;
         }
 

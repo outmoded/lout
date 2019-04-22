@@ -1,18 +1,22 @@
-# Travis optimizations, see http://docs.travis-ci.com/user/workers/container-based-infrastructure/
-sudo: false
-
 language: node_js
 
 node_js:
   - "8"
-  - "9"
+  - "10"
+  - "11"
   - "node"
 
-deploy:
-  - provider: heroku
-    api_key:
-      secure: 0SO7x4n75eW/7IC3DexD/BNhnOYpbH54uZdouS8iSAWCrtG/P3CgRMYUcr+bApFgBfzBmmQVwCBBSgOWGe9mpnNLfg+ha58QGzFKJ9as+Z529qoFnr/hlUt6QF2578j2O2fG/QADFw2NhAYy6NrGF2Ki/khp5+MZ3IjHl8E86wk=
-    app: lout
-    on:
-      repo: hapijs/lout
-      node: "8"
+sudo: false
+
+install:
+  - "npm install"
+  - "npm install hapi@$HAPI_VERSION"
+
+env:
+  - HAPI_VERSION="17"
+  - HAPI_VERSION="18"
+
+os:
+  - "linux"
+  - "osx"
+  - "windows"

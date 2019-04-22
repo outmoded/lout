@@ -1,15 +1,15 @@
 'use strict';
 
-// Load modules
-
-const Lab = require('lab');
-const Hapi = require('hapi');
-const Cheerio = require('cheerio');
 const Path = require('path');
-const Inert = require('inert');
-const Vision = require('vision');
 
-// Declare internals
+const Code = require('@hapi/code');
+const Cheerio = require('cheerio');
+const Hapi = require('@hapi/hapi');
+const Inert = require('@hapi/inert');
+const Lab = require('@hapi/lab');
+const Lout = require('..');
+const Vision = require('@hapi/vision');
+
 
 const internals = {
     async bootstrapServer(server, plugins, options) {
@@ -19,13 +19,10 @@ const internals = {
     }
 };
 
-// Test shortcuts
 
-const lab = exports.lab = Lab.script();
-const before = lab.before;
-const describe = lab.experiment;
-const it = lab.test;
-const expect = lab.expect;
+const { describe, it, before } = exports.lab = Lab.script();
+const expect = Code.expect;
+
 
 describe('Registration', () => {
 
@@ -33,7 +30,7 @@ describe('Registration', () => {
 
         const server = Hapi.server();
 
-        await internals.bootstrapServer(server, require('../'));
+        await internals.bootstrapServer(server, Lout);
 
         const routes = server.table();
         expect(routes).to.have.length(2);
@@ -44,7 +41,7 @@ describe('Registration', () => {
         const server = Hapi.server();
 
         await internals.bootstrapServer(server, {
-            plugin: require('../'),
+            plugin: Lout,
             options: {
                 helpersPath: Path.join(__dirname, '../templates/helpers'),
                 cssPath: null,
@@ -61,7 +58,7 @@ describe('Registration', () => {
         const server = Hapi.server();
 
         await expect(internals.bootstrapServer(server, {
-            plugin: require('../'),
+            plugin: Lout,
             options: {
                 foo: 'bar'
             }
@@ -74,7 +71,7 @@ describe('Registration', () => {
         const server = Hapi.server();
 
         await internals.bootstrapServer(server, {
-            plugin: require('../'),
+            plugin: Lout,
             options: {
                 endpoint: 'api/'
             }
@@ -96,7 +93,7 @@ describe('Lout', () => {
 
         server.route(require('./routes/default'));
 
-        internals.bootstrapServer(server, require('../'));
+        internals.bootstrapServer(server, Lout);
 
     });
 
@@ -569,7 +566,7 @@ describe('Lout', () => {
             server.auth.default('testStrategy');
 
             server.route(require('./routes/withauth'));
-            internals.bootstrapServer(server, require('../'));
+            internals.bootstrapServer(server, Lout);
         });
 
         it('should display authentication information', async () => {
@@ -625,7 +622,7 @@ describe('Lout', () => {
 
             server.route(require('./routes/withoutpost'));
 
-            await internals.bootstrapServer(server, require('../'));
+            await internals.bootstrapServer(server, Lout);
 
             const res = await server.inject('/docs');
 
@@ -642,7 +639,7 @@ describe('Customized Lout', () => {
         const server = Hapi.server();
 
         internals.bootstrapServer(server, {
-            plugin: require('../'),
+            plugin: Lout,
             options: {
                 basePath: Path.join(__dirname, './custom-test-files')
             }
@@ -655,7 +652,7 @@ describe('Customized Lout', () => {
         server.route(require('./routes/default'));
 
         await internals.bootstrapServer(server, {
-            plugin: require('../'),
+            plugin: Lout,
             options: {
                 apiVersion: '3.3.3'
             }
@@ -673,7 +670,7 @@ describe('Customized Lout', () => {
         const server = Hapi.server();
 
         internals.bootstrapServer(server, {
-            plugin: require('../'),
+            plugin: Lout,
             options: {
                 basePath: Path.join(__dirname, './custom-test-files'),
                 helpersPath: Path.join(__dirname, '../templates/helpers'),
@@ -697,7 +694,7 @@ describe('Customized Lout', () => {
         };
 
         internals.bootstrapServer(server, {
-            plugin: require('../'),
+            plugin: Lout,
             options
         });
     });
@@ -707,7 +704,7 @@ describe('Customized Lout', () => {
         const server = Hapi.server();
 
         await internals.bootstrapServer(server, {
-            plugin: require('../'),
+            plugin: Lout,
             options: {
                 cssPath: Path.join(__dirname, './custom-test-files/css')
             }
@@ -726,7 +723,7 @@ describe('Customized Lout', () => {
         server.route(require('./routes/default'));
 
         await internals.bootstrapServer(server, {
-            plugin: require('../'),
+            plugin: Lout,
             options: {
                 filterRoutes(route) {
 
@@ -765,7 +762,7 @@ describe('Multiple paths', () => {
         });
 
         await internals.bootstrapServer(server, [{
-            plugin: require('../'),
+            plugin: Lout,
             options: {
                 endpoint: '/docs/v1',
                 filterRoutes(route) {
@@ -774,7 +771,7 @@ describe('Multiple paths', () => {
                 }
             }
         }, {
-            plugin: require('../'),
+            plugin: Lout,
             options: {
                 endpoint: '/docs/v2',
                 filterRoutes(route) {

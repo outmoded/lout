@@ -1,17 +1,16 @@
 'use strict';
 
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 
-const handler = (request, h) => {
 
-    return 'ok';
-};
+const internals = {};
+
 
 module.exports = {
     method: 'GET',
     path: '/test',
     options: {
-        handler,
+        handler: () => 'ok',
         validate: {
             query: Joi.object({
                 param1: Joi.string().required()

@@ -4,38 +4,25 @@
   "version": "11.1.0",
   "repository": "git://github.com/hapijs/lout",
   "main": "lib/index.js",
-  "keywords": [
-    "docs",
-    "hapi"
-  ],
-  "engines": {
-    "node": ">= 8.x.x",
-    "npm": ">= 5.x"
-  },
+  "keywords": ["docs", "hapi"],
   "dependencies": {
-    "boom": "7.x.x",
-    "handlebars": "4.x.x",
-    "hoek": "5.x.x"
-  },
-  "peerDependencies": {
-    "hapi": "17.x.x",
-    "inert": "5.x.x",
-    "joi": "13.x.x",
-    "vision": "5.x.x"
+    "@hapi/boom": "7.x.x",
+    "@hapi/hoek": "6.x.x",
+    "handlebars": "4.x.x"
   },
   "devDependencies": {
     "cheerio": "0.x.x",
-    "code": "5.x.x",
-    "hapi": "17.x.x",
-    "inert": "5.x.x",
-    "joi": "13.x.x",
-    "lab": "15.x.x",
-    "vision": "5.x.x"
+    "@hapi/code": "5.x.x",
+    "@hapi/hapi": "18.x.x",
+    "@hapi/inert": "5.x.x",
+    "@hapi/joi": "15.x.x",
+    "@hapi/lab": "18.x.x",
+    "@hapi/vision": "5.x.x"
   },
   "scripts": {
     "start": "./bin/test-server",
-    "test": "lab -r console -t 100 -a code -L",
-    "test-cov-html": "lab -r html -o coverage.html -a code -L"
+    "test": "lab -r console -t 99.56 -a @hapi/code -L",
+    "test-cov-html": "lab -r html -o coverage.html -a @hapi/code -L"
   },
   "license": "BSD-3-Clause"
 }
